@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, Tabs, Tab, Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import AnalysisResultsDetailInfoPanel from './AnalysisResultsDetailInfoPanel';
 
 export default function AnalysisResultsDetailInfoDialog({ open, onClose, selectedRow }) {
     const [value, setValue] = useState(0);
@@ -52,7 +53,7 @@ export default function AnalysisResultsDetailInfoDialog({ open, onClose, selecte
                 <Tabs value={value} onChange={handleChange} variant="scrollable" centered
                     sx={{
                         position: 'absolute', // Ensure it's positioned relative to the dialog
-                        top: '56px',
+                        top: '36px',
                         left: '37px',
                         
                         '& .MuiTabs-indicator': {
@@ -80,12 +81,8 @@ export default function AnalysisResultsDetailInfoDialog({ open, onClose, selecte
                     
                 </Tabs>
                 {/* Conditionally render each TabPanel */}
-                <Box sx={{ paddingTop: '116px', paddingLeft: '5px', paddingRight: '5px' }}>
-                    {/* {value === 0 && <SystemInfoPanel />}
-                    {value === 1 && <LogFilePanel />}
-                    {value === 2 && <PanelInfoPanel />}
-                    {value === 3 && <UpdateHistoryPanel />}
-                    {value === 4 && <InstrumentCoefPanel />} */}
+                <Box sx={{ paddingTop: '100px', paddingLeft: '5px', paddingRight: '5px' }}>
+                    <AnalysisResultsDetailInfoPanel selectedRow={selectedRow} />
                 </Box>
             </DialogContent>
         </Dialog>

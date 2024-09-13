@@ -12,6 +12,7 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
+import AnalysisResultsDetailInfoDialog from './AnalysisResultsDetailInfoDialog'; // Import your custom dialog component
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -142,13 +143,13 @@ const AnalysisResults = () => {
     const getRowHeight = (params) => 58;
     const [selectionModel, setSelectionModel] = React.useState([]);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(null);
+    const [selectedRowId, setSelectedRowId] = useState(null);
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
     // State to track hover
     const [hovered, setHovered] = useState(false);
 
-    const handleIconClick = (params) => {
-        setSelectedRow(params.row);
+    const handleRowClick = (params) => {
+        setSelectedRowId(params.id); // 선택한 행의 id 설정
         setOpen(true);  // Open the DeviceManagementDialog
     };
 
@@ -345,6 +346,7 @@ const AnalysisResults = () => {
                     getRowHeight={getRowHeight}
                     headerHeight={48}
                     localeText={getLocaleText()} // Use the localeText based on the current locale
+                    onRowClick={handleRowClick} // 행 클릭 시 이벤트
                     slots={{
                         footer: CustomFooter,
                         noRowsOverlay: () => (
@@ -411,10 +413,10 @@ const AnalysisResults = () => {
                     }}
                 />
                 {/* DeviceManagementDialog Component */}
-                <DeviceManagementDialog
+                <AnalysisResultsDetailInfoDialog
                     open={open}
                     onClose={handleClose}
-                    selectedRow={selectedRow} // Pass the selected row to the dialog for context
+                    selectedRow={selectedRowId} // Pass the selected row to the dialog for context
                 />
             </Box>
             <Popover
