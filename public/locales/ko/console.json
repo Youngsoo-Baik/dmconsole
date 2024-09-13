@@ -187,7 +187,7 @@
                 "no": "No",
                 "analyte_name": "검사항목명",
                 "result": "결과",
-                "fianlod": "Final OD",
+                "finalod": "Final OD",
                 "ref_bound": "참고범위(3SD)",
                 "unit": "단위",
                 "error_type": "에러타입"
