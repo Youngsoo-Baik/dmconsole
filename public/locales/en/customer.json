@@ -1,0 +1,148 @@
+{
+    "login": {
+        "header": {
+            "title": "Login",
+            "description": "A verification code will be sent to the email you entered."
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "Please enter your email."
+        },
+        "terms": {
+            "agreement": "Agree to Terms",
+            "check": "Check Terms"
+        },
+        "inquiry": "Inquiry",
+        "inquiry_dialog": {
+            "title": "Email Inquiry",
+            "description": "If you have any questions, please feel free to ask. We will respond as soon as possible.",
+            "recipient": "Email Address for Response",
+            "recipient_placeholder": "Please enter your email address.",
+            "inquiry_content": "Inquiry Content",
+            "inquiry_content_placeholder": "Please enter your inquiry.",
+            "sent_title": "Sent Successfully",
+            "sent_description": "We will respond as soon as possible."
+        }
+    },
+    "verify_code": {
+        "header": {
+            "title": "Login",
+            "description": "Please check the email sent and enter the verification code.",
+            "description_next": "If you did not receive the email, check your spam folder or try again."
+        },
+        "code": {
+            "label": "Verification Code",
+            "placeholder": "Please enter the verification code."
+        }
+    },
+    "main": {
+        "sidebar": {
+            "registration": "Device Registration",
+            "change_email": "Change Email",
+            "inquiry": "Inquiry",
+            "logout": "Logout"
+        },
+        "header": {
+            "title": "DMS - Device Registration"
+        },
+        "content": {
+            "title": "Device List",
+            "no_content": "No devices registered.",
+            "column": {
+                "id": "Order",
+                "model": "Model Name",
+                "reg_number": "Registration Number",
+                "device_serial": "Device S/N",
+                "working_state": "Device State",
+                "connection_state": "Connection State",
+                "reg_date": "Registration Date",
+                "state_change": "State Change"
+            }
+        }
+    },
+    "regist_device_dialog": {
+        "title": "Device Registration",
+        "model": {
+            "label": "Model Name",
+            "placeholder": "Please select a device model."
+        },
+        "reg_number": {
+            "label": "Registration Number",
+            "placeholder": "Enter numbers"
+        },
+        "device_serial": {
+            "label": "Device S/N",
+            "placeholder": "Enter alphanumeric"
+        },
+        "state": {
+            "label": "Connection Status",
+            "placeholder": "Please enter the connection status."
+        },
+        "date": {
+            "label": "Registration Date",
+            "placeholder": "yyyy.mm.dd"
+        },
+        "working_state": {
+            "label": "Device Status",
+            "normal": "Normal",
+            "failure": "Failure",
+            "discard": "Discard"
+        },
+        "conf_noti": "Device registration completed."
+    },
+    "logout_dialog": {
+        "title": "Logout",
+        "description": "Are you sure you want to log out?",
+        "conf_noti": "You will be redirected to the first page after logout."
+    },
+    "delete_dialog": {
+        "title": "Delete",
+        "description": "Deleted data cannot be restored.",
+        "description_next": "Are you sure you want to delete the data?",
+        "conf_noti": {
+            "title": "Deletion Completed",
+            "description": "The data has been deleted."
+        }
+    },
+    "device_edit_dialog": {
+        "title": "Edit Device",
+        "model": "Model Name",
+        "reg_number": "Registration Number",
+        "device_serial": "Device S/N",
+        "state": "Connection Status",
+        "date": "Registration Date",
+        "working_state": {
+            "label": "Device Status",
+            "normal": "Normal",
+            "failure": "Failure",
+            "discard": "Discard"
+        },
+        "conf_noti": {
+            "title": "Edit Completed",
+            "description": "The data has been updated."
+        }
+    },
+    "change_email_dialog": {
+        "header": {
+            "title": "Change Email",
+            "description": "Email will be changed after verification code confirmation."
+        },
+        "email": {
+            "label": "New Email",
+            "placeholder": "Please enter the new email."
+        },
+        "verify_code": {
+            "label": "Verification Code",
+            "placeholder": "Please enter the verification code."
+        },
+        "conf_noti": "Email change completed."
+    },
+    "button": {
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "next": "Next",
+        "create": "Register",
+        "send": "Send",
+        "save": "Save"
+    }
+}

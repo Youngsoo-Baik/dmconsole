@@ -1,0 +1,417 @@
+{
+    "login": {
+        "header": {
+            "title": "DMS Console"
+        },
+        "email": {
+            "label": "이메일",
+            "placeholder": "이메일을 입력해 주세요."
+        },
+        "password": {
+            "label": "비밀번호",
+            "placeholder": "비밀번호를 입력해 주세요."
+        }
+    },
+    "main": {
+        "sidebar": {
+            "dashboard": "Dashboard",
+            "customer_device": "고객 검사기 관리",
+            "customer_device_list": "고객 검사기 목록",
+            "device": "검사기 관리",
+            "device_list": "검사기 목록",
+            "device_data": "검사기 데이터 관리",
+            "analysis_result": "검사 결과",
+            "qc_result": "정도관리 결과",
+            "qc_material": "정도관리 물질",
+            "self_diag": "자가진단 결과",
+            "errors_report": "오류",
+            "account": "계정 관리",
+            "account_list": "계정 목록",
+            "logout": "로그아웃"
+        },
+        "header": {
+            "title": "DMS 관리 Console"
+        },
+        "content": {
+            "no_content": "목록이 없습니다."
+        }
+    },
+    "logout_dialog": {
+        "description": "로그아웃 하시겠습니까?"
+    },
+    "customer_device_list": {
+        "header": {
+            "title": "고객 검사기 목록"
+        },
+        "column": {
+            "id": "순서",
+            "country": "국가",
+            "region": "지역",
+            "reseller": "대리점",
+            "manager": "담당자",
+            "model": "모델명",
+            "customer": "구매자",
+            "serial": "기기 S/N",
+            "production_date": "출하일",
+            "connection_state": "연결상태"
+        },
+        "reg_info_dialog": {
+            "title": "고객 검사기 등록 정보",
+            "customer": "구매자",
+            "model": "모델명",
+            "reg_number": "등록번호",
+            "serial": "기기 S/N",
+            "ip": "연결 IP",
+            "connection_date": "연결 날짜",
+            "reg_date": "등록일",
+            "production_date": "출하일",
+            "country": "국가",
+            "manager": "담당자",
+            "reseller": "대리점",
+            "confirm": "확인"
+        }
+    },
+    "device_list": {
+        "header": {
+            "title": "검사기 목록"
+        },
+        "column": {
+            "id": "순서",
+            "country": "국가",
+            "region": "지역",
+            "reseller": "대리점",
+            "manager": "담당자",
+            "serial": "기기 S/N",
+            "reg_date": "등록일",
+            "connection_state": "연결상태",
+            "management": "관리"
+        },
+        "filter_search": {
+            "serial": "기기 S/N",
+            "serial_placeholder": "기기 S/N 입력",
+            "country": "국가",
+            "country_placeholder": "국가를 선택해 주세요.",
+            "region": "지역",
+            "region_placeholder": "지역 선택",
+            "reseller": "대리점",
+            "reseller_placeholder": "대리점을 선택해 주세요.",
+            "manager": "담당자",
+            "manager_placeholder": "담당자 선택"
+        },
+        "system_info_tab": {
+            "title": "시스템 정보",
+            "serial": "기기 S/N",
+            "mac": "맥주소",
+            "system": "시스템",
+            "qte": "QTE",
+            "bootloader": "부트로더",
+            "application": "어플리케이션",
+            "kernel": "커널",
+            "dsp": "DSP",
+            "rootfs": "루트FS",
+            "xml": "XML"
+        },
+        "logfile_tab": {
+            "title": "로그파일",
+            "column": {
+                "no": "No",
+                "serial": "일련번호",
+                "log": "로그구분",
+                "logfile": "로그파일",
+                "date": "등록일",
+                "unit": "단위",
+                "management": "관리"
+            }
+        },
+        "panel_info_tab": {
+            "title": "패널버전정보",
+            "column": {
+                "no": "No",
+                "serial": "기기 S/N",
+                "panel_info": "패널정보",
+                "panel_version": "패널버전",
+                "date": "등록일"
+            }
+        },
+        "update_history_tab": {
+            "title": "업데이트 이력",
+            "column": {
+                "no": "No",
+                "module": "모듈명",
+                "complete": "완료시간",
+                "elapsed": "소요시간",
+                "old_version": "이전버전",
+                "new_version": "신규버전",
+                "method": "방법"
+            }
+        },
+        "instrument_coef_tab": {
+            "title": "인스트러먼트 계수 정보",
+            "column": {
+                "no": "No",
+                "analyte_name": "항목명",
+                "analyte_id": "항목ID",
+                "analyte_fullname": "항목상세명",
+                "ref_bound": "참고범위",
+                "unit": "단위",
+                "inst_factor_a": "보정계수A",
+                "inst_factor_b": "보정계수B"
+            }
+        }
+    }, 
+    "analysis_result": {
+        "header": {
+            "title": "검사 결과 목록"
+        },
+        "column": {
+            "id": "순서",
+            "model": "모델명",
+            "serial": "기기 S/N",
+            "analysis_time": "검사시간",
+            "cat_lot": "카트리지LOT",
+            "error_code": "오류코드"
+        },
+        "filter_search": {
+            "device_model": "검사기 모델",
+            "device_model_placeholder": "검사기 모델을 선택해 주세요.",
+            "serial": "기기 S/N",
+            "serial_placeholder": "기기 S/N 입력",
+            "cat_lot": "카트리지LOT",
+            "cat_lot_placeholder": "LOT 입력",
+            "error_code": "오류코드",
+            "error_code_placeholder": "오류코드 입력"
+        },
+        "detail_dialog": {
+            "title": "검사 이력 상세 정보",
+            "column": {
+                "no": "No",
+                "analyte_name": "검사항목명",
+                "result": "결과",
+                "fianlod": "Final OD",
+                "ref_bound": "참고범위(3SD)",
+                "unit": "단위",
+                "error_type": "에러타입"
+            }
+        }
+    }, 
+    "qc_result": {
+        "header": {
+            "title": "QC 결과 목록"
+        },
+        "column": {
+            "id": "순서",
+            "model": "모델명",
+            "serial": "기기 S/N",
+            "analysis_time": "검사시간",
+            "cat_lot": "카트리지LOT",
+            "qc_material": "QC물질명",
+            "qc_level": "QC물질레벨",
+            "error_code": "오류코드"
+        },
+        "filter_search": {
+            "device_model": "검사기 모델",
+            "device_model_placeholder": "검사기 모델을 선택해 주세요.",
+            "serial": "기기 S/N",
+            "serial_placeholder": "기기 S/N 입력",
+            "cat_lot": "카트리지LOT",
+            "cat_lot_placeholder": "LOT 입력",
+            "qc_material_lot": "QC 물질 LOT",
+            "qc_material_lot_placeholder": "QC 물질 LOT 입력",
+            "qc_material_level": "QC 물질레벨",
+            "qc_material_level_placeholder": "QC 물질레벨 입력",
+            "error_code":"오류코드",
+            "error_code_placeholder":"오류코드 입력"
+        },
+        "detail_dialog": {
+            "title": "QC 결과 상세",
+            "column": {
+                "no": "No",
+                "analyte_name": "검사항목명",
+                "result": "결과",
+                "fianlod": "Final OD",
+                "ref_bound": "참고범위(3SD)",
+                "unit": "단위",
+                "error_type": "에러타입"
+            }
+        }
+    },
+    "qc_material": {
+        "header": {
+            "title": "QC 물질 목록"
+        },
+        "column": {
+            "id": "순서",
+            "model": "모델명",
+            "serial": "기기 S/N",
+            "qc_material": "QC물질명",
+            "qc_level": "QC물질레벨",
+            "lot": "LOT 번호",
+            "expiration_date": "유효기간",
+            "modifier": "생성자",
+            "qc_val_version": "QCValue 버전"
+        },
+        "filter_search": {
+            "serial": "기기 S/N",
+            "serial_placeholder": "기기 S/N 입력",
+            "qc_material": "QC물질명",
+            "qc_material_placeholder": "QC물질명 입력",
+            "lot": "LOT 번호",
+            "lot_placeholder": "LOT 번호 입력"
+        },
+        "detail_dialog": {
+            "title": "QC 물질 상세",
+            "column": {
+                "no": "No",
+                "analyte_name": "검사항목명",
+                "analyte_id": "검사항목ID",
+                "analyte_fullname": "검사항목상세명",
+                "target_mean": "목표평균",
+                "sd": "SD",
+                "target_range": "목표범위",
+                "unit_si": "단위 SI",
+                "unit_non_si": "단위 Non-SI",
+                "rule": "정책"
+            }
+        }
+    },
+    "self_diag": {
+        "header": {
+            "title": "자가진단 목록"
+        },
+        "column": {
+            "id": "순서",
+            "serial": "기기 S/N",
+            "diag_time": "진단시간",
+            "plunger_motor": "플런저모터",
+            "camera_blu": "카메라 BLU",
+            "temp_ic": "온도IC",
+            "cat_sensor": "카트리지센서",
+            "eqc": "EQC"
+        },
+        "filter_search": {
+            "serial": "기기 S/N",
+            "serial_placeholder": "기기 S/N 입력",
+            "plunger_motor": "플런저모터",
+            "camera_blu": "카메라 BLU",
+            "temp_ic": "온도IC",
+            "cat_sensor": "카트리지센서",
+            "eqc": "EQC"
+        },
+        "detail_dialog": {
+            "title": "자가진단 등록 정보",
+            "model": "모델명",
+            "serial": "기기 S/N",
+            "diag_time": "진단시간",
+            "power": "전원",
+            "plunger_motor": "플런저모터",
+            "camera_blu": "카메라 BLU",
+            "temp_ic": "온도IC",
+            "detector_led": "검출기 LED",
+            "heater1": "히터1",
+            "printer": "프린터",
+            "qrcode": "QR코드",
+            "cat_sensor": "카트리지센서",
+            "eqc": "EQC"
+        }
+    },
+    "errors_report": {
+        "header": {
+            "title": "오류 목록"
+        },
+        "column": {
+            "id": "순서",
+            "model": "모델명",
+            "serial": "기기 S/N",
+            "date": "발생시간",
+            "view_log": "뷰",
+            "error_title": "에러제목",
+            "sent": "전송여부"
+        },
+        "filter_search": {
+            "device_model": "검사기 모델",
+            "device_model_placeholder": "검사기 모델을 선택해 주세요.",
+            "serial": "기기 S/N",
+            "serial_placeholder": "기기 S/N 입력",
+            "error_code": "오류코드",
+            "error_code_placeholder": "오류코드 입력",
+            "error_type": "오류타입",
+            "error_type_placeholder": "오류타입 입력"
+        },
+           "detail_dialog": {
+            "title": "오류 등록 정보",
+            "model": "모델명",
+            "serial": "기기 S/N",
+            "date": "발생시간",
+            "sent": "전송여부",
+            "view_log": "뷰",
+            "error_title": "에러제목",
+            "panel_type": "패널타입",
+            "control_type": "정도관리 타입"
+        }
+    },
+    "account-list": {
+        "header": {
+            "title": "계정 목록"
+        },
+        "column": {
+            "id": "순서",
+            "name": "이름",
+            "email": "이메일",
+            "department": "소속",
+            "grade": "등급",
+            "created_at": "등록일",
+            "updated_at": "수정일",
+            "management": "관리"
+        },
+        "account_mod_dialog": {
+            "title": "회원 정보 수정",
+            "sub_title": "회원 정보",
+            "delete": "삭제하기",
+            "name": "이름",
+            "department": "소속",
+            "email": "이메일",
+            "grade": "등급"
+        },
+        "pass_mod_dialog": {
+            "title": "비밀번호 변경",
+            "sub_title": "비밀번호 변경",
+            "old_pass": "기존 비밀번호",
+            "old_pass_placeholder": "기존 비밀번호를 입력해 주세요.",
+            "new_pass": "신규 비밀번호",
+            "new_pass_placeholder": "변경할 비밀번호를 입력해 주세요.",
+            "confirm_pass": "비밀번호 확인",
+            "confirm_pass_placeholder": "비밀번호를 한번 더 입력해 주세요."
+        },
+        "account_delete_dialog": {
+            "title": "삭제하기",
+            "description": "삭제된 데이터는 복원 불가입니다.",
+            "description_next": "데이터를 삭제하시겠습니까?",
+            "delete_done": {
+                "title": "삭제 완료",
+                "description": "데이터 삭제를 완료하였습니다."
+            }
+        },
+        "pass_mod_confirm_dialog": {
+            "title": "비밀번호를 변경하시겠습니까?"
+        },
+        "pass_mod_done_dialog": {
+            "title": "변경완료",
+            "description": "비밀번호 변경이 완료되었습니다.",
+            "description_next": "다시 로그인해주시기 바랍니다."
+        }
+    },
+    "button": {
+        "cancel": "취소",
+        "change": "변경",
+        "confirm": "확인",
+        "modification": "수정",
+        "search": "검색",
+        "upload": "Upload",
+        "download": "Download",
+        "create": "등록",
+        "login": "로그인",
+        "logout": "로그아웃",
+        "view_all": "전체보기",
+        "filter_search": "필터 검색"
+    }
+}

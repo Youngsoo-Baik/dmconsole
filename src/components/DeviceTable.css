@@ -1,0 +1,78 @@
+/* DeviceTable.css */
+
+.container {
+    width: calc(100% - 326px);
+    min-width: 1024px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .header h2 {
+    margin: 0;
+  }
+  
+  .buttons {
+    display: flex;
+  }
+  
+  .button_container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 16px;
+    margin-left: 1050px;
+  }
+
+  .button_upload {
+    width: 104px;
+    height: 48px;
+    font-size: 14px;
+    gap: 2px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    border: solid 1.5px #7d7d7d;
+    background-color: '#ffffff';
+  }
+  
+  .button_dwload {
+    width: 114px;
+    height: 48px;
+    font-size: 14px;
+    gap: 2px;
+    padding: 9px 20px;
+    border-radius: 10px;
+    background-color: '#80befc';
+  }
+  
+  .filters {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .filter-button {
+    flex-grow: 1;
+    min-width: 150px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 49px;
+  }
+  
+  .filter-select {
+    flex-grow: 1;
+    min-width: 150px;
+  }
+  
+  .data-grid {
+    width: 100%;
+    margin-top: 0;
+  }

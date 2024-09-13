@@ -1,0 +1,148 @@
+{
+    "login": {
+        "header": {
+            "title": "로그인",
+            "description": "입력한 이메일로 인증코드가 전송됩니다."
+        },
+        "email": {
+            "label": "이메일",
+            "placeholder": "이메일을 입력해 주세요."
+        },
+        "terms": {
+            "agreement": "이용약관동의",
+            "check": "이용약관확인"
+        },
+        "inquiry": "문의사항",
+        "inquiry_dialog": {
+            "title": "이메일 문의",
+            "description": "궁금한 점은 언제든지 문의해 주세요. 빠른 시일 내로 답변해 드리겠습니다.",
+            "recipient": "답변 받으실 이메일 주소",
+            "recipient_placeholder": "이메일 주소를 입력해 주세요.",
+            "inquiry_content": "문의 내용",
+            "inquiry_content_placeholder": "문의하실 내용을 입력해 주세요.",
+            "sent_title": "전송완료",
+            "sent_description": "빠른 시일 내로 답변해 드리겠습니다."
+        }
+    },
+    "verify_code": {
+        "header": {
+            "title": "로그인",
+            "description": "전송한 이메일을 확인하신 후 인증코드를 입력해 주세요.",
+            "description_next": "이메일을 받지 못한 경우, 스팸 폴더를 확인하거나 다시 시도하시길 바랍니다."
+        },
+        "code": {
+            "label": "인증코드",
+            "placeholder": "인증코드를 입력해 주세요."
+        }
+    },
+    "main": {
+        "sidebar": {
+            "registration": "기기 등록",
+            "change_email": "이메일 변경",
+            "inquiry": "문의사항",
+            "logout": "로그아웃"
+        },
+        "header": {
+            "title": "DMS-검사기등록"
+        },
+        "content": {
+            "title": "기기목록",
+            "no_content": "등록된 기기가 없습니다.",
+            "column": {
+                "id": "순서",
+                "model": "모델명",
+                "reg_number": "등록번호",
+                "device_serial": "기기 S/N",
+                "working_state": "기기상태",
+                "connection_state": "연결상태",
+                "reg_date": "등록일",
+                "state_change": "상태변경"
+            }
+        }
+    },
+    "regist_device_dialog": {
+        "title": "기기 등록",
+        "model": {
+            "label": "모델명",
+            "placeholder": "검사기 모델명을 선택해 주세요."
+        },
+        "reg_number": {
+            "label": "등록번호",
+            "placeholder": "숫자입력"
+        },
+        "device_serial": {
+            "label": "기기 S/N",
+            "placeholder": "영문 포함, 숫자입력"
+        },
+        "state": {
+            "label": "연결상태",
+            "placeholder": "연결상태를 입력해 주세요."
+        },
+        "date": {
+            "label": "등록일",
+            "placeholder": "yyyy.mm.dd"
+        },
+        "working_state": {
+            "label": "기기상태",
+            "normal": "정상",
+            "failure": "고장",
+            "discard": "폐기"
+        },
+        "conf_noti":  "기기 등록을 완료했습니다."
+    },
+    "logout_dialog": {
+        "title": "로그아웃",
+        "description": "로그아웃 하시겠습니까?",
+        "conf_noti": "로그아웃되어 첫페이지로 이동합니다."
+    },
+    "delete_dialog": {
+        "title": "삭제하기",
+        "description": "삭제된 데이터는 복원 불가입니다.",
+        "description_next": "데이터를 삭제하시겠습니까?",
+        "conf_noti": {
+            "title": "삭제 완료",
+            "description": "데이터를 삭제하였습니다."
+        }
+    },
+    "device_edit_dialog": {
+        "title": "기기 수정",
+        "model": "모델명",
+        "reg_number": "등록번호",
+        "device_serial": "기기 S/N",
+        "state": "연결상태",
+        "date": "등록일",
+        "working_state": {
+            "label": "기기상태",
+            "normal": "정상",
+            "failure": "고장",
+            "discard": "폐기"
+        },
+        "conf_noti": {
+            "title": "수정 완료",
+            "description": "데이터를 수정하였습니다."
+        }
+    },
+    "change_email_dialog": {
+        "header": {
+            "title": "이메일 변경",
+            "description": "이메일은 인증코드 확인 후 변경됩니다."
+        },
+        "email": {
+            "label": "변경할 이메일",
+            "placeholder": "변경할 이메일을 입력해 주세요."
+        },
+        "verify_code": {
+            "label": "인증코드",
+            "placeholder": "인증코드를 입력해 주세요."
+        },
+        "conf_noti": "이메일 변경이 완료되었습니다."
+    },
+    "button": {
+        "cancel": "취소",
+        "confirm": "확인",
+        "next": "다음",
+        "create": "등록",
+        "send": "보내기",
+        "save": "저장"
+    }
+}

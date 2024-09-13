@@ -1,0 +1,36 @@
+.logout {
+    width: 120px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 12px; /* Rounded button effect */
+    background-color: #dcdfe3; /* Gray background for button effect */
+    /* margin: 10px 0; Space between the buttons */
+    transition: background-color 0.3s ease;
+    margin-left: 107px;
+    font-weight: 600;
+    position: relative;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .logout:hover {
+    background-color: #EBEEF8;
+}
+
+.logout:hover span {
+  color: #0B5CD5; /* 호버 시 텍스트 색상 변경 */
+}
+
+.logout img {
+    margin-right: 10px;
+}
+
+.logout span {
+    font-size: 16px;
+    color: #888; /* 기본 텍스트 색상 */
+    transition: color 0.3s ease; /* 텍스트 색상 변경 시 전환 효과 추가 */
+}
+

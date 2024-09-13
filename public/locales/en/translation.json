@@ -1,0 +1,17 @@
+{
+    "login": "Login",
+    "email": "E-Mail",
+    "enter_email": "Please enter your email",
+    "terms_agreement": "I agree to the terms",
+    "terms_check": "Check the terms",
+    "next": "Next",
+    "inquiry": "Inquiry",
+    "language": "Language",
+    "verify_code": "Verify Code",
+    "enter_verification_code": "Please enter the verification code",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "email_inquiry": "Email Inquiry",
+    "email_inquiry_description": "If you have any questions, please contact us at any time. We will respond as soon as possible.",
+    "verification_code_sent": "A verification code will be sent to the entered email address."
+  }

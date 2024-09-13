@@ -1,0 +1,417 @@
+{
+    "login": {
+        "header": {
+            "title": "DMS Console"
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "Please enter your email."
+        },
+        "password": {
+            "label": "Password",
+            "placeholder": "Please enter your password."
+        }
+    },
+    "main": {
+        "sidebar": {
+            "dashboard": "Dashboard",
+            "customer_device": "Customer Device Management",
+            "customer_device_list": "Customer Device List",
+            "device": "Device Management",
+            "device_list": "Device List",
+            "device_data": "Device Data Management",
+            "analysis_result": "Analysis Results",
+            "qc_result": "QC Results",
+            "qc_material": "QC Materials",
+            "self_diag": "Self-Diagnosis Results",
+            "errors_report": "Errors",
+            "account": "Account Management",
+            "account_list": "Account List",
+            "logout": "Logout"
+        },
+        "header": {
+            "title": "DMS Management Console"
+        },
+        "content": {
+            "no_content": "No items available."
+        }
+    },
+    "logout_dialog": {
+        "description": "Are you sure you want to logout?"
+    },
+    "customer_device_list": {
+        "header": {
+            "title": "Customer Device List"
+        },
+        "column": {
+            "id": "Order",
+            "country": "Country",
+            "region": "Region",
+            "reseller": "Reseller",
+            "manager": "Manager",
+            "model": "Model Name",
+            "customer": "Customer",
+            "serial": "Device S/N",
+            "production_date": "Production Date",
+            "connection_state": "Connection Status"
+        },
+        "reg_info_dialog": {
+            "title": "Customer Device Registration Info",
+            "customer": "Customer",
+            "model": "Model Name",
+            "reg_number": "Registration Number",
+            "serial": "Device S/N",
+            "ip": "Connection IP",
+            "connection_date": "Connection Date",
+            "reg_date": "Registration Date",
+            "production_date": "Production Date",
+            "country": "Country",
+            "manager": "Manager",
+            "reseller": "Reseller",
+            "confirm": "Confirm"
+        }
+    },
+    "device_list": {
+        "header": {
+            "title": "Device List"
+        },
+        "column": {
+            "id": "Order",
+            "country": "Country",
+            "region": "Region",
+            "reseller": "Reseller",
+            "manager": "Manager",
+            "serial": "Device S/N",
+            "reg_date": "Registration Date",
+            "connection_state": "Connection Status",
+            "management": "Management"
+        },
+        "filter_search": {
+            "serial": "Device S/N",
+            "serial_placeholder": "Please enter the device S/N.",
+            "country": "Country",
+            "country_placeholder": "Please select a country.",
+            "region": "Region",
+            "region_placeholder": "Please select a region.",
+            "reseller": "Reseller",
+            "reseller_placeholder": "Please select a reseller.",
+            "manager": "Manager",
+            "manager_placeholder": "Please select a manager."
+        },
+        "system_info_tab": {
+            "title": "System Information",
+            "serial": "Device S/N",
+            "mac": "MAC Address",
+            "system": "System",
+            "qte": "QTE",
+            "bootloader": "Bootloader",
+            "application": "Application",
+            "kernel": "Kernel",
+            "dsp": "DSP",
+            "rootfs": "Root FS",
+            "xml": "XML"
+        },
+        "logfile_tab": {
+            "title": "Log File",
+            "column": {
+                "no": "No",
+                "serial": "Serial Number",
+                "log": "Log Type",
+                "logfile": "Log File",
+                "date": "Registration Date",
+                "unit": "Unit",
+                "managment": "Management"
+            }
+        },
+        "panel_info_tab": {
+            "title": "Panel Version Information",
+            "column": {
+                "no": "No",
+                "serial": "Serial Number",
+                "panel_info": "Panel Information",
+                "panel_version": "Panel Version",
+                "date": "Registration Date"
+            }
+        },
+        "update_history_tab": {
+            "title": "Update History",
+            "column": {
+                "no": "No",
+                "module": "Module Name",
+                "complete": "Completion Time",
+                "elapsed": "Elapsed Time",
+                "old_version": "Old Version",
+                "new_version": "New Version",
+                "method": "Method"
+            }
+        },
+        "instrument_coef_tab": {
+            "title": "Instrument Coefficient Information",
+            "column": {
+                "no": "No",
+                "analyte_name": "Analyte Name",
+                "analyte_id": "Analyte ID",
+                "analyte_fullname": "Full Analyte Name",
+                "ref_bound": "Reference Range",
+                "unit": "Unit",
+                "inst_factor_a": "Correction Coefficient A",
+                "inst_factor_b": "Correction Coefficient B"
+            }
+        }
+    },
+    "analysis_result": {
+        "header": {
+            "title": "Analysis Results List"
+        },
+        "column": {
+            "id": "Order",
+            "model": "Model Name",
+            "serial": "Device S/N",
+            "analysis_time": "Analysis Time",
+            "cat_lot": "Cartridge LOT",
+            "error_code": "Error Code"
+        },
+        "filter_search": {
+            "device_model": "Device Model",
+            "device_model_placeholder": "Please select a device model.",
+            "serial": "Device S/N",
+            "serial_placeholder": "Enter device S/N",
+            "cat_lot": "Cartridge LOT",
+            "cat_lot_placeholder": "Enter LOT",
+            "error_code": "Error Code",
+            "error_code_placeholder": "Enter error code"
+        },
+        "detail_dialog": {
+            "title": "Analysis History Details",
+            "column": {
+                "no": "No",
+                "analyte_name": "Analyte Name",
+                "result": "Result",
+                "fianlod": "Final OD",
+                "ref_bound": "Reference Range (3SD)",
+                "unit": "Unit",
+                "error_type": "Error Type"
+            }
+        }
+    },
+    "qc_result": {
+        "header": {
+            "title": "QC Results List"
+        },
+        "column": {
+            "id": "Order",
+            "model": "Model Name",
+            "serial": "Device S/N",
+            "analysis_time": "Analysis Time",
+            "cat_lot": "Cartridge LOT",
+            "qc_material": "QC Material Name",
+            "qc_level": "QC Material Level",
+            "error_code": "Error Code"
+        },
+        "filter_search": {
+            "device_model": "Device Model",
+            "device_model_placeholder": "Please select a device model.",
+            "serial": "Device S/N",
+            "serial_placeholder": "Enter device S/N",
+            "cat_lot": "Cartridge LOT",
+            "cat_lot_placeholder": "Enter LOT",
+            "qc_material_lot": "QC Material LOT",
+            "qc_material_lot_placeholder": "Enter QC material LOT",
+            "qc_material_level": "QC Material Level",
+            "qc_material_level_placeholder": "Enter QC material level",
+            "error_code": "Error Code",
+            "error_code_placeholder": "Enter error code"
+        },
+        "detail_dialog": {
+            "title": "QC Result Details",
+            "column": {
+                "no": "No",
+                "analyte_name": "Analyte Name",
+                "result": "Result",
+                "fianlod": "Final OD",
+                "ref_bound": "Reference Range (3SD)",
+                "unit": "Unit",
+                "error_type": "Error Type"
+            }
+        }
+    },
+    "qc_material": {
+        "header": {
+            "title": "QC Material List"
+        },
+        "column": {
+            "id": "Order",
+            "model": "Model Name",
+            "serial": "Device S/N",
+            "qc_material": "QC Material Name",
+            "qc_level": "QC Material Level",
+            "lot": "LOT Number",
+            "expiration_date": "Expiration Date",
+            "modifier": "Modifier",
+            "qc_val_version": "QC Value Version"
+        },
+        "filter_search": {
+            "serial": "Device S/N",
+            "serial_placeholder": "Enter device S/N",
+            "qc_material": "QC Material Name",
+            "qc_material_placeholder": "Enter QC material name",
+            "lot": "LOT Number",
+            "lot_placeholder": "Enter LOT number"
+        },
+        "detail_dialog": {
+            "title": "QC Material Details",
+            "column": {
+                "no": "No",
+                "analyte_name": "Analyte Name",
+                "analyte_id": "Analyte ID",
+                "analyte_fullname": "Full Analyte Name",
+                "target_mean": "Target Mean",
+                "sd": "SD",
+                "target_range": "Target Range",
+                "unit_si": "Unit SI",
+                "unit_non_si": "Unit Non-SI",
+                "rule": "Policy"
+            }
+        }
+    },
+    "self_diag": {
+        "header": {
+            "title": "Self-Diagnosis List"
+        },
+        "column": {
+            "id": "Order",
+            "serial": "Device S/N",
+            "diag_time": "Diagnosis Time",
+            "plunger_motor": "Plunger Motor",
+            "camera_blu": "Camera BLU",
+            "temp_ic": "Temperature IC",
+            "cat_sensor": "Cartridge Sensor",
+            "eqc": "EQC"
+        },
+        "filter_search": {
+            "serial": "Device S/N",
+            "serial_placeholder": "Enter device S/N",
+            "plunger_motor": "Plunger Motor",
+            "camera_blu": "Camera BLU",
+            "temp_ic": "Temperature IC",
+            "cat_sensor": "Cartridge Sensor",
+            "eqc": "EQC"
+        },
+        "detail_dialog": {
+            "title": "Self-Diagnosis Registration Information",
+            "model": "Model Name",
+            "serial": "Device S/N",
+            "diag_time": "Diagnosis Time",
+            "power": "Power",
+            "plunger_motor": "Plunger Motor",
+            "camera_blu": "Camera BLU",
+            "temp_ic": "Temperature IC",
+            "detector_led": "Detector LED",
+            "heater1": "Heater 1",
+            "printer": "Printer",
+            "qrcode": "QR Code",
+            "cat_sensor": "Cartridge Sensor",
+            "eqc": "EQC"
+        }
+    },
+    "errors_report": {
+        "header": {
+            "title": "Error List"
+        },
+        "column": {
+            "id": "Order",
+            "model": "Model Name",
+            "serial": "Device S/N",
+            "date": "Occurrence Time",
+            "view_log": "View",
+            "error_title": "Error Title",
+            "sent": "Sent"
+        },
+        "filter_search": {
+            "device_model": "Device Model",
+            "device_model_placeholder": "Please select a device model.",
+            "serial": "Device S/N",
+            "serial_placeholder": "Enter device S/N",
+            "error_code": "Error Code",
+            "error_code_placeholder": "Enter error code",
+            "error_type": "Error Type",
+            "error_type_placeholder": "Enter error type"
+        },
+        "detail_dialog": {
+            "title": "Error Registration Information",
+            "model": "Model Name",
+            "serial": "Device S/N",
+            "date": "Occurrence Time",
+            "sent": "Sent",
+            "view_log": "View",
+            "error_title": "Error Title",
+            "panel_type": "Panel Type",
+            "control_type": "Control Type"
+        }
+    },
+    "account_list": {
+        "header": {
+            "title": "Account List"
+        },
+        "column": {
+            "id": "Order",
+            "name": "Name",
+            "email": "Email",
+            "department": "Department",
+            "grade": "Grade",
+            "created_at": "Registration Date",
+            "updated_at": "Modification Date",
+            "managment": "Management"
+        },
+        "account_mod_dialog": {
+            "title": "Modify Account Information",
+            "sub_title": "Account Information",
+            "delete": "Delete",
+            "name": "Name",
+            "department": "Department",
+            "email": "Email",
+            "grade": "Grade"
+        },
+        "pass_mod_dialog": {
+            "title": "Change Password",
+            "sub_title": "Change Password",
+            "old_pass": "Current Password",
+            "old_pass_placeholder": "Enter current password.",
+            "new_pass": "New Password",
+            "new_pass_placeholder": "Enter new password.",
+            "confirm_pass": "Confirm Password",
+            "confirm_pass_placeholder": "Re-enter new password."
+        },
+        "account_delete_dialog": {
+            "title": "Delete Account",
+            "description": "Deleted data cannot be recovered.",
+            "description_next": "Do you want to delete the data?",
+            "delete_done": {
+                "title": "Deletion Complete",
+                "description": "The data has been deleted."
+            }
+        },
+        "pass_mod_confirm_dialog": {
+            "title": "Do you want to change the password?"
+        },
+        "pass_mod_done_dialog": {
+            "title": "Change Complete",
+            "description": "The password has been changed.",
+            "description_next": "Please log in again."
+        }
+    },
+    "button": {
+        "cancel": "Cancel",
+        "change": "Change",
+        "confirm": "Confirm",
+        "modification": "Modify",
+        "search": "Search",
+        "upload": "Upload",
+        "download": "Download",
+        "create": "Create",
+        "login": "Login",
+        "logout": "Logout",
+        "view_all": "View All",
+        "filter_search": "Filter Search"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "login": "로그인",
+    "email": "이메일",
+    "enter_email": "이메일을 입력해 주세요.",
+    "terms_agreement": "이용약관동의",
+    "terms_check": "이용약관확인",
+    "next": "다음",
+    "inquiry": "문의사항",
+    "language": "언어",
+    "verify_code": "인증코드",
+    "enter_verification_code": "인증코드를 입력해 주세요.",
+    "cancel": "취소",
+    "submit": "보내기",
+    "email_inquiry": "이메일 문의",
+    "email_inquiry_description": "궁금한 점은 언제든지 문의해 주세요. 빠른 시일 내로 답변해 드리겠습니다.",
+    "verification_code_sent": "입력한 이메일로 인증코드가 전송됩니다."
+  }
