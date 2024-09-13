@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, Tabs, Tab, Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import AnalysisResultsDetailInfoPanel from './QCResultsDetailInfoPanel';
+import QCResultsDetailInfoPanel from './QCResultsDetailInfoPanel';
 
 export default function QCResultsDetailInfoDialog({ open, onClose, selectedRow }) {
     const [value, setValue] = useState(0);
@@ -62,7 +62,7 @@ export default function QCResultsDetailInfoDialog({ open, onClose, selectedRow }
                             height: '8px', // Change the height of the indicator
                         },
                     }}>
-                    <Tab label={t('analysis_result.detail_dialog.title')}
+                    <Tab label={t('qc_result.detail_dialog.title')}
                         sx={{
                             minWidth: '92px',
                             // width: '92px',
@@ -82,7 +82,7 @@ export default function QCResultsDetailInfoDialog({ open, onClose, selectedRow }
                 </Tabs>
                 {/* Conditionally render each TabPanel */}
                 <Box sx={{ paddingTop: '100px', paddingLeft: '5px', paddingRight: '5px' }}>
-                    <AnalysisResultsDetailInfoPanel selectedRow={selectedRow} />
+                    <QCResultsDetailInfoPanel selectedRow={selectedRow} />
                 </Box>
             </DialogContent>
         </Dialog>

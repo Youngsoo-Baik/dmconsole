@@ -15,22 +15,21 @@ const NoRowsOverlay = styled('div')({
 });
 
 const initialRows = [
-    { id: 1, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 2, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 3, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 4, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 5, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 6, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 7, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 8, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 9, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 10, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 11, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 12, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 13, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 14, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 15, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+    { id: 1, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 2, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 3, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 4, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 5, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 6, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 7, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 8, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 9, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 10, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 11, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 12, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 13, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 14, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
+    { id: 15, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
 ];
 
 
@@ -41,73 +40,16 @@ const QCMaterialDetailInfoPanel = () => {
     const getRowHeight = (params) => 47;
 
     const columns = [
-        { field: 'id', headerName: `${t('analysis_result.detail_dialog.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
-        { field: 'analyte_name', headerName: `${t('analysis_result.detail_dialog.column.analyte_name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
-        {
-            field: 'result', headerName: `${t('analysis_result.detail_dialog.column.result')}`, flex: 2, minWidth: 150, headerAlign: 'center', align: 'center',
-            // 이미지와 텍스트를 같이 렌더링하는 custom renderCell
-            renderCell: (params) => {
-
-                // ID 값에 따라 다른 아이콘을 반환
-                const getIconById = (id) => {
-                    switch (id) {
-                        case 1:
-                            return (
-                                <div style={{color: '#e02b1d', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/up-tag.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 2:
-                            return (
-                                <div style={{color: '#007dfa', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/down-tag.png'} alt={'down tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 3:
-                            return (
-                                <div style={{color: '#494949', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/check-tag.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 4:
-                            return (
-                                <div style={{color: '#f96c1c', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/inequality_low.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 5:
-                            return (
-                                <div style={{color: '#f96c1c', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/inequality_high.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        default:
-                            return (
-                                <div style={{color: '#a41207', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/alert.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                    }
-                };
-
-                return (
-                    <div>
-                        {getIconById(params.row.id)}
-                        {/* <span>{params.row.id}</span> */}
-                    </div>
-                );
-            },
-        },
-        { field: 'finalod', headerName: `${t('analysis_result.detail_dialog.column.finalod')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'ref_bound', headerName: `${t('analysis_result.detail_dialog.column.ref_bound')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'unit', headerName: `${t('analysis_result.detail_dialog.column.unit')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'error_type', headerName: `${t('analysis_result.detail_dialog.column.error_type')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'id', headerName: `${t('qc_material.detail_dialog.column.no')}`, flex: 1, minWidth: 30, headerAlign: 'center', align: 'center' },
+        { field: 'analyte_name', headerName: `${t('qc_material.detail_dialog.column.analyte_name')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'analyte_id', headerName: `${t('qc_material.detail_dialog.column.analyte_id')}`, flex: 1, minWidth: 80, headerAlign: 'center', align: 'center' },
+        { field: 'analyte_fullname', headerName: `${t('qc_material.detail_dialog.column.analyte_fullname')}`, flex: 2, minWidth: 150, headerAlign: 'center', align: 'center' },
+        { field: 'target_mean', headerName: `${t('qc_material.detail_dialog.column.target_mean')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'sd', headerName: `${t('qc_material.detail_dialog.column.sd')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'target_range', headerName: `${t('qc_material.detail_dialog.column.target_range')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'unit_si', headerName: `${t('qc_material.detail_dialog.column.unit_si')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'unit_non_si', headerName: `${t('qc_material.detail_dialog.column.unit_non_si')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'rule', headerName: `${t('qc_material.detail_dialog.column.rule')}`, flex: 1, minWidth: 50, headerAlign: 'center', align: 'center' },
     ];
 
     return (
@@ -120,15 +62,6 @@ const QCMaterialDetailInfoPanel = () => {
                 boxShadow: '0px 4px 24px rgba(0, 0, 0, 0.1)',
             }}
         >
-            {/* <Box display="flex" alignItems="center" sx={{
-                paddingLeft: '26px',  // Left padding
-                paddingTop: '26px',   // Top padding
-            }}>
-                <img src="/icon-update.png" alt="update icon" style={{ width: '30px', height: '30px', marginRight: '8px' }} />
-                <Typography variant="h6" sx={{ fontSize: '20px', fontWeight: 'bold', color: '#303468' }}>
-                    {t('analysis_result.detail_dialog..title')}
-                </Typography>
-            </Box> */}
             <Box sx={{ height: '680px', paddingTop: '10px', paddingLeft: '18px', paddingRight: '18px' }}>
                 <DataGrid
                     rows={rows}
@@ -137,8 +70,6 @@ const QCMaterialDetailInfoPanel = () => {
                     apiRef={apiRef}
                     getRowId={(row) => row.id}
                     // rowsPerPageOptions={[5, 10, 20, 50, 100]}
-                    // hideFooterPagination
-                    // hideFooterSelectedRowCount
                     hideFooter
                     getRowHeight={getRowHeight}
                     headerHeight={54}

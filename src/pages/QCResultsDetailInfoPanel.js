@@ -41,73 +41,13 @@ const QCResultsDetailInfoPanel = () => {
     const getRowHeight = (params) => 47;
 
     const columns = [
-        { field: 'id', headerName: `${t('analysis_result.detail_dialog.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
-        { field: 'analyte_name', headerName: `${t('analysis_result.detail_dialog.column.analyte_name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
-        {
-            field: 'result', headerName: `${t('analysis_result.detail_dialog.column.result')}`, flex: 2, minWidth: 150, headerAlign: 'center', align: 'center',
-            // 이미지와 텍스트를 같이 렌더링하는 custom renderCell
-            renderCell: (params) => {
-
-                // ID 값에 따라 다른 아이콘을 반환
-                const getIconById = (id) => {
-                    switch (id) {
-                        case 1:
-                            return (
-                                <div style={{color: '#e02b1d', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/up-tag.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 2:
-                            return (
-                                <div style={{color: '#007dfa', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/down-tag.png'} alt={'down tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 3:
-                            return (
-                                <div style={{color: '#494949', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/check-tag.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 4:
-                            return (
-                                <div style={{color: '#f96c1c', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/inequality_low.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 5:
-                            return (
-                                <div style={{color: '#f96c1c', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/inequality_high.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        default:
-                            return (
-                                <div style={{color: '#a41207', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/alert.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                    }
-                };
-
-                return (
-                    <div>
-                        {getIconById(params.row.id)}
-                        {/* <span>{params.row.id}</span> */}
-                    </div>
-                );
-            },
-        },
-        { field: 'finalod', headerName: `${t('analysis_result.detail_dialog.column.finalod')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'ref_bound', headerName: `${t('analysis_result.detail_dialog.column.ref_bound')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'unit', headerName: `${t('analysis_result.detail_dialog.column.unit')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'error_type', headerName: `${t('analysis_result.detail_dialog.column.error_type')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'id', headerName: `${t('qc_result.detail_dialog.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'analyte_name', headerName: `${t('qc_result.detail_dialog.column.analyte_name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'result', headerName: `${t('qc_result.detail_dialog.column.result')}`, flex: 2, minWidth: 150, headerAlign: 'center', align: 'center' },
+        { field: 'finalod', headerName: `${t('qc_result.detail_dialog.column.finalod')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'ref_bound', headerName: `${t('qc_result.detail_dialog.column.ref_bound')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'unit', headerName: `${t('qc_result.detail_dialog.column.unit')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'error_type', headerName: `${t('qc_result.detail_dialog.column.error_type')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
     ];
 
     return (
