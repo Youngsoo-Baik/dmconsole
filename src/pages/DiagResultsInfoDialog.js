@@ -17,7 +17,7 @@ const CustomDivider = styled(Divider)(({ theme }) => ({
     margin: '12.6px 35px 12.6px 22.5px',
     // transform: 'rotate(-270deg)',
     backgroundColor: 'var(--gray-400)', // Corresponds to var(--gray-400)
-  }));
+}));
 
 export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
     const { t } = useTranslation('console');
@@ -34,21 +34,23 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                 border: '1px solid #80befc', // 테두리 설정
             },
         }}>
-            <DialogTitle sx={{
-                fontSize: '24px', // 폰트 크기 설정
-                fontWeight: 'bold', // 폰트 굵기 설정
-                marginTop: '40px', // 위쪽 여백
-                marginBottom: '5px', // 아래쪽 여백
-                marginLeft: '12px', // 왼쪽 여백
-                color: '#002A70' // 폰트 색상 설정
-            }}>{t('self_diag.detail_dialog.title')}</DialogTitle>
-            <DialogContent sx={{overflowY: 'hidden' }}>
-                <Box border={1} borderColor="#7d7d7d" borderRadius={2} p={2}  sx={{backgroundColor: '#ffffff'}} >
+            <DialogTitle
+                sx={{
+                    fontSize: '24px', // 폰트 크기 설정
+                    fontWeight: 'bold', // 폰트 굵기 설정
+                    marginTop: '40px', // 위쪽 여백
+                    marginBottom: '5px', // 아래쪽 여백
+                    marginLeft: '12px', // 왼쪽 여백
+                    color: '#002A70' // 폰트 색상 설정
+                }}>{t('self_diag.detail_dialog.title')}
+            </DialogTitle>
+            <DialogContent sx={{ overflowY: 'hidden' }}>
+                <Box border={1} borderColor="#7d7d7d" borderRadius={2} p={2} sx={{ backgroundColor: '#ffffff' }} >
                     <Grid container spacing={2} sx={{ height: 'auto', overflowY: 'visible' }}>
-                        
-                        <Grid item xs={12} sx={{ml:1}}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.model')}
+
+                        <Grid item xs={12} sx={{ ml: 1 }}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.model')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 Fluoro Check ™ Heating Block
@@ -59,137 +61,147 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             <Divider /> {/* Divider 컴포넌트 사용 */}
                         </Grid>
 
-                        <Grid item xs={6} sx={{ml:1}}>
-                        <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.serial')}
+                        <Grid item xs={6} sx={{ ml: 1 }}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.serial')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 YVKA0-A00001
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.diag_time')}
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.diag_time')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 2023-10-30 18:10:17
                             </Typography>
                         </Grid>
-                        
+
                         <Grid item xs={12}>
                             <Divider /> {/* Divider 컴포넌트 사용 */}
                         </Grid>
 
-                        <Grid item xs={2} sx={{ml:1}}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.power')}
+                        <Grid item xs={2} sx={{ ml: 1 }}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.power')}
                             </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 ON
-                            </Typography>
+                            </Typography> */}
+                            <img src="/icon-pass.png"   width="60px" height="25px"></img>
                         </Grid>
                         <Grid item xs={1}>
-                        <Divider orientation="vertical" />
+                            <Divider orientation="vertical" />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.plunger_motor')}
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.plunger_motor')}
                             </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                            ON
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.camera_blu')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                            ON
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.temp_ic')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                            ON
-                            </Typography>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <Divider /> {/* Divider 컴포넌트 사용 */}
-                        </Grid>
-
-                        <Grid item xs={2} sx={{ml:1}}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.detector_led')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                OFF
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.heater1')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                            OFF
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.printer')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                            OFF
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                        <Divider orientation="vertical" />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.qrcode')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                            OFF
-                            </Typography>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <Divider /> {/* Divider 컴포넌트 사용 */}
-                        </Grid>
-
-                        <Grid item xs={2} sx={{ml:1}}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.cat_sensor')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 ON
-                            </Typography>
+                            </Typography> */}
+                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
                         </Grid>
                         <Grid item xs={1}>
-                        <Divider orientation="vertical" />
+                            <Divider orientation="vertical" />
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('self_diag.detail_dialog.eqc')}
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.camera_blu')}
                             </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                ON
+                            </Typography> */}
+                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Divider orientation="vertical" />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.temp_ic')}
+                            </Typography>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                ON
+                            </Typography> */}
+                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Divider /> {/* Divider 컴포넌트 사용 */}
+                        </Grid>
+
+                        <Grid item xs={2} sx={{ ml: 1 }}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.detector_led')}
+                            </Typography>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 OFF
+                            </Typography> */}
+                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Divider orientation="vertical" />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.heater1')}
                             </Typography>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                OFF
+                            </Typography> */}
+                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Divider orientation="vertical" />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.printer')}
+                            </Typography>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                OFF
+                            </Typography> */}
+                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Divider orientation="vertical" />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.qrcode')}
+                            </Typography>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                OFF
+                            </Typography> */}
+                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Divider /> {/* Divider 컴포넌트 사용 */}
+                        </Grid>
+
+                        <Grid item xs={2} sx={{ ml: 1 }}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.cat_sensor')}
+                            </Typography>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                ON
+                            </Typography> */}
+                            <img src="/icon-pass.png"   width="60px" height="25px"></img>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Divider orientation="vertical" />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '13px', color: '#002A70', mb: '6px' }}>
+                                {t('self_diag.detail_dialog.eqc')}
+                            </Typography>
+                            {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                OFF
+                            </Typography> */}
+                            <img src="/icon-pass.png"   width="60px" height="25px"></img>
                         </Grid>
                     </Grid>
                 </Box>

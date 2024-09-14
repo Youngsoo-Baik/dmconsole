@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Box, Grid, Divider } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 // 샘플 데이터 (이 데이터를 rowId로 가져왔다고 가정)
 const rowData = {
@@ -9,6 +10,7 @@ const rowData = {
 };
 
 export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
+    const { t } = useTranslation('console');
     const data = rowData[rowId];
     console.log(rowId);
     console.log(data);
@@ -16,7 +18,7 @@ export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
         <Dialog open={open} onClose={onClose} PaperProps={{
             sx: {
                 width: '592px', // 가로 크기 설정
-                height: '824px', // 세로 크기 설정
+                height: '744px', // 세로 크기 설정
                 backgroundColor: '#ebeef8', // 배경 색상 설정
                 borderRadius: '8px', // 모서리 둥글기 설정
                 border: '1px solid #80befc', // 테두리 설정
@@ -29,16 +31,16 @@ export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
                 marginBottom: '5px', // 아래쪽 여백
                 marginLeft: '12px', // 왼쪽 여백
                 color: '#002A70' // 폰트 색상 설정
-            }}>고객 검사기 등록 정보</DialogTitle>
+            }}>{t('errors_report.detail_dialog.title')}</DialogTitle>
             <DialogContent sx={{overflowY: 'hidden' }}>
                 <Box border={1} borderColor="#7d7d7d" borderRadius={2} p={2}  sx={{backgroundColor: '#ffffff'}} >
                     <Grid container spacing={2} sx={{ height: 'auto', overflowY: 'visible' }}>
                         <Grid item xs={12} sx={{ml:1}}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                구매자
+                            {t('errors_report.detail_dialog.model')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                hardtack7535@naver.com
+                            Fluoro Check ™ Heating Block
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -46,26 +48,7 @@ export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
                         </Grid>
                         <Grid item xs={12} sx={{ml:1}}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                모델명
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                Fluoro Check ™ Heating Block
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Divider /> {/* Divider 컴포넌트 사용 */}
-                        </Grid>
-                        <Grid item xs={7} sx={{ml:1}}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                등록번호
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                08800026300229
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                기기 S/N
+                            {t('errors_report.detail_dialog.serial')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 YVKA0-A00001
@@ -76,56 +59,18 @@ export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
                         </Grid>
                         <Grid item xs={7} sx={{ml:1}}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                연결 IP
+                            {t('errors_report.detail_dialog.date')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                61.36.16.226
+                                2023-10-30 18:10:17
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                연결 날짜
+                            {t('errors_report.detail_dialog.sent')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023.11.01 13:16
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Divider /> {/* Divider 컴포넌트 사용 */}
-                        </Grid>
-                        <Grid item xs={7} sx={{ml:1}}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                등록일
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023.08.11
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                출하일
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023.08.11
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Divider /> {/* Divider 컴포넌트 사용 */}
-                        </Grid>
-                        <Grid item xs={7} sx={{ml:1}}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                국가
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                파푸아뉴기니
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                담당자
-                            </Typography>
-                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                담당자
+                                DONE
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -133,10 +78,40 @@ export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
                         </Grid>
                         <Grid item xs={12}  sx={{ml:1}}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                                대리점
+                            {t('errors_report.detail_dialog.view_log')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                원주24시스카이동물메디컬센터
+                                ANALYSISQCHWCHECK
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Divider /> {/* Divider 컴포넌트 사용 */}
+                        </Grid>
+                        <Grid item xs={12}  sx={{ml:1}}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
+                            {t('errors_report.detail_dialog.error_title')}
+                            </Typography>
+                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                Catridge QR Code Recognition Error
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Divider /> {/* Divider 컴포넌트 사용 */}
+                        </Grid>
+                        <Grid item xs={7} sx={{ml:1}}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
+                            {t('errors_report.detail_dialog.cat_type')}
+                            </Typography>
+                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                -
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
+                            {t('errors_report.detail_dialog.control_type')}
+                            </Typography>
+                            <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
+                                -
                             </Typography>
                         </Grid>
                     </Grid>

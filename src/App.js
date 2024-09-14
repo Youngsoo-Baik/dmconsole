@@ -25,14 +25,19 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
+  // 로그아웃 핸들러
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        {/* <Route path="/" element={isLoggedIn ? <MainLayout /> : <Navigate to="/login" />}> */}
-        <Route path="/" element={<MainLayout/>}>
-          <Route  path="/devicetable" element={<DeviceTable />} />
-          {/* <Route index element={<Home />} /> */}
+        {/* 로그인 상태에 따라 메인 레이아웃으로 이동 */}
+        <Route path="/" element={isLoggedIn ? <MainLayout onLogout={handleLogout} /> : <Navigate to="/login" />}>
+          {/* <Route path="/" element={<MainLayout/>}> */}
+          <Route index element={<Navigate to="customer-devices" />} />
           <Route path="customer-devices" element={<CustomerDeviceList />} />
           <Route path="devices" element={<DeviceList />} />
           <Route path="analysis-results" element={<AnalysisResults />} />

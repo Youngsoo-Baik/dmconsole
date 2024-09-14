@@ -82,7 +82,7 @@ const DMSText = styled(Typography)({
   marginRight: '14px'
 });
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();  // Initialize the navigate function
@@ -90,6 +90,8 @@ const Login = () => {
 
   const handleLogin = () => {
     if (email === 'test' && password === 'pass') {
+      // navigate('/customer-devices');  // Navigate to the home page on successful login
+      onLogin();  // 로그인 상태 변경
       navigate('/customer-devices');  // Navigate to the home page on successful login
     } else {
       alert('Invalid login credentials');
