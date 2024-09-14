@@ -345,7 +345,7 @@
             "sent": "전송여부",
             "view_log": "뷰",
             "error_title": "에러제목",
-            "panel_type": "패널타입",
+            "cat_type": "카트리지 타입",
             "control_type": "정도관리 타입"
         }
     },

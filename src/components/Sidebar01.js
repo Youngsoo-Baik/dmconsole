@@ -77,7 +77,7 @@ const SubListItem = styled(ListItem)({
     height: '40px', // 세로 크기
 });
 
-const Sidebar = () => {
+function Sidebar({ onLogout }) {
     const [selectedPath, setSelectedPath] = useState(''); // 현재 선택된 경로를 상태로 관리
     const [user, setUser] = useState('admin'); // 현재 로그인된 사용자를 'admin'으로 설정
     const { t } = useTranslation('console');
@@ -94,7 +94,8 @@ const Sidebar = () => {
 
     const handleLogoutConfirm = () => {
         setLogoutDialogOpen(false);
-        handleMenuClick('login');   // navigate to login page
+        onLogout(); // 부모로부터 받은 로그아웃 함수 호출
+        handleMenuClick('/login');   // navigate to login page
         console.log('Logged out');
     };
 

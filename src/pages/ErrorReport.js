@@ -10,7 +10,7 @@ import { styled } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
-import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
+import ErrorReportInfoDialog from './ErrorReportInfoDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 
 function CustomPagination() {
@@ -135,18 +135,17 @@ const ErrorReport = () => {
     const getRowHeight = (params) => 58;
     const [selectionModel, setSelectionModel] = React.useState([]);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(null);
-    const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
-    // State to track hover
-    const [hovered, setHovered] = useState(false);
-
-    const handleIconClick = (params) => {
-        setSelectedRow(params.row);
-        setOpen(true);  // Open the DeviceManagementDialog
+    const [currentRow, setCurrentRow] = useState(null);
+    const [selectedRowId, setSelectedRowId] = useState(null);
+    const [dialogOpen, setDialogOpen] = useState(false);
+  
+    const handleRowClick = (params) => {
+      setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
+      setDialogOpen(true);  // 다이얼로그 열기
     };
-
-    const handleClose = () => {
-        setOpen(false);  // Close the DeviceManagementDialog
+  
+    const handleCloseDialog = () => {
+      setDialogOpen(false);
     };
 
     const handleHeaderCheckboxChange = (event) => {
@@ -337,6 +336,7 @@ const ErrorReport = () => {
                     getRowId={(row) => row.id}
                     rowsPerPageOptions={[5, 10, 20, 50, 100]}
                     getRowHeight={getRowHeight}
+                    onRowClick={handleRowClick}  // 행 클릭 시 이벤트 핸들러 호출
                     headerHeight={48}
                     localeText={getLocaleText()} // Use the localeText based on the current locale
                     slots={{
@@ -405,10 +405,10 @@ const ErrorReport = () => {
                     }}
                 />
                 {/* DeviceManagementDialog Component */}
-                <DeviceManagementDialog
-                    open={open}
-                    onClose={handleClose}
-                    selectedRow={selectedRow} // Pass the selected row to the dialog for context
+                <ErrorReportInfoDialog
+                    open={dialogOpen}
+                    onClose={handleCloseDialog}
+                    rowId={selectedRowId}
                 />
             </Box>
             <Popover
