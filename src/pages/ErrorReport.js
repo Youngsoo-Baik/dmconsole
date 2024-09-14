@@ -107,20 +107,20 @@ function CustomFooter() {
 
 const initialRows = [
     { id: 1, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 2, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
+    { id: 2, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
     { id: 3, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
     { id: 4, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 5, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 6, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
+    { id: 5, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
+    { id: 6, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
     { id: 7, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
     { id: 8, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
     { id: 9, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 10, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
+    { id: 10, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
     { id: 11, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 12, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
+    { id: 12, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
     { id: 13, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 14, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 15, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
+    { id: 14, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
+    { id: 15, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
     { id: 16, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
 ];
 
@@ -157,6 +157,15 @@ const ErrorReport = () => {
         }
     };
 
+    function renderStatus(params) {
+        console.log(params);
+        return (
+            <Box sx={{ textAlign: 'center', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {params.value ? <img src="/sent_complete.png" alt="pass" /> : <img src="/sent_notdone.png" alt="fail" />}
+            </Box>
+        );
+    }
+
     const columns = [
         { field: 'id', headerName: `${t('errors_report.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'model', headerName: `${t('errors_report.column.model')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
@@ -164,7 +173,7 @@ const ErrorReport = () => {
         { field: 'date', headerName: `${t('errors_report.column.date')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'view_log', headerName: `${t('errors_report.column.view_log')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'error_title', headerName: `${t('errors_report.column.error_title')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'sent', headerName: `${t('errors_report.column.sent')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'sent', headerName: `${t('errors_report.column.sent')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' , renderCell: (params) => renderStatus(params) },
     ];
 
     const formik = useFormik({
