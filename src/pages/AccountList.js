@@ -10,7 +10,7 @@ import { styled } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
-import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
+import AccountManagementDialog from './AccountManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 
 function CustomPagination() {
@@ -281,13 +281,17 @@ const AccountList = () => {
             <Box sx={{ display: 'flex', width: '1524px' }}>
                 
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '10px', width: 'calc(100%  - 10px)' }}>
-                    <Box className="button_container" sx={{ display: 'flex', gap: '10px' }}>
+                    <Box className="button_container" sx={{ display: 'flex', gap: '2px' }}>
                         <Button
                             variant="contained"
                             onClick={handleExport}
                             className="button_dwload"
                             sx={{
+                                width: '122px',
+                                height: '48px',
+                                fontFamily: 'Pretendard',
                                 fontSize: '14px',
+                                fontWeight: '500px',
                                 borderRadius: '10px',
                                 textTransform: 'none',
                                 backgroundColor: '#80befc',
@@ -295,9 +299,9 @@ const AccountList = () => {
                                     backgroundColor: '#0b5cd5',
                                 },
                             }}
-                            endIcon={<img src={'/download.png'} alt="Download Icon" style={{ width: '30px', height: '30px' }} />}
+                            endIcon={<img src={'/guest.png'} alt="guest Icon" style={{ width: '30px', height: '30px' }} />}
                         >
-                            {t('button.download')}
+                            {t('button.add_member')}
                         </Button>
                     </Box>
                 </Box>
@@ -371,7 +375,7 @@ const AccountList = () => {
                     }}
                 />
                 {/* DeviceManagementDialog Component */}
-                <DeviceManagementDialog
+                <AccountManagementDialog
                     open={open}
                     onClose={handleClose}
                     selectedRow={selectedRow} // Pass the selected row to the dialog for context
