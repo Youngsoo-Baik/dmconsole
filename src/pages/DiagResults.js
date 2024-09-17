@@ -109,14 +109,14 @@ function CustomFooter() {
 
 const initialRows = [
     { id: 1, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 2, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
+    { id: 2, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
     { id: 3, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
     { id: 4, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
     { id: 5, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 6, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
+    { id: 6, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: true, temp_ic:false, cat_sensor:true, eqc:true },
     { id: 7, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 8, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 9, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
+    { id: 8, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:true, cat_sensor:true, eqc:true },
+    { id: 9, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
     { id: 10, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
     { id: 11, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
     { id: 12, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
@@ -158,15 +158,24 @@ const DiagResults = () => {
         }
     };
 
+    function renderStatus(params) {
+        console.log(params);
+        return (
+            <Box sx={{ textAlign: 'center', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {params.value ? <img src="/icon-pass.png" alt="pass" /> : <img src="/icon-fail.png" alt="fail" />}
+            </Box>
+        );
+    }
+
     const columns = [
         { field: 'id', headerName: `${t('self_diag.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('self_diag.column.serial')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'diag_time', headerName: `${t('self_diag.column.diag_time')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'plunger_motor', headerName: `${t('self_diag.column.plunger_motor')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'camera_blu', headerName: `${t('self_diag.column.camera_blu')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'temp_ic', headerName: `${t('self_diag.column.temp_ic')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'cat_sensor', headerName: `${t('self_diag.column.cat_sensor')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'eqc', headerName: `${t('self_diag.column.eqc')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'plunger_motor', headerName: `${t('self_diag.column.plunger_motor')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderStatus(params) },
+        { field: 'camera_blu', headerName: `${t('self_diag.column.camera_blu')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderStatus(params) },
+        { field: 'temp_ic', headerName: `${t('self_diag.column.temp_ic')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderStatus(params) },,
+        { field: 'cat_sensor', headerName: `${t('self_diag.column.cat_sensor')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderStatus(params) },,
+        { field: 'eqc', headerName: `${t('self_diag.column.eqc')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderStatus(params) },
     ];
 
     const formik = useFormik({

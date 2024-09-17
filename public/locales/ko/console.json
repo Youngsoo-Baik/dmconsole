@@ -351,7 +351,7 @@
     },
     "account-list": {
         "header": {
-            "title": "계정 목록"
+            "title": "회원 목록"
         },
         "column": {
             "id": "순서",
@@ -412,6 +412,7 @@
         "login": "로그인",
         "logout": "로그아웃",
         "view_all": "전체보기",
-        "filter_search": "필터 검색"
+        "filter_search": "필터 검색",
+        "add_member": "회원등록"
     }
 }

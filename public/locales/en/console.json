@@ -412,6 +412,7 @@
         "login": "Login",
         "logout": "Logout",
         "view_all": "View All",
-        "filter_search": "Filter Search"
+        "filter_search": "Filter Search",
+        "add_member": "Add Member"
     }
 }
