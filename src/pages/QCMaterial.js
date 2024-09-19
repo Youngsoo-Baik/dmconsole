@@ -374,15 +374,6 @@ const QCMaterial = () => {
                     onSelectionModelChange={(newSelection) => {
                         setSelectionModel(newSelection);
                     }}
-                    // components={{
-                    //     BaseCheckbox: () => (
-                    //       <Checkbox
-                    //         checked={selectionModel.length === rows.length}
-                    //         indeterminate={selectionModel.length > 0 && selectionModel.length < rows.length}
-                    //         onChange={handleHeaderCheckboxChange}
-                    //       />
-                    //     ),
-                    //   }}
                     sx={{
                         '& .MuiDataGrid-columnHeaders div[role="row"]': {
                             backgroundColor: '#F5F5F7',
@@ -442,8 +433,8 @@ const QCMaterial = () => {
                 }}
                 PaperProps={{
                     style: {
-                        width: 600,
-                        height: 429,
+                        width: 448,
+                        height: 332,
                         borderRadius: '8px',
                         border: '1px solid #80befc',
                     },
@@ -454,25 +445,15 @@ const QCMaterial = () => {
                         <Box sx={{ mt: '10px', ml: '21px', display: 'flex', flexDirection: 'column', gap: 2 }}>
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.serial')}</Typography>
-                                    {/* <TextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
-                                        value={formik.values.deviceSN}
-                                        onChange={formik.handleChange}
-                                        variant="outlined"
-                                        sx={{ width: '268px', height: '48px', '& .MuiOutlinedInput-root': { height: '48px' } }}
-                                        InputProps={{ sx: { borderRadius: '10px' } }}
-                                    /> */}
+                                    <Typography sx={{ color: '#002a70' }}>{t('qc_material.filter_search.serial')}</Typography>
                                     <CustomTextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
+                                        id="serial"
+                                        name="serial"
+                                        placeholder={t('qc_material.filter_search.serial_placeholder')}
                                         // description="This will be device serial number"
                                         error={false}
                                         disabled={false}
-                                        value={formik.values.deviceSN}
+                                        value={formik.values.serial}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
@@ -486,90 +467,43 @@ const QCMaterial = () => {
                             </Box>
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.country')}</Typography>
-                                    {/* <Select
-                                        id="gender"
-                                        name="gender"
-                                        value={formik.values.gender}
-                                        onChange={formik.handleChange}
-                                        displayEmpty
-                                        sx={{ width: '322px', height: '48px', borderRadius: '10px' }}
-                                    >
-                                        <MenuItem value=""><em>{t('device_list.filter_search.country_placeholder')}</em></MenuItem>
-                                        <MenuItem value="M">M</MenuItem>
-                                        <MenuItem value="F">F</MenuItem>
-                                    </Select> */}
-                                    <CustomSelect
-                                        id="country"
-                                        name="country"
-                                        value={formik.values.country}
+                                    <Typography sx={{ color: '#002a70' }}>{t('qc_material.filter_search.qc_material')}</Typography>
+                                    <CustomTextField
+                                        id="qc_material"
+                                        name="qc_material"
+                                        placeholder={t('qc_material.filter_search.qc_material_placeholder')}
+                                        // description="This will be device serial number"
+                                        error={false}
+                                        disabled={false}
+                                        value={formik.values.qc_material}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
-                                        placeholder={t('device_list.filter_search.country_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
+                                        // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
+                                        // helperText={formik.touched.myTextField && formik.errors.myTextField}
+                                        active={true}
+                                        size="medium"
+                                        width="171px"   // 가로 크기 지정
+                                        height="48px"   // 세로 크기 지정
                                     />
                                 </Box>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.region')}</Typography>
-                                    <CustomSelect
-                                        id="region"
-                                        name="region"
-                                        value={formik.values.region}
+                                    <Typography sx={{ color: '#002a70' }}>{t('qc_material.filter_search.lot')}</Typography>
+                                    <CustomTextField
+                                        id="lot"
+                                        name="lot"
+                                        placeholder={t('qc_material.filter_search.lot_placeholder')}
+                                        // description="This will be device serial number"
+                                        error={false}
+                                        disabled={false}
+                                        value={formik.values.lot}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems02}
-                                        placeholder={t('device_list.filter_search.region_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                            </Box>
-
-                            <Box sx={{ display: 'flex', gap: '24px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.reseller')}</Typography>
-                                    <CustomSelect
-                                        id="reseller"
-                                        name="reseller"
-                                        value={formik.values.reseller}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems03}
-                                        placeholder={t('device_list.filter_search.reseller_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.manager')}</Typography>
-                                    <CustomSelect
-                                        id="manager"
-                                        name="manager"
-                                        value={formik.values.manager}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems04}
-                                        placeholder={t('device_list.filter_search.manager_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
+                                        // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
+                                        // helperText={formik.touched.myTextField && formik.errors.myTextField}
+                                        active={true}
+                                        size="medium"
+                                        width="171px"   // 가로 크기 지정
+                                        height="48px"   // 세로 크기 지정
                                     />
                                 </Box>
                             </Box>
@@ -577,7 +511,7 @@ const QCMaterial = () => {
                                 <Button
                                     onClick={handleCloseFilterDialog}
                                     variant="outlined"
-                                    sx={{ fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
+                                    sx={{ color: '#8b8fa8', border: 'solid 1px var(--gray-gray-200)', fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
                                 >
                                     {t('button.cancel')}
                                 </Button>

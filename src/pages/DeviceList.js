@@ -404,15 +404,6 @@ const DeviceList = () => {
                     onSelectionModelChange={(newSelection) => {
                         setSelectionModel(newSelection);
                     }}
-                    // components={{
-                    //     BaseCheckbox: () => (
-                    //       <Checkbox
-                    //         checked={selectionModel.length === rows.length}
-                    //         indeterminate={selectionModel.length > 0 && selectionModel.length < rows.length}
-                    //         onChange={handleHeaderCheckboxChange}
-                    //       />
-                    //     ),
-                    //   }}
                     sx={{
                         '& .MuiDataGrid-columnHeaders div[role="row"]': {
                             backgroundColor: '#F5F5F7',
@@ -485,16 +476,6 @@ const DeviceList = () => {
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                                     <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.serial')}</Typography>
-                                    {/* <TextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
-                                        value={formik.values.deviceSN}
-                                        onChange={formik.handleChange}
-                                        variant="outlined"
-                                        sx={{ width: '268px', height: '48px', '& .MuiOutlinedInput-root': { height: '48px' } }}
-                                        InputProps={{ sx: { borderRadius: '10px' } }}
-                                    /> */}
                                     <CustomTextField
                                         id="deviceSN"
                                         name="deviceSN"
@@ -517,18 +498,6 @@ const DeviceList = () => {
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                                     <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.country')}</Typography>
-                                    {/* <Select
-                                        id="gender"
-                                        name="gender"
-                                        value={formik.values.gender}
-                                        onChange={formik.handleChange}
-                                        displayEmpty
-                                        sx={{ width: '322px', height: '48px', borderRadius: '10px' }}
-                                    >
-                                        <MenuItem value=""><em>{t('device_list.filter_search.country_placeholder')}</em></MenuItem>
-                                        <MenuItem value="M">M</MenuItem>
-                                        <MenuItem value="F">F</MenuItem>
-                                    </Select> */}
                                     <CustomSelect
                                         id="country"
                                         name="country"
@@ -607,7 +576,7 @@ const DeviceList = () => {
                                 <Button
                                     onClick={handleCloseFilterDialog}
                                     variant="outlined"
-                                    sx={{ fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
+                                    sx={{ color: '#8b8fa8', border: 'solid 1px var(--gray-gray-200)', fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
                                 >
                                     {t('button.cancel')}
                                 </Button>

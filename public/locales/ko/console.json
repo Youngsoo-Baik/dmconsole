@@ -295,7 +295,8 @@
             "camera_blu": "카메라 BLU",
             "temp_ic": "온도IC",
             "cat_sensor": "카트리지센서",
-            "eqc": "EQC"
+            "eqc": "EQC",
+            "select": "선택"
         },
         "detail_dialog": {
             "title": "자가진단 등록 정보",
@@ -334,8 +335,8 @@
             "serial_placeholder": "기기 S/N 입력",
             "error_code": "오류코드",
             "error_code_placeholder": "오류코드 입력",
-            "error_type": "오류타입",
-            "error_type_placeholder": "오류타입 입력"
+            "error_type": "에러제목",
+            "error_type_placeholder": "에러제목 입력"
         },
            "detail_dialog": {
             "title": "오류 등록 정보",

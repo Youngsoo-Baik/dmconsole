@@ -106,22 +106,22 @@ function CustomFooter() {
 }
 
 const initialRows = [
-    { id: 1, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 2, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
-    { id: 3, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 4, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 5, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
-    { id: 6, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
-    { id: 7, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 8, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 9, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 10, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
-    { id: 11, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 12, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
-    { id: 13, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
-    { id: 14, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
-    { id: 15, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:false },
-    { id: 16, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent:true },
+    { id: 1, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 2, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: false },
+    { id: 3, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 4, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 5, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: false },
+    { id: 6, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: false },
+    { id: 7, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 8, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 9, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 10, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: false },
+    { id: 11, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 12, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: false },
+    { id: 13, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
+    { id: 14, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: false },
+    { id: 15, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: false },
+    { id: 16, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', date: '2023-10-30 17:39:24', view_log: 'ANALYSISQCHWCHECKXXXXXX', error_title: 'Catridge QR Code Recognition Error', sent: true },
 ];
 
 const ErrorReport = () => {
@@ -138,14 +138,14 @@ const ErrorReport = () => {
     const [currentRow, setCurrentRow] = useState(null);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
-  
+
     const handleRowClick = (params) => {
-      setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
-      setDialogOpen(true);  // 다이얼로그 열기
+        setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
+        setDialogOpen(true);  // 다이얼로그 열기
     };
-  
+
     const handleCloseDialog = () => {
-      setDialogOpen(false);
+        setDialogOpen(false);
     };
 
     const handleHeaderCheckboxChange = (event) => {
@@ -173,7 +173,7 @@ const ErrorReport = () => {
         { field: 'date', headerName: `${t('errors_report.column.date')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'view_log', headerName: `${t('errors_report.column.view_log')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'error_title', headerName: `${t('errors_report.column.error_title')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'sent', headerName: `${t('errors_report.column.sent')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' , renderCell: (params) => renderStatus(params) },
+        { field: 'sent', headerName: `${t('errors_report.column.sent')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderStatus(params) },
     ];
 
     const formik = useFormik({
@@ -366,15 +366,6 @@ const ErrorReport = () => {
                     onSelectionModelChange={(newSelection) => {
                         setSelectionModel(newSelection);
                     }}
-                    // components={{
-                    //     BaseCheckbox: () => (
-                    //       <Checkbox
-                    //         checked={selectionModel.length === rows.length}
-                    //         indeterminate={selectionModel.length > 0 && selectionModel.length < rows.length}
-                    //         onChange={handleHeaderCheckboxChange}
-                    //       />
-                    //     ),
-                    //   }}
                     sx={{
                         '& .MuiDataGrid-columnHeaders div[role="row"]': {
                             backgroundColor: '#F5F5F7',
@@ -413,7 +404,7 @@ const ErrorReport = () => {
                         backgroundColor: '#ffffff',
                     }}
                 />
-                {/* DeviceManagementDialog Component */}
+                {/* ErrorReportInfoDialog Component */}
                 <ErrorReportInfoDialog
                     open={dialogOpen}
                     onClose={handleCloseDialog}
@@ -435,7 +426,7 @@ const ErrorReport = () => {
                 PaperProps={{
                     style: {
                         width: 600,
-                        height: 429,
+                        height: 332,
                         borderRadius: '8px',
                         border: '1px solid #80befc',
                     },
@@ -446,130 +437,72 @@ const ErrorReport = () => {
                         <Box sx={{ mt: '10px', ml: '21px', display: 'flex', flexDirection: 'column', gap: 2 }}>
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.serial')}</Typography>
-                                    {/* <TextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
-                                        value={formik.values.deviceSN}
+                                    <Typography sx={{ color: '#002a70' }}>{t('errors_report.filter_search.device_model')}</Typography>
+                                    <CustomSelect
+                                        id="model"
+                                        name="model"
+                                        value={formik.values.model}
                                         onChange={formik.handleChange}
-                                        variant="outlined"
-                                        sx={{ width: '268px', height: '48px', '& .MuiOutlinedInput-root': { height: '48px' } }}
-                                        InputProps={{ sx: { borderRadius: '10px' } }}
-                                    /> */}
+                                        onBlur={formik.handleBlur}
+                                        menuItems={menuItems}
+                                        placeholder={t('errors_report.filter_search.device_model_placeholder')}
+                                        // description="Select a language"
+                                        width="322px"   // Custom width
+                                        height="48px"   // Custom height
+                                        // fontSize="18px" // Custom font size
+                                        itemWidth="303px"  // Custom Menu Item width
+                                        itemHeight="42px"  // Custom Menu Item height
+                                    />
+                                </Box>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <Typography sx={{ color: '#002a70' }}>{t('errors_report.filter_search.serial')}</Typography>
                                     <CustomTextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
+                                        id="serial"
+                                        name="serial"
+                                        placeholder={t('errors_report.filter_search.serial_placeholder')}
                                         // description="This will be device serial number"
                                         error={false}
                                         disabled={false}
-                                        value={formik.values.deviceSN}
+                                        value={formik.values.serial}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
                                         // helperText={formik.touched.myTextField && formik.errors.myTextField}
                                         active={true}
                                         size="medium"
-                                        width="268px"   // 가로 크기 지정
+                                        width="171px"   // 가로 크기 지정
                                         height="48px"   // 세로 크기 지정
                                     />
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.country')}</Typography>
-                                    {/* <Select
-                                        id="gender"
-                                        name="gender"
-                                        value={formik.values.gender}
-                                        onChange={formik.handleChange}
-                                        displayEmpty
-                                        sx={{ width: '322px', height: '48px', borderRadius: '10px' }}
-                                    >
-                                        <MenuItem value=""><em>{t('device_list.filter_search.country_placeholder')}</em></MenuItem>
-                                        <MenuItem value="M">M</MenuItem>
-                                        <MenuItem value="F">F</MenuItem>
-                                    </Select> */}
-                                    <CustomSelect
-                                        id="country"
-                                        name="country"
-                                        value={formik.values.country}
+                                    <Typography sx={{ color: '#002a70' }}>{t('errors_report.filter_search.error_type')}</Typography>
+                                    <CustomTextField
+                                        id="error_type"
+                                        name="error_type"
+                                        placeholder={t('errors_report.filter_search.error_type_placeholder')}
+                                        // description="This will be device serial number"
+                                        error={false}
+                                        disabled={false}
+                                        value={formik.values.error_type}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
-                                        placeholder={t('device_list.filter_search.country_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.region')}</Typography>
-                                    <CustomSelect
-                                        id="region"
-                                        name="region"
-                                        value={formik.values.region}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems02}
-                                        placeholder={t('device_list.filter_search.region_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
+                                        // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
+                                        // helperText={formik.touched.myTextField && formik.errors.myTextField}
+                                        active={true}
+                                        size="medium"
+                                        width="424px"   // 가로 크기 지정
+                                        height="48px"   // 세로 크기 지정
                                     />
                                 </Box>
                             </Box>
 
-                            <Box sx={{ display: 'flex', gap: '24px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.reseller')}</Typography>
-                                    <CustomSelect
-                                        id="reseller"
-                                        name="reseller"
-                                        value={formik.values.reseller}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems03}
-                                        placeholder={t('device_list.filter_search.reseller_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.manager')}</Typography>
-                                    <CustomSelect
-                                        id="manager"
-                                        name="manager"
-                                        value={formik.values.manager}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems04}
-                                        placeholder={t('device_list.filter_search.manager_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                            </Box>
                             <Box sx={{ mt: '46px', display: 'flex', justifyContent: 'center', gap: '28px' }}>
                                 <Button
                                     onClick={handleCloseFilterDialog}
                                     variant="outlined"
-                                    sx={{ fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
+                                    sx={{ color: '#8b8fa8', border: 'solid 1px var(--gray-gray-200)', fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
                                 >
                                     {t('button.cancel')}
                                 </Button>

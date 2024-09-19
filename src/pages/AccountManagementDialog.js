@@ -64,7 +64,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                             height: '8px', // Change the height of the indicator
                         },
                     }}>
-                    <Tab label={t('device_list.system_info_tab.title')}
+                    <Tab label={t('account-list.account_mod_dialog.title')}
                         sx={{
                             minWidth: '92px',
                             // width: '92px',
@@ -80,7 +80,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                             textAlign: 'left',
                             color: '#303468',
                         }} />
-                    <Tab label={t('device_list.logfile_tab.title')}
+                    <Tab label={t('account-list.pass_mod_dialog.title')}
                         sx={{
                             minWidth: '70px',
                             height: '24px',

@@ -1,16 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
-import { Box, Button, Dialog, DialogActions, DialogContent, TextField, Select, MenuItem, Popover, Divider, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Box, Button, DialogContent, Select, MenuItem, Popover, Typography, FormControl, Pagination, PaginationItem } from '@mui/material';
 import Papa from 'papaparse';
 import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
-import Checkbox from '@mui/material/Checkbox';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
-import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 import AnalysisResultsDetailInfoDialog from './AnalysisResultsDetailInfoDialog'; // Import your custom dialog component
 
@@ -177,11 +175,10 @@ const AnalysisResults = () => {
 
     const formik = useFormik({
         initialValues: {
-            deviceSN: '',
-            country: '',
-            region: '',
-            reseller: '',
-            manager: '',
+            model: '',
+            serial: '',
+            cat_lot: '',
+            error_code: '',
         },
         onSubmit: (values) => {
             // const filteredRows = rows.filter((row) => true);
@@ -365,15 +362,6 @@ const AnalysisResults = () => {
                     onSelectionModelChange={(newSelection) => {
                         setSelectionModel(newSelection);
                     }}
-                    // components={{
-                    //     BaseCheckbox: () => (
-                    //       <Checkbox
-                    //         checked={selectionModel.length === rows.length}
-                    //         indeterminate={selectionModel.length > 0 && selectionModel.length < rows.length}
-                    //         onChange={handleHeaderCheckboxChange}
-                    //       />
-                    //     ),
-                    //   }}
                     sx={{
                         '& .MuiDataGrid-columnHeaders div[role="row"]': {
                             backgroundColor: '#F5F5F7',
@@ -433,8 +421,8 @@ const AnalysisResults = () => {
                 }}
                 PaperProps={{
                     style: {
-                        width: 600,
-                        height: 429,
+                        width: 448,
+                        height: 431,
                         borderRadius: '8px',
                         border: '1px solid #80befc',
                     },
@@ -445,25 +433,35 @@ const AnalysisResults = () => {
                         <Box sx={{ mt: '10px', ml: '21px', display: 'flex', flexDirection: 'column', gap: 2 }}>
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.serial')}</Typography>
-                                    {/* <TextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
-                                        value={formik.values.deviceSN}
+                                    <Typography sx={{ color: '#002a70' }}>{t('analysis_result.filter_search.device_model')}</Typography>
+                                    <CustomSelect
+                                        id="model"
+                                        name="model"
+                                        value={formik.values.model}
                                         onChange={formik.handleChange}
-                                        variant="outlined"
-                                        sx={{ width: '268px', height: '48px', '& .MuiOutlinedInput-root': { height: '48px' } }}
-                                        InputProps={{ sx: { borderRadius: '10px' } }}
-                                    /> */}
+                                        onBlur={formik.handleBlur}
+                                        menuItems={menuItems02}
+                                        placeholder={t('analysis_result.filter_search.device_model_placeholder')}
+                                        // description="Select a language"
+                                        width="322px"   // Custom width
+                                        height="48px"   // Custom height
+                                        // fontSize="18px" // Custom font size
+                                        itemWidth="151px"  // Custom Menu Item width
+                                        itemHeight="42px"  // Custom Menu Item height
+                                    />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: 'flex', gap: '24px' }}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <Typography sx={{ color: '#002a70' }}>{t('analysis_result.filter_search.serial')}</Typography>
                                     <CustomTextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
+                                        id="serial"
+                                        name="serial"
+                                        placeholder={t('analysis_result.filter_search.serial_placeholder')}
                                         // description="This will be device serial number"
                                         error={false}
                                         disabled={false}
-                                        value={formik.values.deviceSN}
+                                        value={formik.values.serial}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
@@ -477,90 +475,43 @@ const AnalysisResults = () => {
                             </Box>
                             <Box sx={{ display: 'flex', gap: '24px' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.country')}</Typography>
-                                    {/* <Select
-                                        id="gender"
-                                        name="gender"
-                                        value={formik.values.gender}
-                                        onChange={formik.handleChange}
-                                        displayEmpty
-                                        sx={{ width: '322px', height: '48px', borderRadius: '10px' }}
-                                    >
-                                        <MenuItem value=""><em>{t('device_list.filter_search.country_placeholder')}</em></MenuItem>
-                                        <MenuItem value="M">M</MenuItem>
-                                        <MenuItem value="F">F</MenuItem>
-                                    </Select> */}
-                                    <CustomSelect
-                                        id="country"
-                                        name="country"
-                                        value={formik.values.country}
+                                    <Typography sx={{ color: '#002a70' }}>{t('analysis_result.filter_search.cat_lot')}</Typography>
+                                    <CustomTextField
+                                        id="cat_lot"
+                                        name="cat_lot"
+                                        placeholder={t('analysis_result.filter_search.cat_lot_placeholder')}
+                                        // description="This will be device serial number"
+                                        error={false}
+                                        disabled={false}
+                                        value={formik.values.cat_lot}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
-                                        placeholder={t('device_list.filter_search.country_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
+                                        // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
+                                        // helperText={formik.touched.myTextField && formik.errors.myTextField}
+                                        active={true}
+                                        size="medium"
+                                        width="171px"   // 가로 크기 지정
+                                        height="48px"   // 세로 크기 지정
                                     />
                                 </Box>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.region')}</Typography>
-                                    <CustomSelect
-                                        id="region"
-                                        name="region"
-                                        value={formik.values.region}
+                                    <Typography sx={{ color: '#002a70' }}>{t('analysis_result.filter_search.error_code')}</Typography>
+                                    <CustomTextField
+                                        id="error_code"
+                                        name="error_code"
+                                        placeholder={t('analysis_result.filter_search.error_code_placeholder')}
+                                        // description="This will be device serial number"
+                                        error={false}
+                                        disabled={false}
+                                        value={formik.values.error_code}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems02}
-                                        placeholder={t('device_list.filter_search.region_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                            </Box>
-
-                            <Box sx={{ display: 'flex', gap: '24px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.reseller')}</Typography>
-                                    <CustomSelect
-                                        id="reseller"
-                                        name="reseller"
-                                        value={formik.values.reseller}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems03}
-                                        placeholder={t('device_list.filter_search.reseller_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.manager')}</Typography>
-                                    <CustomSelect
-                                        id="manager"
-                                        name="manager"
-                                        value={formik.values.manager}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems04}
-                                        placeholder={t('device_list.filter_search.manager_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
+                                        // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
+                                        // helperText={formik.touched.myTextField && formik.errors.myTextField}
+                                        active={true}
+                                        size="medium"
+                                        width="171px"   // 가로 크기 지정
+                                        height="48px"   // 세로 크기 지정
                                     />
                                 </Box>
                             </Box>
@@ -568,7 +519,7 @@ const AnalysisResults = () => {
                                 <Button
                                     onClick={handleCloseFilterDialog}
                                     variant="outlined"
-                                    sx={{ fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
+                                    sx={{ color: '#8b8fa8', border: 'solid 1px var(--gray-gray-200)', fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
                                 >
                                     {t('button.cancel')}
                                 </Button>
