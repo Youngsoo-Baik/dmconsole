@@ -363,6 +363,24 @@
             "updated_at": "Modification Date",
             "managment": "Management"
         },
+	"account_create_dialog": {
+	    "title": "Register Account",
+	    "sub_title": "Please fill in all the required fields for account registration.",
+	    "admin_account": "Admin Account",
+	    "normal_account": "Standard Account",
+	    "email": "Email",
+	    "email_placeholder": "Please enter your email.",
+	    "name": "Name",
+	    "name_placeholder": "Please enter your name.",
+	    "department": "Department",
+	    "department_holder": "Please enter your department.",
+	    "pass": "Password",
+	    "pass_placeholder": "Please enter your password.",
+	    "pass_confirm": "Confirm Password",
+	    "pass_confirm_placeholder": "Please re-enter your password."
+	    "create_done": "Registration Complete",
+	    "create_done_description": "The member registration has been successfully completed."
+	},
         "account_mod_dialog": {
             "title": "Modify Account Information",
             "sub_title": "Account Information",
@@ -371,6 +389,8 @@
             "department": "Department",
             "email": "Email",
             "grade": "Grade"
+	    "complete": "Modification Complete",
+	    "complete_description": "The member information has been successfully updated."
         },
         "pass_mod_dialog": {
             "title": "Change Password",

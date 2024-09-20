@@ -12,6 +12,7 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import AccountManagementDialog from './AccountManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
+import AccountCreateDialog from './AccountCreateDialog';
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -137,6 +138,7 @@ const AccountList = () => {
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
     // State to track hover
     const [hovered, setHovered] = useState(false);
+    const [openDiag, setOpenDiag] = useState(false);
 
     const handleIconClick = (params) => {
         setSelectedRow(params.row);
@@ -191,14 +193,18 @@ const AccountList = () => {
             reseller: '',
             manager: '',
         },
-        onSubmit: (values) => { 
+        onSubmit: (values) => {
             console.log(values);
         },
     });
 
-    const handleExport = () => {
-        apiRef.current.exportDataAsCsv();
+    const handleCreateAccount = () => {
+        setOpenDiag(true);
     };
+
+    const handleDiagClose = () => {
+        setOpenDiag(false);
+    }
 
     const handleImport = (event) => {
         const file = event.target.files[0];
@@ -216,10 +222,6 @@ const AccountList = () => {
                 },
             });
         }
-    };
-
-    const handleImportClick = () => {
-        fileInputRef.current.click();
     };
 
     const handleClickFilterButton = (event) => {
@@ -280,8 +282,8 @@ const AccountList = () => {
                     <Box className="button_container" sx={{ display: 'flex', gap: '2px' }}>
                         <Button
                             variant="contained"
-                            onClick={handleExport}
-                            className="button_dwload"
+                            onClick={handleCreateAccount}
+                            className="button_create"
                             sx={{
                                 width: '122px',
                                 height: '48px',
@@ -299,6 +301,11 @@ const AccountList = () => {
                         >
                             {t('button.add_member')}
                         </Button>
+                        {/* AccountCreateDialog Component */}
+                        <AccountCreateDialog
+                            open={openDiag}
+                            onClose={handleDiagClose}
+                        />
                     </Box>
                 </Box>
             </Box>

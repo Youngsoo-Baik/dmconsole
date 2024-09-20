@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, Tabs, Tab, Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import SystemInfoPanel from './DeviceInfo/SystemInfoPanel';
-import LogFilePanel from './DeviceInfo/LogFilePanel';
+import AccountMemberInfoPanel from './AccountMemberInfoPanel';
+import AccountPasswordInfoPanel from './AccountPasswordInfoPanel';
 
 
 export default function AccountManagementDialog({ open, onClose, selectedRow }) {
@@ -25,7 +25,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
             PaperProps={{
                 sx: {
                     width: '972px',
-                    height: '881px',
+                    height: '594px',
                     borderRadius: '14px', // Rounded corners
                     boxShadow: '0px 4px 24px 0px rgba(0, 0, 0, 0.1)', // Apply the shadow here
                 },
@@ -66,7 +66,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                     }}>
                     <Tab label={t('account-list.account_mod_dialog.title')}
                         sx={{
-                            minWidth: '92px',
+                            minWidth: '114px',
                             // width: '92px',
                             height: '24px',
                             marginBottom: '12px',
@@ -82,7 +82,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                         }} />
                     <Tab label={t('account-list.pass_mod_dialog.title')}
                         sx={{
-                            minWidth: '70px',
+                            minWidth: '109px',
                             height: '24px',
                             marginBottom: '12px',
                             fontFamily: 'Pretendard',
@@ -97,9 +97,9 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                         }} />
                 </Tabs>
                 {/* Conditionally render each TabPanel */}
-                <Box sx={{ paddingTop: '116px', paddingLeft: '5px', paddingRight: '5px' }}>
-                    {value === 0 && <SystemInfoPanel />}
-                    {value === 1 && <LogFilePanel />}
+                <Box sx={{ paddingTop: '136px', paddingLeft: '5px', paddingRight: '5px' }}>
+                    {value === 0 && <AccountMemberInfoPanel />}
+                    {value === 1 && <AccountPasswordInfoPanel />}
                 </Box>
             </DialogContent>
         </Dialog>

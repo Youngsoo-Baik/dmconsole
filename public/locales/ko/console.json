@@ -364,6 +364,24 @@
             "updated_at": "수정일",
             "management": "관리"
         },
+        "account_create_dialog": {
+            "title": "회원 등록",
+            "sub_title": "회원 등록에 필요한 모든 항목을 입력해 주세요.",
+            "admin_account": "관리자 계정",
+            "user_account": "일반 계정",
+            "email": "이메일",
+            "email_placeholder": "이메일을 입력해 주세요.",
+            "name": "이름",
+            "name_placeholder": "이름을 입력해 주세요.",
+            "department": "소속",
+            "department_placeholder": "소속을 입력해 주세요.",
+            "pass": "비밀번호",
+            "pass_placeholder": "비밀번호를 입력해 주세요.",
+            "pass_confirm": "비밀번호 확인",
+            "pass_confirm_placeholder": "비밀번호를 한번 더 입력해 주세요.",
+            "create_done": "등록 완료",
+            "create_done_description": "회원 등록이 완료되었습니다."
+        },
         "account_mod_dialog": {
             "title": "회원 정보 수정",
             "sub_title": "회원 정보",
@@ -371,7 +389,9 @@
             "name": "이름",
             "department": "소속",
             "email": "이메일",
-            "grade": "등급"
+            "grade": "등급",
+            "complete": "수정완료",
+            "complete_description": "회원 정보 수정을 완료하였습니다."
         },
         "pass_mod_dialog": {
             "title": "비밀번호 변경",

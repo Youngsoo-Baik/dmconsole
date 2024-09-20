@@ -175,6 +175,14 @@ const Header = () => {
         <Typography variant="body1">Kildong@precision-bio.com</Typography>
         <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
         <Box display="flex" alignItems="center" ml={2} mr='89px'>
+          {/* 아이콘을 LanguageDropdown 앞에 추가 */}
+          <img
+            src="/iconoir_language.png"  // 아이콘 경로
+            alt="Language Icon"
+            style={{
+              marginRight: '10px', // 아이콘과 텍스트 간격
+            }}
+          />
           {/* <LanguageToggle /> */}
           <LanguageDropdown />
         </Box>
