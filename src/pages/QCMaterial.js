@@ -186,11 +186,9 @@ const QCMaterial = () => {
 
     const formik = useFormik({
         initialValues: {
-            deviceSN: '',
-            country: '',
-            region: '',
-            reseller: '',
-            manager: '',
+            serial: '',
+            qc_material: '',
+            lot: ''
         },
         onSubmit: (values) => {
             // const filteredRows = rows.filter((row) => true);

@@ -178,11 +178,9 @@ const ErrorReport = () => {
 
     const formik = useFormik({
         initialValues: {
-            deviceSN: '',
-            country: '',
-            region: '',
-            reseller: '',
-            manager: '',
+            model: '',
+            serial: '',
+            error_type: '',
         },
         onSubmit: (values) => {
             // const filteredRows = rows.filter((row) => true);

@@ -178,11 +178,12 @@ const DiagResults = () => {
 
     const formik = useFormik({
         initialValues: {
-            deviceSN: '',
-            country: '',
-            region: '',
-            reseller: '',
-            manager: '',
+            serial: '',
+            plunger_motor: '',
+            camera_blu: '',
+            temp_ic: '',
+            cat_sensor: '',
+            eqc: '',
         },
         onSubmit: (values) => {
             // const filteredRows = rows.filter((row) => true);
