@@ -13,7 +13,7 @@ function DeleteButton() {
             sx={{
                 width: '104px',
                 height: '48px',
-                padding: '9px 8px',
+                padding: '9px 6px',
                 backgroundColor: 'var(--white)',
                 borderRadius: '10px',
                 border: '2px solid var(--gray-400)',
@@ -24,7 +24,7 @@ function DeleteButton() {
                 gap: '4px',
                 marginRight: '43px',
                 transition: '0.3s',  // 애니메이션 부드럽게 적용
-
+                
                 '&:hover': {
                     borderColor: 'var(--primary-blue-500)', // hover 시 보더 색상 변경
                     backgroundColor: 'var(--white)', // 배경색 변경
