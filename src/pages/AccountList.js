@@ -109,15 +109,15 @@ function CustomFooter() {
 const initialRows = [
     { id: 1, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 2, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 3, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+    { id: 3, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 4, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 5, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 6, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+    { id: 5, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+    { id: 6, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 7, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 8, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 9, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 10, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 11, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+    { id: 10, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+    { id: 11, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 12, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 13, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
     { id: 14, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
@@ -163,7 +163,18 @@ const AccountList = () => {
         { field: 'name', headerName: `${t('account-list.column.name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'email', headerName: `${t('account-list.column.email')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'department', headerName: `${t('account-list.column.department')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'grade', headerName: `${t('account-list.column.grade')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        {
+            field: 'grade', headerName: `${t('account-list.column.grade')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center',
+            renderCell: (params) => (
+                // <IconButton>
+                    <img
+                        src={'M' === params.value ? './icon-admin.svg' : './icon-user.svg'} // Change icon based on hover state
+                        alt="grade icon"
+                        style={{ width: 40, height: 40 }}
+                    />
+                // </IconButton>
+            ),
+        },
         { field: 'created_at', headerName: `${t('account-list.column.created_at')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'updated_at', headerName: `${t('account-list.column.updated_at')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         {
