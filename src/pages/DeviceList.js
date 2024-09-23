@@ -12,6 +12,8 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -394,6 +396,8 @@ const DeviceList = () => {
                                 {/* <Typography>No data available</Typography> */}
                             </NoRowsOverlay>
                         ),
+                        columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                        columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
                     }}
                     initialState={{
                         pagination: { paginationModel: { pageSize: 10 } },
@@ -405,6 +409,12 @@ const DeviceList = () => {
                         setSelectionModel(newSelection);
                     }}
                     sx={{
+                        // '& .MuiDataGrid-columnHeader--sorted': {
+                        //     backgroundColor: 'transparent', // 정렬된 컬럼의 배경색 제거 (하이라이트 제거)
+                        //   },
+                        //   '& .MuiDataGrid-columnHeader:focus-within': {
+                        //     backgroundColor: 'transparent', // 포커스된 상태의 하이라이트 제거
+                        //   },
                         '& .MuiDataGrid-columnHeaders div[role="row"]': {
                             backgroundColor: '#F5F5F7',
                         },
