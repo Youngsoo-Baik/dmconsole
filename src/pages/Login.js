@@ -4,9 +4,8 @@ import { styled } from '@mui/material/styles';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { login, logout } from '../api/auth'; // auth.js에서 login, logout 함수 가져오기
 // const backgroundImage = `${process.env.PUBLIC_URL}/login_image_01.png`;
 const backgroundImage = 'login_image_01.png';
 
@@ -89,13 +88,45 @@ const Login = ({ onLogin }) => {
   const { t } = useTranslation('console');
 
   const handleLogin = () => {
-    if (email === 'test' && password === 'pass') {
-      // navigate('/customer-devices');  // Navigate to the home page on successful login
+
+    /* old implementation
+    const url = `${apiUrl}/console/login`;
+    // const url = "/console/login";
+    //const content = { email: "admin@precision-bio.com", password: "admin" };
+    // const content = { email: `${username}`, password: `${password}` };
+    const content = { email: `${email}`, password: `${password}` };
+    const config = { 'Content-Type': 'application/json' };
+    console.log(content);
+    let res = "";
+
+    axios.post(url, content, config).then(function (response) {
+      console.log("Got Response")
+
+      res = response;
+      console.log(res);
+      console.log(res.status);
+      if (res.status === 201) {
+        console.log("Login Success");
+        onLogin();  // 로그인 상태 변경
+        navigate('/customer-devices');  // Navigate to the home page on successful login
+      } else {
+        // console.log("status is not 201");
+        // console.log(res.status);
+        alert('Invalid login credentials');
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+    */
+    try {
+      login(email, password); // auth.js의 login 함수 호출
+      console.log("Login Success");
       onLogin();  // 로그인 상태 변경
       navigate('/customer-devices');  // Navigate to the home page on successful login
-    } else {
-      alert('Invalid login credentials');
+    } catch (error) {
+      console.error('로그인 실패:', error.response?.data || error.message);
     }
+
   };
 
   return (
@@ -107,7 +138,7 @@ const Login = ({ onLogin }) => {
           <DMSText>{t('login.header.title')}</DMSText>
           <Line />
         </DMSTextContainer>
-        <FormControl variant="outlined"  sx={{ marginTop: '55px', width: '480px', height: '73px' }}>
+        <FormControl variant="outlined" sx={{ marginTop: '55px', width: '480px', height: '73px' }}>
           <TextField
             id="email"
             type="text"
@@ -128,7 +159,7 @@ const Login = ({ onLogin }) => {
             sx={{ '& fieldset': { borderRadius: '8px' } }}
           />
         </FormControl>
-        <FormControl variant="outlined"  sx={{ marginTop:'44px', marginBottom: "66.6px", width: '480px', height: '73px' }}>
+        <FormControl variant="outlined" sx={{ marginTop: '44px', marginBottom: "66.6px", width: '480px', height: '73px' }}>
           <TextField
             id="password"
             type="password"

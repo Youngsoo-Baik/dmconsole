@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 import './Sidebar.css';
 import { useTranslation } from 'react-i18next';
 import LogoutDialog from './LogoutDialog';  // LogoutDialog 컴포넌트 임포트
+import { logout } from '../api/auth'; // auth.js에서 login, logout 함수 가져오기
 
 const SidebarContainer = styled(Box)({
     width: '326px',
@@ -95,6 +96,7 @@ function Sidebar({ onLogout }) {
     const handleLogoutConfirm = () => {
         setLogoutDialogOpen(false);
         onLogout(); // 부모로부터 받은 로그아웃 함수 호출
+        logout(); // auth.js의 logout 함수 호출
         handleMenuClick('/login');   // navigate to login page
         console.log('Logged out');
     };
