@@ -5,7 +5,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { login, logout } from '../api/auth'; // auth.js에서 login, logout 함수 가져오기
+import { login } from '../api/auth'; // auth.js에서 login, logout 함수 가져오기
 // const backgroundImage = `${process.env.PUBLIC_URL}/login_image_01.png`;
 const backgroundImage = 'login_image_01.png';
 

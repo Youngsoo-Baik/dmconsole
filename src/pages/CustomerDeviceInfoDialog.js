@@ -1,19 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import apiClient from '../api/apiClient'; // apiClient import
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Box, Grid, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 // 샘플 데이터 (이 데이터를 rowId로 가져왔다고 가정)
-const rowData = {
-    900: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-    901: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-    902: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true }
-};
+// const rowData = {
+//     900: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+//     901: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+//     902: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true }
+// };
 
 export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
     const { t } = useTranslation('console');
-    const data = rowData[rowId];
-    console.log(rowId);
-    console.log(data);
+    const [rowData, setRowData] = useState(null); // API 응답 데이터를 저장할 상태
+
+    // const data = rowData[rowId];
+    // console.log(rowId);
+    // console.log(data);
+    // rowId를 통해 API 호출
+    useEffect(() => {
+        const fetchDeviceData = async () => {
+            try {
+                const response = await apiClient.get(`/console/customer-devices/${rowId}`);
+                setRowData(response.data); // 응답 데이터를 rowData에 저장
+            } catch (error) {
+                console.error('Error fetching device data:', error);
+            }
+        };
+
+        if (rowId) {
+            fetchDeviceData(); // rowId가 존재하면 데이터 호출
+        }
+    }, [rowId]);
+
+    // rowData가 없을 때 로딩 표시
+    if (!rowData) {
+        return null; // 데이터를 가져오기 전에는 아무것도 렌더링하지 않음 (또는 로딩 스피너 추가 가능)
+    }
+
     return (
         <Dialog open={open} onClose={onClose} PaperProps={{
             sx: {
@@ -40,7 +64,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                                 {t('customer_device_list.reg_info_dialog.customer')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                hardtack7535@naver.com
+                                {rowData.email} {/* API에서 받은 이메일 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -51,7 +75,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.model')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                Fluoro Check ™ Heating Block
+                                {rowData.prodName} {/* API에서 받은 제품명 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -62,7 +86,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.reg_number')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                08800026300229
+                                {rowData.regCode} {/* API에서 받은 등록 코드 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
@@ -70,7 +94,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.serial')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                YVKA0-A00001
+                                {rowData.serial} {/* API에서 받은 시리얼 넘버 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -89,7 +113,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.connection_date')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023.11.01 13:16
+                                {rowData.connectionDate} {/* API에서 받은 연결 날짜 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -100,7 +124,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.reg_date')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023.08.11
+                                {rowData.registeredAt} {/* API에서 받은 등록 날짜 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
@@ -108,7 +132,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.production_date')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023.08.11
+                                {rowData.productAt} {/* API에서 받은 생산 날짜 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -119,7 +143,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.country')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                파푸아뉴기니
+                                {rowData.country} {/* API에서 받은 국가 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
@@ -127,7 +151,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.manager')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                담당자
+                                {rowData.manager} {/* API에서 받은 담당자 */}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -138,7 +162,7 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
                             {t('customer_device_list.reg_info_dialog.reseller')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                원주24시스카이동물메디컬센터
+                                {rowData.reseller} {/* API에서 받은 리셀러 */}
                             </Typography>
                         </Grid>
                     </Grid>

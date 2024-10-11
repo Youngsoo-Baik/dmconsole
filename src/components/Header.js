@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Box, Typography, Avatar, Divider, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Divider } from '@mui/material';
 import { MenuItem, FormControl, Select, InputBase, FormHelperText, ListItemText, ListItemIcon } from '@mui/material';
-import LanguageIcon from '@mui/icons-material/Language';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import apiClient from '../api/apiClient';  // apiClient를 import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token'; // getAccessToken 추가
+
+const apiUrl = Config.apiUrl;
 
 const CustomArrowDownIcon = (props) => {
   console.log('CustomArrowDownIcon');
@@ -163,6 +166,27 @@ const LanguageDropdown = () => {
 
 const Header = () => {
   const { t } = useTranslation('console');
+  const [email, setEmail] = useState(''); // email 상태 추가
+
+  // useEffect를 통해 /console/users/me API 호출
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await apiClient.get(`${apiUrl}/console/users/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${getAccessToken}`, // 토큰 추가
+            }
+          });
+        console.log(response.data);
+        setEmail(response.data.email); // email 정보 설정
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '113px', width: '1592px', padding: '0px 10px', borderBottom: '1px solid #ccc' }}>
@@ -172,7 +196,8 @@ const Header = () => {
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         {/* <Avatar sx={{ bgcolor: 'primary.main', marginRight: '8px' }} /> */}
         <img src="profile.png" alt="profile" style={{ width: 30, height: 30, borderRadius: '50%', marginRight: '8px' }} />
-        <Typography variant="body1">Kildong@precision-bio.com</Typography>
+        {/* email 정보를 body1에 표시 */}
+        <Typography variant="body1">{email}</Typography>
         <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
         <Box display="flex" alignItems="center" ml={2} mr='89px'>
           {/* 아이콘을 LanguageDropdown 앞에 추가 */}

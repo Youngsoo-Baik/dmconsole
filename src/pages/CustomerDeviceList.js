@@ -1,14 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
-import { Box, Select, MenuItem, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Box, Select, MenuItem, Typography, FormControl, Pagination, PaginationItem } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
-import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
 import CustomerDeviceInfoDialog from './CustomerDeviceInfoDialog';
-import { MarginTwoTone } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import koKR from '../components/koKR.json'; // Import the translation file
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -92,22 +95,18 @@ const NoRowsOverlay = styled('div')({
     fontSize: '1.5rem',
     color: '#888',
     flexDirection: 'column',
-  });
+});
 
 function CustomFooter() {
     return (
-        <GridFooterContainer sx={{ borderTop: 'none', color: '#8b909a'}}>
+        <GridFooterContainer sx={{ borderTop: 'none', color: '#8b909a' }}>
             <CustomPagination />
         </GridFooterContainer>
     );
 }
 
-const initialRows = [
-    { id: 999, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-];
-
 const CustomerDeviceList = () => {
-    //const [rows, setRows] = useState(initialRows);
+    const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
@@ -118,56 +117,106 @@ const CustomerDeviceList = () => {
     const [currentRow, setCurrentRow] = useState(null);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
-  
+    const [loading, setLoading] = useState(true);
+
     const handleRowClick = (params) => {
-      setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
-      setDialogOpen(true);  // 다이얼로그 열기
+        setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
+        setDialogOpen(true);  // 다이얼로그 열기
     };
-  
+
     const handleCloseDialog = () => {
-      setDialogOpen(false);
+        setDialogOpen(false);
     };
 
     const columns = [
         { field: 'id', headerName: `${t('customer_device_list.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'country', headerName: `${t('customer_device_list.column.country')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'region', headerName: `${t('customer_device_list.column.region')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'reseller', headerName: `${t('customer_device_list.column.reseller')}`, flex: 2.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'reseller', headerName: `${t('customer_device_list.column.reseller')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'manager', headerName: `${t('customer_device_list.column.manager')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'model', headerName: `${t('customer_device_list.column.model')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'customer', headerName: `${t('customer_device_list.column.customer')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'customer', headerName: `${t('customer_device_list.column.customer')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('customer_device_list.column.serial')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'production_date', headerName: `${t('customer_device_list.column.production_date')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'connection_state', headerName: `${t('customer_device_list.column.connection_state')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderConnection(params) }
     ];
 
     // const rows = []; 
-    const rows = [
-        { id: 900, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 901, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 902, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 903, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 904, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 905, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 906, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 907, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 908, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 909, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 910, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 911, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 912, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 913, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 914, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 915, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 916, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 917, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 918, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 919, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 920, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 921, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-        { id: 922, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-        { id: 999, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-    ];
+    // const rows = [
+    //     { id: 900, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 901, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 902, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 903, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 904, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 905, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 906, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 907, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 908, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 909, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 910, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 911, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 912, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 913, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 914, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 915, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 916, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 917, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 918, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 919, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 920, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 921, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+    //     { id: 922, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    //     { id: 999, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+    // ];
+
+    // API 호출 및 데이터 업데이트
+    useEffect(() => {
+        const fetchDevices = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/customer-devices`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+                    },
+                    params: {
+                        page: 1,
+                        size: 200,
+                        sort: [
+                            "createdAt,desc",
+                            "serial,asc",
+                            "country,asc",
+                            "area,asc",
+                            "reseller,asc",
+                            "manager,asc",
+                            "prodName,asc",
+                            "customer,asc",
+                            "productAt,asc"
+                        ]
+                    }
+                });
+
+                const updatedRows = response.data.content.map((device, index) => ({
+                    id: device.id, // 'id' 필드 매핑
+                    country: device.country, // 'country' 필드 매핑
+                    region: device.area, // 'region'은 'area' 필드로 매핑
+                    reseller: device.reseller, // 'reseller' 필드 매핑
+                    manager: device.manager, // 'manager' 필드 매핑
+                    model: device.prodName, // 'model'은 'prodName' 필드로 매핑
+                    customer: device.email, // 'customer'은 'email' 필드로 매핑
+                    serial: device.serial, // 'serial' 필드 매핑
+                    production_date: device.productAt, // 'production_date'는 'productAt' 필드로 매핑
+                    connection_state: device.isConnect // 'connection_state'는 'isConnect' 필드로 매핑
+                }));
+
+                setRows(updatedRows); // rows 상태 업데이트
+
+            } catch (error) {
+                console.error('Error fetching device data:', error);
+            }
+        };
+
+        fetchDevices(); // 컴포넌트가 마운트되었을 때 데이터 호출
+        setLoading(false);
+    }, []);
 
     function renderConnection(params) {
         console.log(params);
@@ -180,8 +229,9 @@ const CustomerDeviceList = () => {
 
 
     const getLocaleText = () => {
-        return i18n.language === 'ko' ? koKR: {};
-      };
+        return i18n.language === 'ko' ? koKR : {};
+    };
+
     return (
         <Box sx={{ width: '1592px', minWidth: 1024 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
@@ -201,14 +251,15 @@ const CustomerDeviceList = () => {
                     onRowClick={handleRowClick}  // 행 클릭 시 이벤트 핸들러 호출
                     headerHeight={48}
                     localeText={getLocaleText()} // Use the localeText based on the current locale
+                    loading={loading} // Add loading prop here
                     slots={{
                         footer: CustomFooter,
                         noRowsOverlay: () => (
                             <NoRowsOverlay>
-                              <img src="nodata.png" alt="No data" />
-                              {/* <Typography>No data available</Typography> */}
+                                <img src="nodata.png" alt="No data" />
+                                {/* <Typography>No data available</Typography> */}
                             </NoRowsOverlay>
-                          ),
+                        ),
                     }}
                     initialState={{
                         pagination: { paginationModel: { pageSize: 10 } },
@@ -238,7 +289,7 @@ const CustomerDeviceList = () => {
                         },
                         '& .MuiDataGrid-cellContent': {
                             width: '100%',
-                            
+
                         },
                         '& .MuiDataGrid-footerContainer': {
                             display: 'flex',

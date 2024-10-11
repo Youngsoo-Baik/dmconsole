@@ -377,7 +377,7 @@
 	    "pass": "Password",
 	    "pass_placeholder": "Please enter your password.",
 	    "pass_confirm": "Confirm Password",
-	    "pass_confirm_placeholder": "Please re-enter your password."
+	    "pass_confirm_placeholder": "Please re-enter your password.",
 	    "create_done": "Registration Complete",
 	    "create_done_description": "The member registration has been successfully completed."
 	},
@@ -388,7 +388,7 @@
             "name": "Name",
             "department": "Department",
             "email": "Email",
-            "grade": "Grade"
+            "grade": "Grade",
 	    "complete": "Modification Complete",
 	    "complete_description": "The member information has been successfully updated."
         },

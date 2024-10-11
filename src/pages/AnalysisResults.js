@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { Box, Button, DialogContent, Select, MenuItem, Popover, Typography, FormControl, Pagination, PaginationItem } from '@mui/material';
@@ -11,6 +11,11 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import koKR from '../components/koKR.json'; // Import the translation file
 import AnalysisResultsDetailInfoDialog from './AnalysisResultsDetailInfoDialog'; // Import your custom dialog component
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -131,7 +136,7 @@ const initialRows = [
 ];
 
 const AnalysisResults = () => {
-    const [rows, setRows] = useState(initialRows);
+    const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
@@ -145,6 +150,31 @@ const AnalysisResults = () => {
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
     // State to track hover
     const [hovered, setHovered] = useState(false);
+
+    // API 데이터 호출
+    useEffect(() => {
+        apiClient.get(`${apiUrl}/console/analysis-results`, {
+            params: {
+                page: 1,
+                size: 100,
+            },
+            headers: {
+                Authorization: `Bearer ${getAccessToken()}`,
+            }
+        }).then(response => {
+            const fetchedRows = response.data.content.map(item => ({
+                id: item.id,
+                model: item.prodName,
+                serial: item.serial,
+                analysis_time: item.date,
+                cat_lot: item.lotNumber,
+                error_code: item.errorCode,
+            }));
+            setRows(fetchedRows);
+        }).catch(error => {
+            console.error('API 호출 실패:', error);
+        });
+    }, []);
 
     const handleRowClick = (params) => {
         setSelectedRowId(params.id); // 선택한 행의 id 설정

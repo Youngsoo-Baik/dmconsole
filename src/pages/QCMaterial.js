@@ -1,18 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
-import { Box, Button, Dialog, DialogActions, DialogContent, TextField, Select, MenuItem, Popover, Divider, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Box, Button, DialogContent, Select, MenuItem, Popover, Typography, FormControl, Pagination, PaginationItem } from '@mui/material';
 import Papa from 'papaparse';
 import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
-import Checkbox from '@mui/material/Checkbox';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
-import QCMaterialDetailInfoDialog from  './QCMaterialDetailInfoDialog';
+import QCMaterialDetailInfoDialog from './QCMaterialDetailInfoDialog';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
+
 function CustomPagination() {
     const apiRef = useGridApiContext();
     const page = useGridSelector(apiRef, gridPageSelector);
@@ -106,39 +111,39 @@ function CustomFooter() {
 }
 
 const initialRows = [
-    { id: 1, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 2, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 3, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 4, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 5, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 6, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 7, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 8, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 9, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 10, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 11, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 12, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 13, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 14, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 15, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 16, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 17, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 18, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 19, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 20, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 21, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 22, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 23, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 24, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 25, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 26, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 27, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 28, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
-    { id: 29, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material:'Liq Multqual', qc_level:'3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24',  modifier: 'Manufacture', qc_val_version:'04' },
+    { id: 1, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 2, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 3, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 4, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 5, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 6, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 7, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 8, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 9, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 10, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 11, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 12, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 13, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 14, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 15, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 16, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 17, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 18, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 19, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 20, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 21, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 22, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 23, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 24, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 25, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 26, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 27, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 28, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
+    { id: 29, model: 'Fluoro Check Heating Block', serial: 'PCKA0-A00137', qc_material: 'Liq Multqual', qc_level: '3', lot: 'V30AAW7V', expiration_date: '2023-10-30 17:39:24', modifier: 'Manufacture', qc_val_version: '04' },
 ];
 
 const QCMaterial = () => {
-    const [rows, setRows] = useState(initialRows);
+    const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
@@ -152,6 +157,49 @@ const QCMaterial = () => {
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
     // State to track hover
     const [hovered, setHovered] = useState(false);
+
+
+    useEffect(() => {
+        // API 호출로 데이터를 가져오는 부분
+        apiClient.get(`${apiUrl}/console/qc-materials`, {
+            headers: {
+                Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+            },
+            params: {
+                page: 1,
+                size: 1000,
+                sort: [
+                    'createdAt,desc',
+                    'serial,asc',
+                    'date,desc',
+                    'prodName,asc',
+                    'qcLotNumber,desc',
+                    'qcName,asc',
+                    'qcLevel,desc',
+                    'modifier,asc',
+                    'qcExpiredDate,desc',
+                    'qcValueVersion,asc'
+                ],
+            },
+        })
+            .then((response) => {
+                const fetchedRows = response.data.content.map((item) => ({
+                    id: item.id,
+                    model: item.prodName,
+                    serial: item.serial,
+                    qc_material: item.qcName,
+                    qc_level: item.qcLevel,
+                    lot: item.qcLotNumber,
+                    expiration_date: item.qcExpiredDate,
+                    modifier: item.modifier,
+                    qc_val_version: item.qcValueVersion,
+                }));
+                setRows(fetchedRows);
+            })
+            .catch((error) => {
+                console.error('데이터 가져오기 오류:', error);
+            });
+    }, []);
 
     const handleRowClick = (params) => {
         setSelectedRowId(params.id); // 선택한 행의 id 설정
@@ -174,11 +222,11 @@ const QCMaterial = () => {
 
     const columns = [
         { field: 'id', headerName: `${t('qc_material.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
-        { field: 'model', headerName: `${t('qc_material.column.model')}`, flex: 2.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'model', headerName: `${t('qc_material.column.model')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('qc_material.column.serial')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'qc_material', headerName: `${t('qc_material.column.qc_material')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'qc_level', headerName: `${t('qc_material.column.qc_level')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'lot', headerName: `${t('qc_material.column.lot')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'lot', headerName: `${t('qc_material.column.lot')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'expiration_date', headerName: `${t('qc_material.column.expiration_date')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'modifier', headerName: `${t('qc_material.column.modifier')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'qc_val_version', headerName: `${t('qc_material.column.qc_val_version')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },

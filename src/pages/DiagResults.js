@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { Box, Button, DialogContent, Select, MenuItem, Popover, Divider, Typography, FormControl, Pagination, PaginationItem } from '@mui/material';
@@ -6,12 +6,16 @@ import Papa from 'papaparse';
 import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
-
 import { styled } from '@mui/system';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import koKR from '../components/koKR.json'; // Import the translation file
 import DiagResultsInfoDialog from './DiagResultsInfoDialog';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -106,20 +110,20 @@ function CustomFooter() {
 }
 
 const initialRows = [
-    { id: 1, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 2, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 3, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 4, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 5, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 6, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: true, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 7, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 8, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:true, cat_sensor:true, eqc:true },
-    { id: 9, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 10, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 11, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 12, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 13, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
-    { id: 14, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic:false, cat_sensor:true, eqc:true },
+    { id: 1, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 2, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 3, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 4, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 5, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 6, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: true, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 7, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 8, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: true, cat_sensor: true, eqc: true },
+    { id: 9, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 10, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 11, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 12, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 13, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+    { id: 14, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
 ];
 
 const DiagResults = () => {
@@ -136,16 +140,48 @@ const DiagResults = () => {
     const [currentRow, setCurrentRow] = useState(null);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
-  
+    const [loading, setLoading] = useState(true);
+
+    // API 호출로 데이터를 가져오는 부분
+    useEffect(() => {
+        apiClient.get(`${apiUrl}/console/self-tests`, {
+            headers: {
+                Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+            },
+            params: {
+                // serial: 'PVKA0-A44737', // 필요한 serial 번호
+                page: 1,
+                size: 100,
+            },
+        })
+            .then((response) => {
+                const fetchedRows = response.data.content.map((item) => ({
+                    id: item.id,
+                    serial: item.serial,
+                    diag_time: item.date,
+                    plunger_motor: item.plungerMotor,
+                    camera_blu: item.cameraBlu,
+                    temp_ic: item.tempIc,
+                    cat_sensor: item.cartridgeSensor,
+                    eqc: item.eqc,
+                }));
+                setRows(fetchedRows);
+                // data fetch 후 state 변경
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('데이터 가져오기 오류:', error);
+            });
+    }, []);
+
     const handleRowClick = (params) => {
-      setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
-      setDialogOpen(true);  // 다이얼로그 열기
-    };
-  
-    const handleCloseDialog = () => {
-      setDialogOpen(false);
+        setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
+        setDialogOpen(true);  // 다이얼로그 열기
     };
 
+    const handleCloseDialog = () => {
+        setDialogOpen(false);
+    };
 
     const handleHeaderCheckboxChange = (event) => {
         if (event.target.checked) {
@@ -349,6 +385,7 @@ const DiagResults = () => {
                     onRowClick={handleRowClick}  // 행 클릭 시 이벤트 핸들러 호출
                     headerHeight={48}
                     localeText={getLocaleText()} // Use the localeText based on the current locale
+                    loading={loading} // Add loading prop here
                     slots={{
                         footer: CustomFooter,
                         noRowsOverlay: () => (
@@ -503,7 +540,7 @@ const DiagResults = () => {
                                 }}
                             />
                             <Box sx={{ display: 'flex', gap: '24px' }}>
-                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                                     <Typography sx={{ color: '#002a70' }}>{t('self_diag.filter_search.temp_ic')}</Typography>
                                     <CustomSelect
                                         id="temp_ic"

@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Box, Grid, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+const apiUrl = Config.apiUrl;
 
 // 샘플 데이터 (이 데이터를 rowId로 가져왔다고 가정)
-const rowData = {
-    900: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-    901: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-    902: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true }
-};
+// const rowData = {
+//     900: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
+//     901: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
+//     902: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true }
+// };
 
 export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
     const { t } = useTranslation('console');
-    const data = rowData[rowId];
-    console.log(rowId);
-    console.log(data);
+    const [data, setData] = useState(null);
+    // const data = rowData[rowId];
+    // console.log(rowId);
+    // console.log(data);
+    useEffect(() => {
+        if (rowId && open) {
+            apiClient.get(`${apiUrl}/console/error-messages/${rowId}`, {
+                headers: {
+                    Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+                },
+            })
+                .then((response) => {
+                    setData(response.data);
+                })
+                .catch((error) => {
+                    console.error('데이터를 가져오는 중 에러 발생:', error);
+                });
+        }
+    }, [rowId, open]);
+
+    if (!data) {
+        return null;
+    }
+
     return (
         <Dialog open={open} onClose={onClose} PaperProps={{
             sx: {
@@ -32,86 +57,86 @@ export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
                 marginLeft: '12px', // 왼쪽 여백
                 color: '#002A70' // 폰트 색상 설정
             }}>{t('errors_report.detail_dialog.title')}</DialogTitle>
-            <DialogContent sx={{overflowY: 'hidden' }}>
-                <Box border={1} borderColor="#7d7d7d" borderRadius={2} p={2}  sx={{backgroundColor: '#ffffff'}} >
+            <DialogContent sx={{ overflowY: 'hidden' }}>
+                <Box border={1} borderColor="#7d7d7d" borderRadius={2} p={2} sx={{ backgroundColor: '#ffffff' }} >
                     <Grid container spacing={2} sx={{ height: 'auto', overflowY: 'visible' }}>
-                        <Grid item xs={12} sx={{ml:1}}>
+                        <Grid item xs={12} sx={{ ml: 1 }}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.model')}
+                                {t('errors_report.detail_dialog.model')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                            Fluoro Check ™ Heating Block
+                                {data.prodName}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider /> {/* Divider 컴포넌트 사용 */}
                         </Grid>
-                        <Grid item xs={12} sx={{ml:1}}>
+                        <Grid item xs={12} sx={{ ml: 1 }}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.serial')}
+                                {t('errors_report.detail_dialog.serial')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                YVKA0-A00001
+                                {data.serial}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider /> {/* Divider 컴포넌트 사용 */}
                         </Grid>
-                        <Grid item xs={7} sx={{ml:1}}>
+                        <Grid item xs={7} sx={{ ml: 1 }}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.date')}
+                                {t('errors_report.detail_dialog.date')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023-10-30 18:10:17
+                                {data.date}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.sent')}
+                                {t('errors_report.detail_dialog.sent')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                DONE
+                                {data.isSent ? 'DONE' : 'NOT DONE'}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider /> {/* Divider 컴포넌트 사용 */}
                         </Grid>
-                        <Grid item xs={12}  sx={{ml:1}}>
+                        <Grid item xs={12} sx={{ ml: 1 }}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.view_log')}
+                                {t('errors_report.detail_dialog.view_log')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                ANALYSISQCHWCHECK
+                                {data.viewLog}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider /> {/* Divider 컴포넌트 사용 */}
                         </Grid>
-                        <Grid item xs={12}  sx={{ml:1}}>
+                        <Grid item xs={12} sx={{ ml: 1 }}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.error_title')}
+                                {t('errors_report.detail_dialog.error_title')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                Catridge QR Code Recognition Error
+                                {data.errorTitle}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider /> {/* Divider 컴포넌트 사용 */}
                         </Grid>
-                        <Grid item xs={7} sx={{ml:1}}>
+                        <Grid item xs={7} sx={{ ml: 1 }}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.cat_type')}
+                                {t('errors_report.detail_dialog.cat_type')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                -
+                                {data.panelType || '-'}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
                             <Typography variant="body1" fontWeight="bold" sx={{ fontSize: '14px', color: '#002A70', mb: '6px' }}>
-                            {t('errors_report.detail_dialog.control_type')}
+                                {t('errors_report.detail_dialog.control_type')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                -
+                                {data.controlType || '-'}
                             </Typography>
                         </Grid>
                     </Grid>

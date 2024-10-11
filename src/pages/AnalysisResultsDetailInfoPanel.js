@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 const NoRowsOverlay = styled('div')({
     display: 'flex',
@@ -34,11 +39,44 @@ const initialRows = [
 ];
 
 
-const AnalysisResultsDetailInfoPanel = () => {
-    const [rows, setRows] = useState(initialRows);
+const AnalysisResultsDetailInfoPanel = ({selectedRow}) => {
+    const [rows, setRows] = useState([]);
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
+
+        // API 호출 및 데이터 매핑
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const response = await apiClient.get(`${apiUrl}/console/analysis-results/${selectedRow}`, {
+                        headers: {
+                            Authorization: `Bearer ${getAccessToken()}`,
+                        }
+                    });
+    
+                    const data = response.data;
+    
+                    // API 응답 데이터를 rows 형식으로 변환
+                    const mappedRows = [{
+                        id: data.id,
+                        analyte_name: data.prodName,        // 제품 이름
+                        result: data.serial,                // 시리얼 번호
+                        finalod: data.date,                 // 분석 시간
+                        ref_bound: data.patientId,          // 환자 ID
+                        unit: data.sex,                     // 성별
+                        error_type: data.errorCode          // 에러 코드
+                    }];
+    
+                    setRows(mappedRows);
+    
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                }
+            };
+    
+            fetchData();
+        }, [selectedRow]);  // id 값이 변경될 때마다 호출
 
     const columns = [
         { field: 'id', headerName: `${t('analysis_result.detail_dialog.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },

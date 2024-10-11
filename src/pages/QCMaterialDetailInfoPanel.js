@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 const NoRowsOverlay = styled('div')({
     display: 'flex',
@@ -32,9 +37,8 @@ const initialRows = [
     { id: 15, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121' , unit_si:'mEq/L', unit_non_si:'mmol/L', rule:'2'},
 ];
 
-
-const QCMaterialDetailInfoPanel = () => {
-    const [rows, setRows] = useState(initialRows);
+const QCMaterialDetailInfoPanel = ({ selectedRow }) => {
+    const [rows, setRows] = useState([]);
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
@@ -51,6 +55,32 @@ const QCMaterialDetailInfoPanel = () => {
         { field: 'unit_non_si', headerName: `${t('qc_material.detail_dialog.column.unit_non_si')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'rule', headerName: `${t('qc_material.detail_dialog.column.rule')}`, flex: 1, minWidth: 50, headerAlign: 'center', align: 'center' },
     ];
+
+    useEffect(() => {
+        // API 호출로 데이터를 가져오는 부분
+        apiClient.get(`${apiUrl}/console/qc-materials/${selectedRow}/qc-material-analytes`, {
+            headers: {
+                Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+            },
+        })
+        .then((response) => {
+            const fetchedRows = response.data.content.map((item) => ({
+                id: item.id,
+                analyte_name: item.analyteName,
+                analyte_id: item.analyteId,
+                analyte_fullname: item.analyteFullName,
+                target_mean: item.mean,
+                target_range: `${item.min} - ${item.max}`,
+                unit_si: item.siUnit,
+                unit_non_si: item.unit,
+                rule: item.selectedRule,
+            }));
+            setRows(fetchedRows);
+        })
+        .catch((error) => {
+            console.error('데이터 가져오기 오류:', error);
+        });
+    }, [selectedRow]);
 
     return (
         <Paper

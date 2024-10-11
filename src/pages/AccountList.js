@@ -1,18 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
-import { Box, Button, Dialog, DialogActions, DialogContent, TextField, Select, MenuItem, Popover, Divider, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Box, Button, DialogContent, Select, MenuItem, Popover, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
 import Papa from 'papaparse';
 import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
-import Checkbox from '@mui/material/Checkbox';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import AccountManagementDialog from './AccountManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 import AccountCreateDialog from './AccountCreateDialog';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -124,7 +128,7 @@ const initialRows = [
 ];
 
 const AccountList = () => {
-    const [rows, setRows] = useState(initialRows);
+    const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
@@ -139,6 +143,36 @@ const AccountList = () => {
     // State to track hover
     const [hovered, setHovered] = useState(false);
     const [openDiag, setOpenDiag] = useState(false);
+
+    // API 호출로 데이터를 가져오는 부분
+    useEffect(() => {
+        apiClient.get(`${apiUrl}/console/users`, {
+            headers: {
+                Authorization: `Bearer ${getAccessToken}`, // 토큰 추가
+            },
+            params: {
+                page: 1,
+                size: 10,
+                sorting: ['createdAt,desc'],
+            },
+        })
+            .then((response) => {
+                const fetchedRows = response.data.content.map((user) => ({
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    department: user.department,
+                    grade: user.role === 'ADMIN' ? 'A' : 'M', // role에 따라 grade 설정
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString(),
+                    management: 'manage',
+                }));
+                setRows(fetchedRows);
+            })
+            .catch((error) => {
+                console.error('데이터 가져오기 오류:', error);
+            });
+    }, []);
 
     const handleIconClick = (params) => {
         setSelectedRow(params.row);
@@ -167,11 +201,11 @@ const AccountList = () => {
             field: 'grade', headerName: `${t('account-list.column.grade')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center',
             renderCell: (params) => (
                 // <IconButton>
-                    <img
-                        src={'M' === params.value ? './icon-admin.svg' : './icon-user.svg'} // Change icon based on hover state
-                        alt="grade icon"
-                        style={{ width: 40, height: 40 }}
-                    />
+                <img
+                    src={'M' === params.value ? './icon-admin.svg' : './icon-user.svg'} // Change icon based on hover state
+                    alt="grade icon"
+                    style={{ width: 40, height: 40 }}
+                />
                 // </IconButton>
             ),
         },

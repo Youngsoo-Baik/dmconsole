@@ -1,17 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
-import { Box, Button, Dialog, DialogActions, DialogContent, TextField, Select, MenuItem, Popover, Divider, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Box, Button, DialogContent, Select, MenuItem, Popover, Typography, FormControl, Pagination, PaginationItem } from '@mui/material';
 import Papa from 'papaparse';
 import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
-import Checkbox from '@mui/material/Checkbox';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import ErrorReportInfoDialog from './ErrorReportInfoDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -125,7 +129,7 @@ const initialRows = [
 ];
 
 const ErrorReport = () => {
-    const [rows, setRows] = useState(initialRows);
+    const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
@@ -138,6 +142,38 @@ const ErrorReport = () => {
     const [currentRow, setCurrentRow] = useState(null);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
+
+    // API 데이터 가져오기
+    useEffect(() => {
+        apiClient.get(`${apiUrl}/console/error-messages`, {
+            headers: {
+                Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+            },
+            params: {
+                prodName: '',
+                serial: '',
+                errorTitle: '',
+                page: 1,
+                size: 9000,
+                sort: ['date,desc'],
+            },
+        })
+            .then((response) => {
+                const mappedRows = response.data.content.map((item, index) => ({
+                    id: item.id,
+                    model: item.prodName,
+                    serial: item.serial,
+                    date: item.date,
+                    view_log: item.viewLog,
+                    error_title: item.errorTitle,
+                    sent: item.isSent,
+                }));
+                setRows(mappedRows);
+            })
+            .catch((error) => {
+                console.error('데이터를 가져오는 중 에러 발생:', error);
+            });
+    }, []);
 
     const handleRowClick = (params) => {
         setSelectedRowId(params.id);  // 선택된 행의 ID를 저장
@@ -261,6 +297,8 @@ const ErrorReport = () => {
     const getLocaleText = () => {
         return i18n.language === 'ko' ? koKR : {};
     };
+
+
 
     return (
         <Box sx={{ width: '1592px', minWidth: 1024 }}>

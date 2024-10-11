@@ -1,19 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
-import { Box, Button, Dialog, DialogActions, DialogContent, TextField, Select, MenuItem, Popover, Divider, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Box, Button, DialogContent, Select, MenuItem, Popover, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
 import Papa from 'papaparse';
 import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
-import Checkbox from '@mui/material/Checkbox';
 import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
 import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -131,7 +135,7 @@ const initialRows = [
 ];
 
 const DeviceList = () => {
-    const [rows, setRows] = useState(initialRows);
+    const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
@@ -145,6 +149,151 @@ const DeviceList = () => {
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
     // State to track hover
     const [hovered, setHovered] = useState(false);
+    const [countryMenuItems, setCountryMenuItems] = useState([]); // Country menu items
+    const [resellerMenuItems, setResellerMenuItems] = useState([]); // Reseller menu items
+    const [managerMenuItems, setManagerMenuItems] = useState([]); // Manager menu items
+    const [areaMenuItems, setAreaMenuItems] = useState([]); // Area menu items
+    const [originalRows, setOriginalRows] = useState([]); // 초기 데이터 저장용 상태 추가
+    const [filteredRows, setFilteredRows] = useState([]); // 필터링된 데이터를 저장할 상태
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/devices`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken}`,
+                    },
+                    params: {
+                        page: 1,
+                        size: 10000,
+                        sort: [
+                            "createdAt,desc",
+                            "serial,asc",
+                            "country,asc",
+                            "area,asc",
+                            "reseller,asc",
+                            "manager,asc",
+                            "prodName,asc",
+                            "registeredAt,asc"
+                        ]
+                    }
+                });
+
+                const data = response.data.content;
+
+                // API 데이터 매핑
+                const mappedRows = data.map((device) => ({
+                    id: device.id,
+                    country: device.country,
+                    region: device.area,
+                    reseller: device.reseller,
+                    manager: device.manager,
+                    serial: device.serial,
+                    reg_date: device.registeredAt,
+                    connection_state: device.isConnect,
+                    management: '관리',
+                }));
+
+                setRows(mappedRows);
+                setOriginalRows(mappedRows); // 초기 데이터 저장
+            } catch (error) {
+                console.error('Error fetching devices:', error);
+            }
+        };
+
+        fetchData();
+        // data fetch 후 state 변경
+        setLoading(false);
+    }, []);
+
+    useEffect(() => {
+        // Country 데이터 불러오기
+        const fetchCountries = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/devices/countries`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    },
+                });
+
+                const countriesData = response.data.countries.map((country) => ({
+                    value: country.value,
+                    label: country.text,
+                }));
+
+                setCountryMenuItems(countriesData); // 받아온 countries 데이터를 설정
+                console.log(countriesData);
+            } catch (error) {
+                console.error('Error fetching countries:', error);
+            }
+        };
+
+        // Resellers 데이터 불러오기
+        const fetchResellers = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/devices/resellers`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    },
+                });
+
+                const resellersData = response.data.resellers.map((reseller) => ({
+                    value: reseller.value,
+                    label: reseller.text,
+                }));
+
+                setResellerMenuItems(resellersData); // 받아온 resellers 데이터를 설정
+            } catch (error) {
+                console.error('Error fetching resellers:', error);
+            }
+        };
+
+        // Managers 데이터 불러오기
+        const fetchManagers = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/devices/managers`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    },
+                });
+
+                const managersData = response.data.managers.map((manager) => ({
+                    value: manager.value,
+                    label: manager.text,
+                }));
+
+                setManagerMenuItems(managersData); // 받아온 managers 데이터를 설정
+            } catch (error) {
+                console.error('Error fetching managers:', error);
+            }
+        };
+
+        // Areas 데이터 불러오기
+        const fetchAreas = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/devices/areas`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    },
+                });
+
+                const areasData = response.data.areas.map((area) => ({
+                    value: area.value,
+                    label: area.text,
+                }));
+
+                setAreaMenuItems(areasData); // 받아온 areas 데이터를 설정
+            } catch (error) {
+                console.error('Error fetching areas:', error);
+            }
+        };
+
+        fetchCountries();
+        fetchResellers();
+        fetchManagers();
+        fetchAreas();
+    }, []);
 
     const handleIconClick = (params) => {
         setSelectedRow(params.row);
@@ -153,15 +302,6 @@ const DeviceList = () => {
 
     const handleClose = () => {
         setOpen(false);  // Close the DeviceManagementDialog
-    };
-
-    const handleHeaderCheckboxChange = (event) => {
-        if (event.target.checked) {
-            const allIds = rows.map((row) => row.id); // 대체 코드
-            setSelectionModel(allIds);
-        } else {
-            setSelectionModel([]);
-        }
     };
 
     const columns = [
@@ -192,6 +332,7 @@ const DeviceList = () => {
         },
     ];
 
+    // 필터 검색 폼의 onSubmit에 handleFilterSearch 연결
     const formik = useFormik({
         initialValues: {
             deviceSN: '',
@@ -200,11 +341,8 @@ const DeviceList = () => {
             reseller: '',
             manager: '',
         },
-        onSubmit: (values) => {
-            // const filteredRows = rows.filter((row) => true);
-            // setRows(filteredRows);
-            // setOpenFilterDialog(false);
-            // setAnchorEl(null);   
+        onSubmit: (values, event) => {
+            handleFilterSearch(event, values); // 필터 검색 실행
             console.log(values);
         },
     });
@@ -231,6 +369,45 @@ const DeviceList = () => {
         }
     };
 
+    // 'View All' 버튼 클릭 시 전체 데이터 복원
+    const handleViewAll = () => {
+        setRows(originalRows); // 원본 데이터를 rows에 설정하여 전체 데이터 표시
+        setFilteredRows([]); // 필터링된 데이터 초기화
+    };
+
+    // 'Filter Search' 버튼 클릭 시 필터링된 데이터 적용
+    const handleFilterSearch = (event, values = {}) => {
+        setAnchorEl(event.currentTarget);
+        setOpenFilterDialog(!openFilterDialog);
+
+        // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용, 없으면 원본 데이터 사용
+        const baseRows = filteredRows.length > 0 ? filteredRows : originalRows;
+
+        console.log(values);
+        // const filteredRows = originalRows.filter((row) => {
+        const newFilteredRows = baseRows.filter((row) => {
+            console.log("filtering debugging")
+            console.log(row.country);
+            console.log(values.country);
+            return (
+                (!values.deviceSN || row.serial.includes(values.deviceSN)) &&
+                // (!values.country || row.country === values.country) &&
+                // (!values.region || row.region === values.region) &&
+                // (!values.reseller || row.reseller === values.reseller) &&
+                // (!values.manager || row.manager === values.manager)
+                (!values.country || row.country === countryMenuItems.find((item) => item.value === values.country)?.label) &&
+                (!values.region || row.region === areaMenuItems.find((item) => item.value === values.region)?.label) &&
+                (!values.reseller || row.reseller === resellerMenuItems.find((item) => item.value === values.reseller)?.label) &&
+                (!values.manager || row.manager === managerMenuItems.find((item) => item.value === values.manager)?.label)
+            );
+        });
+
+        // setRows(filteredRows); // 필터링된 데이터를 rows에 설정
+        // handleCloseFilterDialog(); // 필터 다이얼로그 닫기
+        setRows(newFilteredRows); // 필터링된 데이터를 rows에 설정
+        setFilteredRows(newFilteredRows); // 필터링된 데이터를 filteredRows에도 저장
+    };
+
     const handleImportClick = () => {
         fileInputRef.current.click();
     };
@@ -254,28 +431,6 @@ const DeviceList = () => {
         );
     }
 
-    //menuItems for country
-    const menuItems = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-
-    //menuItems for region
-    const menuItems02 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-    //menuItems for reseller
-    const menuItems03 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-    //menuItems for manager
-    const menuItems04 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-
     const getLocaleText = () => {
         return i18n.language === 'ko' ? koKR : {};
     };
@@ -291,7 +446,7 @@ const DeviceList = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '-10px' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Button
-                            onClick={() => setRows(rows)}
+                            onClick={handleViewAll}
                             style={{
                                 fontSize: '16px',
                                 width: '178px',
@@ -308,7 +463,7 @@ const DeviceList = () => {
                             {t('button.view_all')}
                         </Button>
                         <Button
-                            onClick={handleClickFilterButton}
+                            onClick={handleFilterSearch}
                             style={{
                                 fontSize: '16px',
                                 width: '211px',
@@ -388,6 +543,7 @@ const DeviceList = () => {
                     getRowHeight={getRowHeight}
                     headerHeight={48}
                     localeText={getLocaleText()} // Use the localeText based on the current locale
+                    loading={loading} // Add loading prop here
                     slots={{
                         footer: CustomFooter,
                         noRowsOverlay: () => (
@@ -514,7 +670,7 @@ const DeviceList = () => {
                                         value={formik.values.country}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
+                                        menuItems={countryMenuItems}
                                         placeholder={t('device_list.filter_search.country_placeholder')}
                                         // description="Select a language"
                                         width="322px"   // Custom width
@@ -532,7 +688,7 @@ const DeviceList = () => {
                                         value={formik.values.region}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems02}
+                                        menuItems={areaMenuItems}
                                         placeholder={t('device_list.filter_search.region_placeholder')}
                                         // description="Select a language"
                                         width="171px"   // Custom width
@@ -553,7 +709,7 @@ const DeviceList = () => {
                                         value={formik.values.reseller}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems03}
+                                        menuItems={resellerMenuItems}
                                         placeholder={t('device_list.filter_search.reseller_placeholder')}
                                         // description="Select a language"
                                         width="322px"   // Custom width
@@ -571,7 +727,7 @@ const DeviceList = () => {
                                         value={formik.values.manager}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems04}
+                                        menuItems={managerMenuItems}
                                         placeholder={t('device_list.filter_search.manager_placeholder')}
                                         // description="Select a language"
                                         width="171px"   // Custom width
