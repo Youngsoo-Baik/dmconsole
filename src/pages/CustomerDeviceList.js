@@ -171,51 +171,54 @@ const CustomerDeviceList = () => {
 
     // API 호출 및 데이터 업데이트
     useEffect(() => {
-        const fetchDevices = async () => {
-            try {
-                const response = await apiClient.get(`${apiUrl}/console/customer-devices`, {
-                    headers: {
-                        Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
-                    },
-                    params: {
-                        page: 1,
-                        size: 200,
-                        sort: [
-                            "createdAt,desc",
-                            "serial,asc",
-                            "country,asc",
-                            "area,asc",
-                            "reseller,asc",
-                            "manager,asc",
-                            "prodName,asc",
-                            "customer,asc",
-                            "productAt,asc"
-                        ]
-                    }
-                });
+        // Simulate an API call
+        // setTimeout(() => {
+            const fetchDevices = async () => {
+                try {
+                    const response = await apiClient.get(`${apiUrl}/console/customer-devices`, {
+                        headers: {
+                            Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+                        },
+                        params: {
+                            page: 1,
+                            size: 200,
+                            sort: [
+                                "createdAt,desc",
+                                "serial,asc",
+                                "country,asc",
+                                "area,asc",
+                                "reseller,asc",
+                                "manager,asc",
+                                "prodName,asc",
+                                "customer,asc",
+                                "productAt,asc"
+                            ]
+                        }
+                    });
 
-                const updatedRows = response.data.content.map((device, index) => ({
-                    id: device.id, // 'id' 필드 매핑
-                    country: device.country, // 'country' 필드 매핑
-                    region: device.area, // 'region'은 'area' 필드로 매핑
-                    reseller: device.reseller, // 'reseller' 필드 매핑
-                    manager: device.manager, // 'manager' 필드 매핑
-                    model: device.prodName, // 'model'은 'prodName' 필드로 매핑
-                    customer: device.email, // 'customer'은 'email' 필드로 매핑
-                    serial: device.serial, // 'serial' 필드 매핑
-                    production_date: device.productAt, // 'production_date'는 'productAt' 필드로 매핑
-                    connection_state: device.isConnect // 'connection_state'는 'isConnect' 필드로 매핑
-                }));
+                    const updatedRows = response.data.content.map((device, index) => ({
+                        id: device.id, // 'id' 필드 매핑
+                        country: device.country, // 'country' 필드 매핑
+                        region: device.area, // 'region'은 'area' 필드로 매핑
+                        reseller: device.reseller, // 'reseller' 필드 매핑
+                        manager: device.manager, // 'manager' 필드 매핑
+                        model: device.prodName, // 'model'은 'prodName' 필드로 매핑
+                        customer: device.email, // 'customer'은 'email' 필드로 매핑
+                        serial: device.serial, // 'serial' 필드 매핑
+                        production_date: device.productAt, // 'production_date'는 'productAt' 필드로 매핑
+                        connection_state: device.isConnect // 'connection_state'는 'isConnect' 필드로 매핑
+                    }));
 
-                setRows(updatedRows); // rows 상태 업데이트
+                    setRows(updatedRows); // rows 상태 업데이트
 
-            } catch (error) {
-                console.error('Error fetching device data:', error);
-            }
-        };
+                } catch (error) {
+                    console.error('Error fetching device data:', error);
+                }
+            };
 
-        fetchDevices(); // 컴포넌트가 마운트되었을 때 데이터 호출
-        setLoading(false);
+            fetchDevices(); // 컴포넌트가 마운트되었을 때 데이터 호출
+            setLoading(false);
+        // }, 2000); // simulate loading for 2 seconds
     }, []);
 
     function renderConnection(params) {

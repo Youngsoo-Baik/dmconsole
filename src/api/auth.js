@@ -37,5 +37,6 @@ export const refreshToken = async () => {
 
     const newAccessToken = response.data.accessToken;
     setAccessToken(newAccessToken); // 새로운 Access Token 저장
+    //setRefreshToken(response.data.refreshToken); // 새로운 Refresh Token 저장
     return newAccessToken;
 };

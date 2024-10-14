@@ -150,6 +150,10 @@ const AnalysisResults = () => {
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
     // State to track hover
     const [hovered, setHovered] = useState(false);
+    const [productsMenuItems, setProductsMenuItems] = useState([]); // Products menu items
+    const [originalRows, setOriginalRows] = useState([]); // 초기 데이터 저장용 상태 추가
+    const [filteredRows, setFilteredRows] = useState([]); // 필터링된 데이터를 저장할 상태
+    const [loading, setLoading] = useState(true);
 
     // API 데이터 호출
     useEffect(() => {
@@ -171,11 +175,38 @@ const AnalysisResults = () => {
                 error_code: item.errorCode,
             }));
             setRows(fetchedRows);
+            setOriginalRows(fetchedRows); // 초기 데이터 저장
         }).catch(error => {
             console.error('API 호출 실패:', error);
         });
+        // data fetch 후 state 변경
+        setLoading(false);
     }, []);
 
+    useEffect(() => {
+        // 검사기 모델 데이터 불러오기
+        const fetchProducts = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/devices/products`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    },
+                });
+
+                const productsData = response.data.products.map((product) => ({
+                    value: product.value,
+                    label: product.text,
+                }));
+
+                setProductsMenuItems(productsData); // 받아온 countries 데이터를 설정
+                console.log(productsData);
+            } catch (error) {
+                console.error('Error fetching countries:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
     const handleRowClick = (params) => {
         setSelectedRowId(params.id); // 선택한 행의 id 설정
         setOpen(true);  // Open the DeviceManagementDialog
@@ -210,11 +241,8 @@ const AnalysisResults = () => {
             cat_lot: '',
             error_code: '',
         },
-        onSubmit: (values) => {
-            // const filteredRows = rows.filter((row) => true);
-            // setRows(filteredRows);
-            // setOpenFilterDialog(false);
-            // setAnchorEl(null);   
+        onSubmit: (values, event) => {
+            handleFilterSearch(event, values); // 필터 검색 실행
             console.log(values);
         },
     });
@@ -245,6 +273,38 @@ const AnalysisResults = () => {
         fileInputRef.current.click();
     };
 
+        // 'View All' 버튼 클릭 시 전체 데이터 복원
+        const handleViewAll = () => {
+            setRows(originalRows); // 원본 데이터를 rows에 설정하여 전체 데이터 표시
+            setFilteredRows([]); // 필터링된 데이터 초기화
+        };
+    
+        // 'Filter Search' 버튼 클릭 시 필터링된 데이터 적용
+        const handleFilterSearch = (event, values = {}) => {
+            setAnchorEl(event.currentTarget);
+            setOpenFilterDialog(!openFilterDialog);
+    
+            // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용, 없으면 원본 데이터 사용
+            const baseRows = filteredRows.length > 0 ? filteredRows : originalRows;
+    
+            console.log(values);
+            // const filteredRows = originalRows.filter((row) => {
+            const newFilteredRows = baseRows.filter((row) => {
+                console.log("filtering debugging")
+                return (
+                    (!values.model || row.model === productsMenuItems.find((item) => item.value === values.model)?.label) &&
+                    (!values.serial || row.serial.includes(values.serial)) &&
+                    (!values.cat_lot || row.cat_lot.includes(values.cat_lot)) &&
+                    (!values.error_code || row.error_code.includes(values.error_code)) 
+                );
+            });
+    
+            // setRows(filteredRows); // 필터링된 데이터를 rows에 설정
+            // handleCloseFilterDialog(); // 필터 다이얼로그 닫기
+            setRows(newFilteredRows); // 필터링된 데이터를 rows에 설정
+            setFilteredRows(newFilteredRows); // 필터링된 데이터를 filteredRows에도 저장
+        };
+    
     const handleClickFilterButton = (event) => {
         setAnchorEl(event.currentTarget);
         setOpenFilterDialog(!openFilterDialog);
@@ -264,28 +324,6 @@ const AnalysisResults = () => {
         );
     }
 
-    //menuItems for country
-    const menuItems = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-
-    //menuItems for region
-    const menuItems02 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-    //menuItems for reseller
-    const menuItems03 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-    //menuItems for manager
-    const menuItems04 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-
     const getLocaleText = () => {
         return i18n.language === 'ko' ? koKR : {};
     };
@@ -301,7 +339,7 @@ const AnalysisResults = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '-10px' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Button
-                            onClick={() => setRows(rows)}
+                            onClick={handleViewAll}
                             style={{
                                 fontSize: '16px',
                                 width: '178px',
@@ -318,7 +356,7 @@ const AnalysisResults = () => {
                             {t('button.view_all')}
                         </Button>
                         <Button
-                            onClick={handleClickFilterButton}
+                            onClick={handleFilterSearch}
                             style={{
                                 fontSize: '16px',
                                 width: '211px',
@@ -374,6 +412,7 @@ const AnalysisResults = () => {
                     headerHeight={48}
                     localeText={getLocaleText()} // Use the localeText based on the current locale
                     onRowClick={handleRowClick} // 행 클릭 시 이벤트
+                    loading={loading} // Add loading prop here
                     slots={{
                         footer: CustomFooter,
                         noRowsOverlay: () => (
@@ -470,7 +509,7 @@ const AnalysisResults = () => {
                                         value={formik.values.model}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems02}
+                                        menuItems={productsMenuItems}
                                         placeholder={t('analysis_result.filter_search.device_model_placeholder')}
                                         // description="Select a language"
                                         width="322px"   // Custom width

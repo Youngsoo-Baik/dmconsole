@@ -140,6 +140,8 @@ const DiagResults = () => {
     const [currentRow, setCurrentRow] = useState(null);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [originalRows, setOriginalRows] = useState([]); // 초기 데이터 저장용 상태 추가
+    const [filteredRows, setFilteredRows] = useState([]); // 필터링된 데이터를 저장할 상태
     const [loading, setLoading] = useState(true);
 
     // API 호출로 데이터를 가져오는 부분
@@ -166,12 +168,13 @@ const DiagResults = () => {
                     eqc: item.eqc,
                 }));
                 setRows(fetchedRows);
-                // data fetch 후 state 변경
-                setLoading(false);
+                setOriginalRows(fetchedRows); // 초기 데이터 저장
             })
             .catch((error) => {
                 console.error('데이터 가져오기 오류:', error);
             });
+        // data fetch 후 state 변경
+        setLoading(false);
     }, []);
 
     const handleRowClick = (params) => {
@@ -193,7 +196,7 @@ const DiagResults = () => {
     };
 
     function renderStatus(params) {
-        console.log(params);
+        console.log(params.value);
         return (
             <Box sx={{ textAlign: 'center', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {params.value ? <img src="/icon-pass.png" alt="pass" /> : <img src="/icon-fail.png" alt="fail" />}
@@ -221,11 +224,8 @@ const DiagResults = () => {
             cat_sensor: '',
             eqc: '',
         },
-        onSubmit: (values) => {
-            // const filteredRows = rows.filter((row) => true);
-            // setRows(filteredRows);
-            // setOpenFilterDialog(false);
-            // setAnchorEl(null);   
+        onSubmit: (values, event) => {
+            handleFilterSearch(event, values); // 필터 검색 실행   
             console.log(values);
         },
     });
@@ -256,6 +256,43 @@ const DiagResults = () => {
         fileInputRef.current.click();
     };
 
+    // 'View All' 버튼 클릭 시 전체 데이터 복원
+    const handleViewAll = () => {
+        setRows(originalRows); // 원본 데이터를 rows에 설정하여 전체 데이터 표시
+        setFilteredRows([]); // 필터링된 데이터 초기화
+    };
+
+    // 'Filter Search' 버튼 클릭 시 필터링된 데이터 적용
+    const handleFilterSearch = (event, values = {}) => {
+        setAnchorEl(event.currentTarget);
+        setOpenFilterDialog(!openFilterDialog);
+
+        // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용, 없으면 원본 데이터 사용
+        const baseRows = filteredRows.length > 0 ? filteredRows : originalRows;
+
+        console.log(values);
+        // const filteredRows = originalRows.filter((row) => {
+        const newFilteredRows = baseRows.filter((row) => {
+            console.log("filtering debugging")
+            console.log(row.plunger_motor);
+            console.log(values.plunger_motor);
+
+            return (
+                (!values.serial || row.serial.includes(values.serial)) &&
+                (values.plunger_motor === undefined || row.plunger_motor === (values.plunger_motor === "0")) &&  // true/false 필터링 적용
+                (!values.camera_blu || row.camera_blu === (values.camera_blu === "0")) &&
+                (!values.temp_ic || row.temp_ic === (values.temp_ic === "0")) &&
+                (!values.cat_sensor || row.cat_sensor === (values.cat_sensor === "0")) &&
+                (!values.eqc || row.eqc === (values.eqc === "0"))
+            );
+        });
+
+        // setRows(filteredRows); // 필터링된 데이터를 rows에 설정
+        // handleCloseFilterDialog(); // 필터 다이얼로그 닫기
+        setRows(newFilteredRows); // 필터링된 데이터를 rows에 설정
+        setFilteredRows(newFilteredRows); // 필터링된 데이터를 filteredRows에도 저장
+    };
+
     const handleClickFilterButton = (event) => {
         setAnchorEl(event.currentTarget);
         setOpenFilterDialog(!openFilterDialog);
@@ -275,26 +312,34 @@ const DiagResults = () => {
         );
     }
 
-    //menuItems for country
-    const menuItems = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
+    //menuItems for plunger motor
+    const plungerMenuItems = [
+        { value: "0", label: "통과" },
+        { value: "1", label: "실패" }
     ];
 
-    //menuItems for region
-    const menuItems02 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
+    //menuItems for camera blu
+    const cameraMenuItems = [
+        { value: "0", label: "통과" },
+        { value: "1", label: "실패" }
     ];
-    //menuItems for reseller
-    const menuItems03 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
+
+    //menuItems for temp ic
+    const tempMenuItems = [
+        { value: "0", label: "통과" },
+        { value: "1", label: "실패" }
     ];
-    //menuItems for manager
-    const menuItems04 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
+
+    //menuItems for cat sensor
+    const catMenuItems = [
+        { value: "0", label: "통과" },
+        { value: "1", label: "실패" }
+    ];
+
+    //menuItems for eqc
+    const eqcMenuItems = [
+        { value: "0", label: "통과" },
+        { value: "1", label: "실패" }
     ];
 
     const getLocaleText = () => {
@@ -312,7 +357,7 @@ const DiagResults = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '-10px' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Button
-                            onClick={() => setRows(rows)}
+                            onClick={handleViewAll}
                             style={{
                                 fontSize: '16px',
                                 width: '178px',
@@ -329,7 +374,7 @@ const DiagResults = () => {
                             {t('button.view_all')}
                         </Button>
                         <Button
-                            onClick={handleClickFilterButton}
+                            onClick={handleFilterSearch}
                             style={{
                                 fontSize: '16px',
                                 width: '211px',
@@ -502,7 +547,7 @@ const DiagResults = () => {
                                         value={formik.values.plunger_motor}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
+                                        menuItems={plungerMenuItems}
                                         placeholder={t('self_diag.filter_search.select')}
                                         // description="Select a language"
                                         width="171px"   // Custom width
@@ -520,7 +565,7 @@ const DiagResults = () => {
                                         value={formik.values.camera_blu}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
+                                        menuItems={cameraMenuItems}
                                         placeholder={t('self_diag.filter_search.select')}
                                         // description="Select a language"
                                         width="171px"   // Custom width
@@ -548,7 +593,7 @@ const DiagResults = () => {
                                         value={formik.values.temp_ic}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
+                                        menuItems={tempMenuItems}
                                         placeholder={t('self_diag.filter_search.select')}
                                         // description="Select a language"
                                         width="171px"   // Custom width
@@ -566,7 +611,7 @@ const DiagResults = () => {
                                         value={formik.values.cat_sensor}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
+                                        menuItems={catMenuItems}
                                         placeholder={t('self_diag.filter_search.select')}
                                         // description="Select a language"
                                         width="171px"   // Custom width
@@ -584,7 +629,7 @@ const DiagResults = () => {
                                         value={formik.values.eqc}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        menuItems={menuItems02}
+                                        menuItems={eqcMenuItems}
                                         placeholder={t('self_diag.filter_search.select')}
                                         // description="Select a language"
                                         width="171px"   // Custom width
