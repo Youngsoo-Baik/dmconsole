@@ -1,10 +1,15 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { Select, MenuItem, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
+import apiClient from '../../api/apiClient'; // API client import
+import Config from '../../Config'; // apiUrl 추가
+import { getAccessToken } from '../../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -114,18 +119,82 @@ const initialRows = [
     { id: 13, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
 ];
 
-const LogFilePanel = () => {
-    const [rows, setRows] = useState(initialRows);
+const LogFilePanel = (rowId) => {
+    const [rows, setRows] = useState([]);
+    const [serial, setSerial] = useState(''); // serial state 추가
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
     const [selectedRow, setSelectedRow] = useState(null);
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
 
+    // Serial 값을 가져오는 API 호출
+    useEffect(() => {
+        const fetchDeviceInfo = async () => {
+            try {
+                const token = getAccessToken(); // 토큰 가져오기
+                const response = await apiClient.get(`${apiUrl}/console/devices/${rowId.rowId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                // API로 받은 serial 값을 상태에 저장
+                const { serial: deviceSerial } = response.data;
+                setSerial(deviceSerial);  // serial 상태 업데이트
+            } catch (error) {
+                console.error('Error fetching device info:', error);
+            }
+        };
+
+        if (rowId) {
+            fetchDeviceInfo();
+        }
+    }, [rowId]); // rowId가 변경될 때마다 실행
+
     const handleIconClick = (params) => {
         setSelectedRow(params.row);
-        alert(`Icon clicked for row with ID: ${params.row.id}`); // Perform your custom action here
+        const downloadUrl = params.row.management; // downloadUrl 가져오기
+        if (downloadUrl) {
+            console.log(downloadUrl);
+            window.open(downloadUrl, '_blank'); // downloadUrl을 새로운 탭에서 열기
+        } else {
+            alert('Download URL not available');
+        }
+        //alert(`Icon clicked for row with ID: ${params.row.id}`); // Perform your custom action here
     };
+
+    // 로그 파일 정보 가져오는 API 호출
+    useEffect(() => {
+        const fetchLogFilesInfo = async () => {
+            try {
+                const token = getAccessToken(); // Assuming you have a function to get the access token
+                const response = await apiClient.get(`${apiUrl}/console/devices/${rowId.rowId}/log-files`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                // Map the API response to match DataGrid row structure
+                const mappedRows = response.data.content.map((item, index) => ({
+                    id: index + 1,  // Using the index as a unique id
+                    serial: serial,  // API에서 가져온 serial 값 사용
+                    log: item.logCategory,
+                    logfile: item.filename,
+                    date: item.createdAt,
+                    management: item.downloadUrl
+                }));
+
+                setRows(mappedRows);
+            } catch (error) {
+                console.error('Error fetching panel info:', error);
+            }
+        };
+
+        if (serial) { // serial 값이 있을 때만 로그 파일 정보 가져오기
+            fetchLogFilesInfo();
+        }
+    }, [rowId, serial]); // serial이 변경될 때마다 로그 파일 정보를 다시 가져옴
 
     const columns = [
         { field: 'id', headerName: `${t('device_list.logfile_tab.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
@@ -133,7 +202,7 @@ const LogFilePanel = () => {
         { field: 'log', headerName: `${t('device_list.logfile_tab.column.log')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'logfile', headerName: `${t('device_list.logfile_tab.column.logfile')}`, flex: 2.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'date', headerName: `${t('device_list.logfile_tab.column.date')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'unit', headerName: `${t('device_list.logfile_tab.column.unit')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        // { field: 'unit', headerName: `${t('device_list.logfile_tab.column.unit')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         {
             field: 'management', headerName: `${t('device_list.logfile_tab.column.management')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center',
             sortable: false,
@@ -145,7 +214,7 @@ const LogFilePanel = () => {
                     onMouseLeave={() => setHoveredRow(null)} // Remove hovered row
                 >
                     <img
-                        src={hoveredRow === params.id ? './icon-download-hover.png': './icon-download.png'}
+                        src={hoveredRow === params.id ? './icon-download-hover.png' : './icon-download.png'}
                         alt="download icon"
                         style={{ width: 30, height: 30 }}
                     />
@@ -173,7 +242,7 @@ const LogFilePanel = () => {
                     {t('device_list.logfile_tab.title')}
                 </Typography>
             </Box>
-            <Box sx={{ height:'620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
+            <Box sx={{ height: '620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}

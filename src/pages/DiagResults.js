@@ -127,7 +127,7 @@ const initialRows = [
 ];
 
 const DiagResults = () => {
-    const [rows, setRows] = useState(initialRows);
+    const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
@@ -152,8 +152,8 @@ const DiagResults = () => {
             },
             params: {
                 // serial: 'PVKA0-A44737', // 필요한 serial 번호
-                page: 1,
-                size: 100,
+                // page: 1,
+                // size: 100,
             },
         })
             .then((response) => {

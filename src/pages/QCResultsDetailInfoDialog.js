@@ -50,7 +50,7 @@ export default function QCResultsDetailInfoDialog({ open, onClose, selectedRow }
                 </IconButton>
             </DialogTitle>
             <DialogContent>
-                <Tabs value={value} onChange={handleChange} variant="scrollable" centered
+                <Tabs value={value} onChange={handleChange} centered
                     sx={{
                         position: 'absolute', // Ensure it's positioned relative to the dialog
                         top: '36px',

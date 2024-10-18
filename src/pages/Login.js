@@ -87,7 +87,7 @@ const Login = ({ onLogin }) => {
   const navigate = useNavigate();  // Initialize the navigate function
   const { t } = useTranslation('console');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
 
     /* old implementation
     const url = `${apiUrl}/console/login`;
@@ -119,7 +119,7 @@ const Login = ({ onLogin }) => {
     });
     */
     try {
-      login(email, password); // auth.js의 login 함수 호출
+      await login(email, password); // auth.js의 login 함수 호출
       console.log("Login Success");
       onLogin();  // 로그인 상태 변경
       navigate('/customer-devices');  // Navigate to the home page on successful login

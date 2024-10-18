@@ -58,7 +58,7 @@ const QCMaterialDetailInfoPanel = ({ selectedRow }) => {
 
     useEffect(() => {
         // API 호출로 데이터를 가져오는 부분
-        apiClient.get(`${apiUrl}/console/qc-materials/${selectedRow}/qc-material-analytes`, {
+        apiClient.get(`${apiUrl}/console/qc-materials/${selectedRow}/qc-analytes`, {
             headers: {
                 Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
             },

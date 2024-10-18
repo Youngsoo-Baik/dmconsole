@@ -5,7 +5,7 @@ import AccountMemberInfoPanel from './AccountMemberInfoPanel';
 import AccountPasswordInfoPanel from './AccountPasswordInfoPanel';
 
 
-export default function AccountManagementDialog({ open, onClose, selectedRow }) {
+export default function AccountManagementDialog({ open, handleClose, selectedRow }) {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -16,7 +16,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
     return (
         <Dialog
             open={open}
-            onClose={onClose}
+            onClose={handleClose}
             maxWidth="lg"
             // width="972px"
             fullWidth
@@ -35,7 +35,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                 {/* IconButton for the custom close icon */}
                 <IconButton
                     aria-label="close"
-                    onClick={onClose}
+                    onClick={handleClose}
                     sx={{
                         position: 'absolute',
                         right: 8,
@@ -57,14 +57,14 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                         position: 'absolute', // Ensure it's positioned relative to the dialog
                         top: '56px',
                         left: '37px',
-                        
+
                         '& .MuiTabs-indicator': {
                             border: 'none', // Remove the indicator border
                             backgroundColor: '#007dfa', // Change the color of the indicator
                             height: '8px', // Change the height of the indicator
                         },
                     }}>
-                    <Tab label={t('account-list.account_mod_dialog.title')}
+                    <Tab label={t('account_list.account_mod_dialog.title')}
                         sx={{
                             minWidth: '114px',
                             // width: '92px',
@@ -80,7 +80,7 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                             textAlign: 'left',
                             color: '#303468',
                         }} />
-                    <Tab label={t('account-list.pass_mod_dialog.title')}
+                    <Tab label={t('account_list.pass_mod_dialog.title')}
                         sx={{
                             minWidth: '109px',
                             height: '24px',
@@ -98,8 +98,10 @@ export default function AccountManagementDialog({ open, onClose, selectedRow }) 
                 </Tabs>
                 {/* Conditionally render each TabPanel */}
                 <Box sx={{ paddingTop: '136px', paddingLeft: '5px', paddingRight: '5px' }}>
-                    {value === 0 && <AccountMemberInfoPanel />}
-                    {value === 1 && <AccountPasswordInfoPanel />}
+                    {/* {value === 0 && <AccountMemberInfoPanel />}
+                    {value === 1 && <AccountPasswordInfoPanel />} */}
+                    {value === 0 && <AccountMemberInfoPanel open={open} handleClose={handleClose} selectedRow={selectedRow} />}
+                    {value === 1 && <AccountPasswordInfoPanel open={open} handleClose={handleClose} selectedRow={selectedRow} />}
                 </Box>
             </DialogContent>
         </Dialog>

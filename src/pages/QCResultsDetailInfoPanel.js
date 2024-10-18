@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 const NoRowsOverlay = styled('div')({
     display: 'flex',
@@ -33,12 +38,43 @@ const initialRows = [
     { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
 ];
 
-
-const QCResultsDetailInfoPanel = () => {
-    const [rows, setRows] = useState(initialRows);
+const QCResultsDetailInfoPanel = ({ selectedRow }) => {
+    const [rows, setRows] = useState([]);
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
+
+    console.log(selectedRow);
+
+    // API 호출
+    useEffect(() => {
+        const fetchControlData = async () => {
+            try {
+                const token = getAccessToken();
+                const response = await apiClient.get(`${apiUrl}/console/control-results/${selectedRow}/control-data`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const data = response.data.content;
+
+                // 응답 데이터에 맞게 필드명을 변경하여 rows 상태 업데이트
+                const formattedRows = data.map((item, index) => ({
+                    id: item.id,
+                    analyte_name: item.analyteName,
+                    result: item.result,
+                    finalod: item.finalOd,
+                    ref_bound: item.refRange,
+                    unit: item.unit,
+                    error_type: item.bubbleOccur
+                }));
+
+                setRows(formattedRows);
+            } catch (error) {
+                console.error('Error fetching control data:', error);
+            }
+        };
+
+        fetchControlData();
+    }, [selectedRow]);
 
     const columns = [
         { field: 'id', headerName: `${t('qc_result.detail_dialog.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },

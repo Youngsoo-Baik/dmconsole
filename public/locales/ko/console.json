@@ -350,7 +350,7 @@
             "control_type": "정도관리 타입"
         }
     },
-    "account-list": {
+    "account_list": {
         "header": {
             "title": "회원 목록"
         },
@@ -380,7 +380,10 @@
             "pass_confirm": "비밀번호 확인",
             "pass_confirm_placeholder": "비밀번호를 한번 더 입력해 주세요.",
             "create_done": "등록 완료",
-            "create_done_description": "회원 등록이 완료되었습니다."
+            "create_done_description": "회원 등록이 완료되었습니다.",
+            "invalid_email": "이메일 형식이 올바르지 않습니다.",
+            "invalid_pass": "잘못된 비밀번호 형식입니다. 최소 8자 이상, 최대 20자 이하, 하나 이상의 대문자, 소문자, 숫자 및 특수문자 포함",
+            "invalid_pass_confirm": "비밀번호가 일치하지 않습니다."
         },
         "account_mod_dialog": {
             "title": "회원 정보 수정",

@@ -1,10 +1,15 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Typography, Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { Select, MenuItem, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
+import apiClient from '../../api/apiClient'; // API client import
+import Config from '../../Config'; // apiUrl 추가
+import { getAccessToken } from '../../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -125,15 +130,66 @@ const initialRows = [
     { id: 24, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
 ];
 
-const PanelInfoPanel = () => {
-    const [rows, setRows] = useState(initialRows);
+const PanelInfoPanel = (rowId) => {
+    const [rows, setRows] = useState([]);
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
+    const [serial, setSerial] = useState(''); // serial state 추가
 
-    const handleIconClick = (id) => {
-        alert(`Icon clicked for row with ID: ${id}`); // Perform your custom action here
-    };
+    useEffect(() => {
+        const fetchDeviceInfo = async () => {
+            try {
+                const token = getAccessToken(); // 토큰 가져오기
+                const response = await apiClient.get(`${apiUrl}/console/devices/${rowId.rowId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+    
+                // API로 받은 serial 값을 상태에 저장
+                const { serial: deviceSerial } = response.data;
+                setSerial(deviceSerial);  // serial 상태 업데이트
+            } catch (error) {
+                console.error('Error fetching device info:', error);
+            }
+        };
+    
+        if (rowId) {
+            fetchDeviceInfo();
+        }
+    }, [rowId]); // rowId가 변경될 때마다 실행
+    
+    // 로그 파일 정보 가져오는 API 호출
+    useEffect(() => {
+        const fetchPanelInfo = async () => {
+            try {
+                const token = getAccessToken(); // Assuming you have a function to get the access token
+                const response = await apiClient.get(`${apiUrl}/console/devices/${rowId.rowId}/panel-info`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                
+                // Map the API response to match DataGrid row structure
+                const mappedRows = response.data.content.map((item, index) => ({
+                    id: index + 1,  // Using the index as a unique id
+                    serial: serial,  // API에서 가져온 serial 값 사용
+                    info: item.panelShortName,
+                    version: item.version,
+                    date: item.createdAt
+                }));
+
+                setRows(mappedRows);
+            } catch (error) {
+                console.error('Error fetching panel info:', error);
+            }
+        };
+
+        if (serial) { // serial 값이 있을 때만 로그 파일 정보 가져오기
+            fetchPanelInfo();
+        }
+    }, [rowId, serial]); // serial이 변경될 때마다 로그 파일 정보를 다시 가져옴
 
     const columns = [
         { field: 'id', headerName: `${t('device_list.panel_info_tab.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },

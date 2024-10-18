@@ -1,10 +1,15 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { Select, MenuItem, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
+import apiClient from '../../api/apiClient'; // API client import
+import Config from '../../Config'; // apiUrl 추가
+import { getAccessToken } from '../../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -124,15 +129,44 @@ const initialRows = [
 ];
 
 
-const InstrumentCoefPanel = () => {
-    const [rows, setRows] = useState(initialRows);
+const InstrumentCoefPanel = (rowId) => {
+    const [rows, setRows] = useState([]);
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
 
-    const handleIconClick = (id) => {
-        alert(`Icon clicked for row with ID: ${id}`); // Perform your custom action here
-    };
+    useEffect(() => {
+        const fetchInstFactorsInfo = async () => {
+            try {
+                const token = getAccessToken(); // Assuming you have a function to get the access token
+                const response = await apiClient.get(`${apiUrl}/console/devices/${rowId.rowId}/inst-factors`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                
+                // Map the API response to match DataGrid row structure
+                const mappedRows = response.data.content.map((item, index) => ({
+                    id: index + 1,  // Using the index as a unique id
+                    analyte_name: item.analyteName,  // You can add actual serial if available in API response
+                    analyte_id: item.analyteId,
+                    fullname: item.analyteFullName,
+                    ref_bound: item.refRangeMin + ' ~ ' + item.refRangeMax,
+                    unit: item.unit,
+                    inst_factor_a: item.speciesInstFactorA,
+                    inst_factor_b: item.speciesInstFactorB
+                }));
+
+                setRows(mappedRows);
+            } catch (error) {
+                console.error('Error fetching panel info:', error);
+            }
+        };
+
+        if (rowId) {
+            fetchInstFactorsInfo();
+        }
+    }, [rowId]); // Fetch data when rowId changes
 
     const columns = [
         { field: 'id', headerName: `${t('device_list.instrument_coef_tab.column.no')}`, flex: 0.7, minWidth: 50, headerAlign: 'center', align: 'center' },

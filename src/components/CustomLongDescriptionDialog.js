@@ -2,7 +2,7 @@ import React from 'react';
 import { Dialog, DialogContent, DialogActions, Button, Typography, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-export default function CustomDialog({
+export default function CustomLongDescriptionDialog({
     open,
     handleClose,
     icon,
@@ -24,7 +24,7 @@ export default function CustomDialog({
                     padding: '10px',
                     border: 'solid 1px var(--primary-blue-400)',
                     width: '476px',  // 가로 크기
-                    height: description ? '266px' : '240px',  // description이 없는 경우 높이를 240px로 설정
+                    height: '266px', // 세로 크기
                     boxSizing: 'border-box', // padding이 전체 크기에 영향을 주지 않도록 설정
                 },
             }}
@@ -33,7 +33,7 @@ export default function CustomDialog({
         >
             <DialogContent sx={{ textAlign: 'center' }}>
                 {/* 아이콘 */}
-                <Box display="flex" justifyContent="center" mb='10px'>
+                <Box display="flex" justifyContent="center" mt='-5px' mb='10px'>
                     {icon}
                 </Box>
 
@@ -43,13 +43,13 @@ export default function CustomDialog({
                 </Typography>
 
                 {/* 설명 텍스트 */}
-                <Typography variant="body2" sx={{ fontSize: '16px', color: '#494a50' }}>
+                <Typography variant="body2" sx={{ fontSize: '15px', color: '#494a50', width: '100%', maxWidth: '210px', textAlign: 'center', whiteSpace: 'normal', wordBreak: 'break-word', margin: '0 auto' }}>
                     {description}
                 </Typography>
             </DialogContent>
 
             {/* 버튼 구성 */}
-            <DialogActions sx={{ justifyContent: 'center', mb: '21px' }}>
+            <DialogActions sx={{ justifyContent: 'center', mb: '10px' }}>
                 {showCancelButton ? (
                     <>
                         {/* 취소 버튼 */}
@@ -58,10 +58,10 @@ export default function CustomDialog({
                             sx={{
                                 fontSize: '16px',
                                 fontWeight: '600px',
-                                width: '150px',
+                                width: '160px',
                                 height: '48px',
                                 borderRadius: '10px',
-                                marginRight: '16px',
+                                marginRight: '10px',
                                 color: '#8b8fa8', 
                                 border: 'solid 1px var(--gray-gray-200)'
                             }}
@@ -78,7 +78,7 @@ export default function CustomDialog({
                                 backgroundColor: "var(--primary-blue-500)",
                                 fontSize: '16px',
                                 fontWeight: '600px',
-                                width: '150px',
+                                width: '160px',
                                 height: '48px',
                                 borderRadius: '10px'
                             }}

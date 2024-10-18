@@ -1,10 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Paper, Grid, Typography, Divider, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import apiClient from '../../api/apiClient'; // API client import
+import Config from '../../Config'; // apiUrl 추가
+import { getAccessToken } from '../../utils/token';
 
-const SystemInfoPanel = () => {
+const apiUrl = Config.apiUrl;
+
+const SystemInfoPanel = (rowId) => {
     const { t } = useTranslation('console');
+    const [systemInfo, setSystemInfo] = useState(null);
 
+    console.log(rowId.rowId);
+    useEffect(() => {
+        const fetchSystemInfo = async () => {
+            try {
+                const token = getAccessToken(); // Assuming you have a function to get the access token
+                const response = await apiClient.get(`${apiUrl}/console/devices/${rowId.rowId}/system-info`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setSystemInfo(response.data);
+            } catch (error) {
+                console.error('Error fetching system info:', error);
+            }
+        };
+
+        if (rowId) {
+            fetchSystemInfo();
+        }
+    }, [rowId]);
+
+    if (!systemInfo) {
+        return <Typography>Loading...</Typography>;
+    }
     return (
         <Paper
             sx={{
@@ -40,7 +70,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={5}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>YVKA0-A00001</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.serial}</Typography>
                     </Grid>
                     <Grid item xs={2}>
                         <Typography variant="body2" sx={{ color: '#8b8fa8', fontWeight: 'bold', paddingLeft: '30px' }}>
@@ -48,7 +78,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>34:A3:BF:25:64:AE</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.mac}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Divider sx={{ width: '864px', backgroundColor: '#cbcbcb', marginTop: '10px', marginBottom: '10px' }} />
@@ -61,7 +91,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={5}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>1.00.15.0011</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.sysVersion}</Typography>
                     </Grid>
                     <Grid item xs={2}>
                         <Typography variant="body2" sx={{ color: '#8b8fa8', fontWeight: 'bold', paddingLeft: '30px' }}>
@@ -69,7 +99,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>1.00.00.0001</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.qteVersion}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Divider sx={{ width: '864px', backgroundColor: '#cbcbcb', marginTop: '10px', marginBottom: '10px' }} />
@@ -82,7 +112,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={5}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>1.00.03.0001</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.bootVersion}</Typography>
                     </Grid>
                     <Grid item xs={2}>
                         <Typography variant="body2" sx={{ color: '#8b8fa8', fontWeight: 'bold', paddingLeft: '30px' }}>
@@ -90,7 +120,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>2.08.52.0026</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.appVersion}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Divider sx={{ width: '864px', backgroundColor: '#cbcbcb', marginTop: '10px', marginBottom: '10px' }} />
@@ -103,7 +133,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={5}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>0.00.00.0001</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.kernelVersion}</Typography>
                     </Grid>
                     <Grid item xs={2}>
                         <Typography variant="body2" sx={{ color: '#8b8fa8', fontWeight: 'bold', paddingLeft: '30px' }}>
@@ -111,7 +141,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>0.00.00.0001</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.dspVersion}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Divider sx={{ width: '864px', backgroundColor: '#cbcbcb', marginTop: '10px', marginBottom: '10px' }} />
@@ -124,7 +154,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={5}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>1.00.15.0011</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.rootFsVersion}</Typography>
                     </Grid>
                     <Grid item xs={2}>
                         <Typography variant="body2" sx={{ color: '#8b8fa8', fontWeight: 'bold', paddingLeft: '30px' }}>
@@ -132,7 +162,7 @@ const SystemInfoPanel = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>
-                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>1.06.67.0002</Typography>
+                        <Typography variant="body2" sx={{ color: '#7d7d7d' }}>{systemInfo.xmlVersion}</Typography>
                     </Grid>
                 </Grid>
             </Grid>

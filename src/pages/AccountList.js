@@ -1,14 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
-import { Box, Button, DialogContent, Select, MenuItem, Popover, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
-import Papa from 'papaparse';
-import { useFormik } from 'formik';
+import { Box, Button, Select, MenuItem, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
-import CustomTextField from '../components/CustomTextField';
-import CustomSelect from '../components/CustomSelect';
 import AccountManagementDialog from './AccountManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 import AccountCreateDialog from './AccountCreateDialog';
@@ -129,23 +125,18 @@ const initialRows = [
 
 const AccountList = () => {
     const [rows, setRows] = useState([]);
-    const [openFilterDialog, setOpenFilterDialog] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
-    const fileInputRef = useRef(null);
     const { i18n } = useTranslation();
     const { t } = useTranslation('console');
     const getRowHeight = (params) => 58;
     const [selectionModel, setSelectionModel] = React.useState([]);
-    const [open, setOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
-    // State to track hover
-    const [hovered, setHovered] = useState(false);
+    const [open, setOpen] = useState(false);
     const [openDiag, setOpenDiag] = useState(false);
 
     // API 호출로 데이터를 가져오는 부분
-    useEffect(() => {
+    const fetchUsers = () => {
         apiClient.get(`${apiUrl}/console/users`, {
             headers: {
                 Authorization: `Bearer ${getAccessToken}`, // 토큰 추가
@@ -163,8 +154,8 @@ const AccountList = () => {
                     email: user.email,
                     department: user.department,
                     grade: user.role === 'ADMIN' ? 'A' : 'M', // role에 따라 grade 설정
-                    created_at: new Date().toISOString(),
-                    updated_at: new Date().toISOString(),
+                    // created_at: new Date().toISOString(),
+                    // updated_at: new Date().toISOString(),
                     management: 'manage',
                 }));
                 setRows(fetchedRows);
@@ -172,33 +163,29 @@ const AccountList = () => {
             .catch((error) => {
                 console.error('데이터 가져오기 오류:', error);
             });
+    };
+
+    // 컴포넌트가 마운트될 때 fetchUsers 호출
+    useEffect(() => {
+        fetchUsers();
     }, []);
 
     const handleIconClick = (params) => {
         setSelectedRow(params.row);
-        setOpen(true);  // Open the DeviceManagementDialog
+        setOpen(true);  // Open the AccountManagementDialog
     };
 
     const handleClose = () => {
-        setOpen(false);  // Close the DeviceManagementDialog
-    };
-
-    const handleHeaderCheckboxChange = (event) => {
-        if (event.target.checked) {
-            const allIds = rows.map((row) => row.id); // 대체 코드
-            setSelectionModel(allIds);
-        } else {
-            setSelectionModel([]);
-        }
+        setOpen(false);  // Close the AccountManagementDialog
     };
 
     const columns = [
-        { field: 'id', headerName: `${t('account-list.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
-        { field: 'name', headerName: `${t('account-list.column.name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'email', headerName: `${t('account-list.column.email')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'department', headerName: `${t('account-list.column.department')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'id', headerName: `${t('account_list.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'name', headerName: `${t('account_list.column.name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'email', headerName: `${t('account_list.column.email')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
+        { field: 'department', headerName: `${t('account_list.column.department')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         {
-            field: 'grade', headerName: `${t('account-list.column.grade')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center',
+            field: 'grade', headerName: `${t('account_list.column.grade')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center',
             renderCell: (params) => (
                 // <IconButton>
                 <img
@@ -209,10 +196,10 @@ const AccountList = () => {
                 // </IconButton>
             ),
         },
-        { field: 'created_at', headerName: `${t('account-list.column.created_at')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'updated_at', headerName: `${t('account-list.column.updated_at')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        // { field: 'created_at', headerName: `${t('account_list.column.created_at')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
+        // { field: 'updated_at', headerName: `${t('account_list.column.updated_at')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         {
-            field: 'management', headerName: `${t('account-list.column.management')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center',
+            field: 'management', headerName: `${t('account_list.column.management')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center',
             sortable: false,
             renderCell: (params) => (
                 <IconButton
@@ -230,85 +217,15 @@ const AccountList = () => {
         },
     ];
 
-    const formik = useFormik({
-        initialValues: {
-            deviceSN: '',
-            country: '',
-            region: '',
-            reseller: '',
-            manager: '',
-        },
-        onSubmit: (values) => {
-            console.log(values);
-        },
-    });
-
     const handleCreateAccount = () => {
+        console.log('Create Account');
         setOpenDiag(true);
     };
 
     const handleDiagClose = () => {
         setOpenDiag(false);
+        fetchUsers(); // 리스트를 새로 고침
     }
-
-    const handleImport = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            Papa.parse(file, {
-                header: true,
-                dynamicTyping: true,
-                complete: (results) => {
-                    const parsedRows = results.data.map((row, index) => ({
-                        id: row.ID || index,
-                        name: row.Name || row.name,
-                        status: row.Status || row.status,
-                    }));
-                    setRows(parsedRows);
-                },
-            });
-        }
-    };
-
-    const handleClickFilterButton = (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpenFilterDialog(!openFilterDialog);
-    };
-
-    const handleCloseFilterDialog = () => {
-        setOpenFilterDialog(false);
-        setAnchorEl(null);
-    };
-
-    function renderConnection(params) {
-        console.log(params);
-        return (
-            <Box sx={{ textAlign: 'center', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {params.value ? <img src="online.png" alt="online" /> : <img src="offline.png" alt="offline" />}
-            </Box>
-        );
-    }
-
-    //menuItems for country
-    const menuItems = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-
-    //menuItems for region
-    const menuItems02 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-    //menuItems for reseller
-    const menuItems03 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
-    //menuItems for manager
-    const menuItems04 = [
-        { value: "USA", label: "미국" },
-        { value: "KOR", label: "대한민국" },
-    ];
 
     const getLocaleText = () => {
         return i18n.language === 'ko' ? koKR : {};
@@ -318,7 +235,7 @@ const AccountList = () => {
         <Box sx={{ width: '1592px', minWidth: 1024 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h2" sx={{ fontSize: '32px', color: '#002a70', fontWeight: 'bold', mt: '20px' }}>
-                    {t('account-list.header.title')}
+                    {t('account_list.header.title')}
                 </Typography>
             </Box>
             <Box sx={{ display: 'flex', width: '1524px' }}>
@@ -349,7 +266,8 @@ const AccountList = () => {
                         {/* AccountCreateDialog Component */}
                         <AccountCreateDialog
                             open={openDiag}
-                            onClose={handleDiagClose}
+                            handleClose={handleDiagClose}
+                            onSuccess={fetchUsers} // 성공 시 리스트 갱신
                         />
                     </Box>
                 </Box>
@@ -425,153 +343,10 @@ const AccountList = () => {
                 {/* DeviceManagementDialog Component */}
                 <AccountManagementDialog
                     open={open}
-                    onClose={handleClose}
+                    handleClose={handleClose}
                     selectedRow={selectedRow} // Pass the selected row to the dialog for context
                 />
             </Box>
-            <Popover
-                open={openFilterDialog}
-                anchorEl={anchorEl}
-                onClose={handleCloseFilterDialog}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                PaperProps={{
-                    style: {
-                        width: 600,
-                        height: 429,
-                        borderRadius: '8px',
-                        border: '1px solid #80befc',
-                    },
-                }}
-            >
-                <DialogContent>
-                    <form onSubmit={formik.handleSubmit}>
-                        <Box sx={{ mt: '10px', ml: '21px', display: 'flex', flexDirection: 'column', gap: 2 }}>
-                            <Box sx={{ display: 'flex', gap: '24px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.serial')}</Typography>
-                                    <CustomTextField
-                                        id="deviceSN"
-                                        name="deviceSN"
-                                        placeholder={t('device_list.filter_search.serial_placeholder')}
-                                        // description="This will be device serial number"
-                                        error={false}
-                                        disabled={false}
-                                        value={formik.values.deviceSN}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        // error={formik.touched.myTextField && Boolean(formik.errors.myTextField)}
-                                        // helperText={formik.touched.myTextField && formik.errors.myTextField}
-                                        active={true}
-                                        size="medium"
-                                        width="268px"   // 가로 크기 지정
-                                        height="48px"   // 세로 크기 지정
-                                    />
-                                </Box>
-                            </Box>
-                            <Box sx={{ display: 'flex', gap: '24px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.country')}</Typography>
-                                    <CustomSelect
-                                        id="country"
-                                        name="country"
-                                        value={formik.values.country}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems}
-                                        placeholder={t('device_list.filter_search.country_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.region')}</Typography>
-                                    <CustomSelect
-                                        id="region"
-                                        name="region"
-                                        value={formik.values.region}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems02}
-                                        placeholder={t('device_list.filter_search.region_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                            </Box>
-
-                            <Box sx={{ display: 'flex', gap: '24px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.reseller')}</Typography>
-                                    <CustomSelect
-                                        id="reseller"
-                                        name="reseller"
-                                        value={formik.values.reseller}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems03}
-                                        placeholder={t('device_list.filter_search.reseller_placeholder')}
-                                        // description="Select a language"
-                                        width="322px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="303px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography sx={{ color: '#002a70' }}>{t('device_list.filter_search.manager')}</Typography>
-                                    <CustomSelect
-                                        id="manager"
-                                        name="manager"
-                                        value={formik.values.manager}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        menuItems={menuItems04}
-                                        placeholder={t('device_list.filter_search.manager_placeholder')}
-                                        // description="Select a language"
-                                        width="171px"   // Custom width
-                                        height="48px"   // Custom height
-                                        // fontSize="18px" // Custom font size
-                                        itemWidth="151px"  // Custom Menu Item width
-                                        itemHeight="42px"  // Custom Menu Item height
-                                    />
-                                </Box>
-                            </Box>
-                            <Box sx={{ mt: '46px', display: 'flex', justifyContent: 'center', gap: '28px' }}>
-                                <Button
-                                    onClick={handleCloseFilterDialog}
-                                    variant="outlined"
-                                    sx={{ fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
-                                >
-                                    {t('button.cancel')}
-                                </Button>
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    sx={{ backgroundColor: "#007dfa", fontSize: '16px', width: '160px', height: '48px', borderRadius: '10px' }}
-                                >
-                                    {t('button.search')}
-                                </Button>
-                            </Box>
-                        </Box>
-                    </form>
-                </DialogContent>
-            </Popover>
         </Box>
     );
 };

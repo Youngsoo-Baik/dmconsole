@@ -179,6 +179,7 @@ const QCResults = () => {
         }).then(response => {
             const fetchedRows = response.data.content.map(item => ({
                 id: item.id,
+                // id: item.order,
                 model: item.prodName,
                 serial: item.serial,
                 analysis_time: item.date,

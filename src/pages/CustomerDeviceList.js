@@ -114,7 +114,6 @@ const CustomerDeviceList = () => {
     const { t } = useTranslation('console');
     const getRowHeight = (params) => 58;
     const [open, setOpen] = useState(false);
-    const [currentRow, setCurrentRow] = useState(null);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [loading, setLoading] = useState(true);

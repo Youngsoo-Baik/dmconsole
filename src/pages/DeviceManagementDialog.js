@@ -7,7 +7,7 @@ import PanelInfoPanel from './DeviceInfo/PanelInfoPanel';
 import UpdateHistoryPanel from './DeviceInfo/UpdateHistoryPanel';
 import InstrumentCoefPanel from './DeviceInfo/InstrumentCoefPanel';
 
-export default function DeviceManagementDialog({ open, onClose, selectedRow }) {
+export default function DeviceManagementDialog({ open, onClose, rowId }) {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -59,7 +59,7 @@ export default function DeviceManagementDialog({ open, onClose, selectedRow }) {
                         position: 'absolute', // Ensure it's positioned relative to the dialog
                         top: '56px',
                         left: '37px',
-                        
+
                         '& .MuiTabs-indicator': {
                             border: 'none', // Remove the indicator border
                             backgroundColor: '#007dfa', // Change the color of the indicator
@@ -145,11 +145,11 @@ export default function DeviceManagementDialog({ open, onClose, selectedRow }) {
                 </Tabs>
                 {/* Conditionally render each TabPanel */}
                 <Box sx={{ paddingTop: '116px', paddingLeft: '5px', paddingRight: '5px' }}>
-                    {value === 0 && <SystemInfoPanel />}
-                    {value === 1 && <LogFilePanel />}
-                    {value === 2 && <PanelInfoPanel />}
-                    {value === 3 && <UpdateHistoryPanel />}
-                    {value === 4 && <InstrumentCoefPanel />}
+                    {value === 0 && <SystemInfoPanel rowId={rowId} />}
+                    {value === 1 && <LogFilePanel rowId={rowId} />}
+                    {value === 2 && <PanelInfoPanel rowId={rowId} />}
+                    {value === 3 && <UpdateHistoryPanel rowId={rowId} />}
+                    {value === 4 && <InstrumentCoefPanel rowId={rowId} />}
                 </Box>
             </DialogContent>
         </Dialog>

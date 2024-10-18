@@ -145,7 +145,8 @@ const DeviceList = () => {
     const getRowHeight = (params) => 58;
     const [selectionModel, setSelectionModel] = React.useState([]);
     const [open, setOpen] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(null);
+    //const [selectedRow, setSelectedRow] = useState(null);
+    const [selectedRowId, setSelectedRowId] = useState(null);
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
     // State to track hover
     const [hovered, setHovered] = useState(false);
@@ -293,10 +294,14 @@ const DeviceList = () => {
         fetchResellers();
         fetchManagers();
         fetchAreas();
+        // data fetch 후 state 변경
+        //setLoading(false);
     }, []);
 
-    const handleIconClick = (params) => {
-        setSelectedRow(params.row);
+    const handleIconClick = (rowId) => {
+        setSelectedRowId(rowId);
+        console.log("Debugging Debugging");
+        console.log(rowId);
         setOpen(true);  // Open the DeviceManagementDialog
     };
 
@@ -318,7 +323,7 @@ const DeviceList = () => {
             sortable: false,
             renderCell: (params) => (
                 <IconButton
-                    onClick={() => handleIconClick(params)}
+                    onClick={() => handleIconClick(params.id)}
                     onMouseEnter={() => setHoveredRow(params.id)} // Set hovered row
                     onMouseLeave={() => setHoveredRow(null)} // Remove hovered row
                 >
@@ -391,10 +396,6 @@ const DeviceList = () => {
             console.log(values.country);
             return (
                 (!values.deviceSN || row.serial.includes(values.deviceSN)) &&
-                // (!values.country || row.country === values.country) &&
-                // (!values.region || row.region === values.region) &&
-                // (!values.reseller || row.reseller === values.reseller) &&
-                // (!values.manager || row.manager === values.manager)
                 (!values.country || row.country === countryMenuItems.find((item) => item.value === values.country)?.label) &&
                 (!values.region || row.region === areaMenuItems.find((item) => item.value === values.region)?.label) &&
                 (!values.reseller || row.reseller === resellerMenuItems.find((item) => item.value === values.reseller)?.label) &&
@@ -546,7 +547,7 @@ const DeviceList = () => {
                     loading={loading} // Add loading prop here
                     slots={{
                         footer: CustomFooter,
-                        noRowsOverlay: () => (
+                        noRowsOverlay: (loading) ? null : () => ( // Conditionally hide noRowsOverlay during loading
                             <NoRowsOverlay>
                                 <img src="nodata.png" alt="No data" />
                                 {/* <Typography>No data available</Typography> */}
@@ -612,7 +613,8 @@ const DeviceList = () => {
                 <DeviceManagementDialog
                     open={open}
                     onClose={handleClose}
-                    selectedRow={selectedRow} // Pass the selected row to the dialog for context
+                    //selectedRow={selectedRow} // Pass the selected row to the dialog for context
+                    rowId={selectedRowId}
                 />
             </Box>
             <Popover

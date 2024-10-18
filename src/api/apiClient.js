@@ -29,27 +29,46 @@ apiClient.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // Access Token 만료 오류 처리 (401 Unauthorized)
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true; // 중복 요청 방지
+    try {
+      // Access Token 만료 오류 처리 (401 Unauthorized)
+      if (error.response && error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true; // 중복 요청 방지
 
-      try {
-        // Refresh Token으로 새로운 Access Token 요청
-        const newAccessToken = await refreshToken();
+        try {
+          // Refresh Token으로 새로운 Access Token 요청
+          const newAccessToken = await refreshToken();
 
-        // 새로운 Access Token 저장
-        setAccessToken(newAccessToken);
+          // 새로운 Access Token 저장
+          setAccessToken(newAccessToken);
 
-        // 원래 요청에 새로운 Access Token을 추가해서 재시도
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        return apiClient(originalRequest);
-      } catch (err) {
-        // Refresh Token도 만료된 경우: 로그아웃 처리 등 추가 작업
-        console.error('토큰 갱신 실패:', err);
-        return Promise.reject(err);
+          // 원래 요청에 새로운 Access Token을 추가해서 재시도
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+          return apiClient(originalRequest);
+        } catch (err) {
+          // Refresh Token도 만료된 경우: 로그아웃 처리 등 추가 작업
+          console.error('토큰 갱신 실패:', err);
+          return Promise.reject(err);
+        }
       }
-    }
 
+      console.log(`Error ${error.response.status}: ${error.response.data.message || 'An error occurred'}`);
+
+      // 400 Bad Request 처리
+      if (error.response && error.response.status === 400) {
+        alert(`Error 400: ${error.response.data?.message || 'Bad Request. Please check your input.'}`);
+      }
+
+      // 에러 메시지와 상태 코드를 alert 창으로 표시
+      // if (error.response) {
+      //   alert(`Error ${error.response.status}: ${error.response.data.message || 'An error occurred'}`);
+      // } else {
+      //   alert('Network error. Please check your internet connection.');
+      // }
+    } catch (runtimeError) {
+      // 런타임 에러 처리
+      console.error('Runtime Error:', runtimeError);
+      //alert('An unexpected error occurred. Please try again later.');
+    }
     return Promise.reject(error);
   }
 );

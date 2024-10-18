@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Box, Grid, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
 import '../styles/colors.css';
-
-// 샘플 데이터 (이 데이터를 rowId로 가져왔다고 가정)
-const rowData = {
-    900: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true },
-    901: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: false },
-    902: { country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', model: 'Fluoro Check Heating Block', customer: 'hardtack@nave.com', serial: '2024.12.12', production_date: '2024.12.12', connection_state: true }
-};
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+const apiUrl = Config.apiUrl;
 
 const CustomDivider = styled(Divider)(({ theme }) => ({
     width: '0.5px',
@@ -21,9 +18,41 @@ const CustomDivider = styled(Divider)(({ theme }) => ({
 
 export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
     const { t } = useTranslation('console');
-    const data = rowData[rowId];
-    console.log(rowId);
-    console.log(data);
+    const [diagData, setDiagData] = useState(null); // 상태(state)로 응답 데이터를 관리
+    const [loading, setLoading] = useState(true); // 로딩 상태 추가
+
+    useEffect(() => {
+        if (rowId && open) {
+            // API 호출
+            const fetchData = async () => {
+                try {
+                    const response = await apiClient.get(`/console/self-tests/${rowId}`);
+                    setDiagData(response.data); // 응답 데이터를 상태에 저장
+                    setLoading(false); // 로딩 완료
+                } catch (error) {
+                    console.error('API 호출 실패:', error);
+                    setLoading(false); // 에러 발생 시에도 로딩 완료로 설정
+                }
+            };
+
+            fetchData();
+        }
+    }, [rowId, open]);
+
+    if (loading) {
+        return <Typography>{t('loading')}</Typography>; // 로딩 중 메시지
+    }
+
+    if (!diagData) {
+        return null; // 데이터가 없는 경우 null 반환
+    }
+
+    // 개별 모듈의 결과 찾기
+    const findResultForModule = (moduleName) => {
+        const module = diagData.selfTestResult.find((m) => m.module === moduleName);
+        return module ? module.result : null;
+    };
+
     return (
         <Dialog open={open} onClose={onClose} PaperProps={{
             sx: {
@@ -53,7 +82,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                                 {t('self_diag.detail_dialog.model')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                Fluoro Check ™ Heating Block
+                                {diagData.prodName}
                             </Typography>
                         </Grid>
 
@@ -66,7 +95,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                                 {t('self_diag.detail_dialog.serial')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                YVKA0-A00001
+                                {diagData.serial}
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
@@ -74,7 +103,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                                 {t('self_diag.detail_dialog.diag_time')}
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
-                                2023-10-30 18:10:17
+                                {diagData.date}
                             </Typography>
                         </Grid>
 
@@ -89,7 +118,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 ON
                             </Typography> */}
-                            <img src="/icon-pass.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('Power') ? "/icon-pass.png" : "/icon-fail.png"} alt="Power Result" width="60px" height="25px" />
                         </Grid>
                         <Grid item xs={1}>
                             <Divider orientation="vertical" />
@@ -101,7 +130,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 ON
                             </Typography> */}
-                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('PlungerMotor') ? "/icon-pass.png" : "/icon-fail.png"} alt="Plunger Motor Result" width="60px" height="25px" />
                         </Grid>
                         <Grid item xs={1}>
                             <Divider orientation="vertical" />
@@ -113,7 +142,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 ON
                             </Typography> */}
-                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('CameraBLU') ? "/icon-pass.png" : "/icon-fail.png"} alt="Camera BLU Result" width="60px" height="25px" />
                         </Grid>
                         <Grid item xs={1}>
                             <Divider orientation="vertical" />
@@ -125,7 +154,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 ON
                             </Typography> */}
-                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('TempIC') ? "/icon-pass.png" : "/icon-fail.png"} alt="Temp IC Result" width="60px" height="25px" />
                         </Grid>
 
                         <Grid item xs={12}>
@@ -139,7 +168,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 OFF
                             </Typography> */}
-                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('DetectorLED') ? "/icon-pass.png" : "/icon-fail.png"} alt="Detector Motor Result" width="60px" height="25px" />
                         </Grid>
                         <Grid item xs={1}>
                             <Divider orientation="vertical" />
@@ -151,7 +180,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 OFF
                             </Typography> */}
-                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('Heater1') ? "/icon-pass.png" : "/icon-fail.png"} alt="Detector LED Result" width="60px" height="25px" />
                         </Grid>
                         <Grid item xs={1}>
                             <Divider orientation="vertical" />
@@ -163,7 +192,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 OFF
                             </Typography> */}
-                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('Print') ? "/icon-pass.png" : "/icon-fail.png"} alt="Detector LED Result" width="60px" height="25px" />
                         </Grid>
                         <Grid item xs={1}>
                             <Divider orientation="vertical" />
@@ -175,7 +204,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 OFF
                             </Typography> */}
-                            <img src="/icon-fail.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('Barcode') ? "/icon-pass.png" : "/icon-fail.png"} alt="Detector LED Result" width="60px" height="25px" />
                         </Grid>
 
                         <Grid item xs={12}>
@@ -189,7 +218,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 ON
                             </Typography> */}
-                            <img src="/icon-pass.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('CatridgeSensor') ? "/icon-pass.png" : "/icon-fail.png"} alt="Detector LED Result" width="60px" height="25px" />
                         </Grid>
                         <Grid item xs={1}>
                             <Divider orientation="vertical" />
@@ -201,7 +230,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 OFF
                             </Typography> */}
-                            <img src="/icon-pass.png"   width="60px" height="25px"></img>
+                            <img src={findResultForModule('EQC') ? "/icon-pass.png" : "/icon-fail.png"} alt="Detector LED Result" width="60px" height="25px" />
                         </Grid>
                     </Grid>
                 </Box>
