@@ -168,8 +168,6 @@ const QCMaterial = () => {
                 Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
             },
             params: {
-                page: 1,
-                size: 1000,
                 sort: [
                     'createdAt,desc',
                     'serial,asc',
@@ -187,6 +185,7 @@ const QCMaterial = () => {
             .then((response) => {
                 const fetchedRows = response.data.content.map((item) => ({
                     id: item.id,
+                    order: item.order,
                     model: item.prodName,
                     serial: item.serial,
                     qc_material: item.qcName,
@@ -226,7 +225,7 @@ const QCMaterial = () => {
     };
 
     const columns = [
-        { field: 'id', headerName: `${t('qc_material.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'order', headerName: `${t('qc_material.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'model', headerName: `${t('qc_material.column.model')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('qc_material.column.serial')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'qc_material', headerName: `${t('qc_material.column.qc_material')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },

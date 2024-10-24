@@ -16,6 +16,7 @@ import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDe
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const apiUrl = Config.apiUrl;
 
@@ -166,8 +167,6 @@ const DeviceList = () => {
                         Authorization: `Bearer ${getAccessToken}`,
                     },
                     params: {
-                        page: 1,
-                        size: 10000,
                         sort: [
                             "createdAt,desc",
                             "serial,asc",
@@ -186,6 +185,7 @@ const DeviceList = () => {
                 // API 데이터 매핑
                 const mappedRows = data.map((device) => ({
                     id: device.id,
+                    order: device.order,
                     country: device.country,
                     region: device.area,
                     reseller: device.reseller,
@@ -193,19 +193,21 @@ const DeviceList = () => {
                     serial: device.serial,
                     reg_date: device.registeredAt,
                     connection_state: device.isConnect,
-                    management: '관리',
+                    // management: 'management',
                 }));
 
                 setRows(mappedRows);
                 setOriginalRows(mappedRows); // 초기 데이터 저장
+                // data fetch 후 state 변경
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching devices:', error);
+                setLoading(false);  // 에러 발생 시에도 loading을 false로 설정
             }
         };
 
         fetchData();
-        // data fetch 후 state 변경
-        setLoading(false);
+
     }, []);
 
     useEffect(() => {
@@ -310,7 +312,7 @@ const DeviceList = () => {
     };
 
     const columns = [
-        { field: 'id', headerName: `${t('device_list.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'order', headerName: `${t('device_list.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'country', headerName: `${t('device_list.column.country')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'region', headerName: `${t('device_list.column.region')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'reseller', headerName: `${t('device_list.column.reseller')}`, flex: 2.5, minWidth: 100, headerAlign: 'center', align: 'center' },
@@ -378,6 +380,7 @@ const DeviceList = () => {
     const handleViewAll = () => {
         setRows(originalRows); // 원본 데이터를 rows에 설정하여 전체 데이터 표시
         setFilteredRows([]); // 필터링된 데이터 초기화
+        formik.resetForm(); // 필터 검색 폼의 입력값과 선택값 초기화
     };
 
     // 'Filter Search' 버튼 클릭 시 필터링된 데이터 적용
@@ -385,8 +388,16 @@ const DeviceList = () => {
         setAnchorEl(event.currentTarget);
         setOpenFilterDialog(!openFilterDialog);
 
-        // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용, 없으면 원본 데이터 사용
-        const baseRows = filteredRows.length > 0 ? filteredRows : originalRows;
+        // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용하지 않고 항상 originalRows 사용
+        const baseRows = originalRows;
+
+        // 모든 필드가 비어있으면 전체 데이터를 보여줌
+        const hasFilter = values.deviceSN || values.country || values.region || values.reseller || values.manager;
+        if (!hasFilter) {
+            setRows(originalRows); // 필터 값이 없으면 전체 데이터를 rows에 설정
+            setFilteredRows([]); // 필터링된 데이터 초기화
+            return;
+        }
 
         console.log(values);
         // const filteredRows = originalRows.filter((row) => {
@@ -413,10 +424,10 @@ const DeviceList = () => {
         fileInputRef.current.click();
     };
 
-    const handleClickFilterButton = (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpenFilterDialog(!openFilterDialog);
-    };
+    // const handleClickFilterButton = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    //     setOpenFilterDialog(!openFilterDialog);
+    // };
 
     const handleCloseFilterDialog = () => {
         setOpenFilterDialog(false);
@@ -464,7 +475,15 @@ const DeviceList = () => {
                             {t('button.view_all')}
                         </Button>
                         <Button
-                            onClick={handleFilterSearch}
+                            onClick={(event) => {
+                                setAnchorEl(event.currentTarget); // 필터 검색 버튼을 anchorEl로 설정
+                                if (filteredRows.length > 0) {
+                                    setRows(filteredRows); // 검색 버튼을 누르면 필터링된 데이터로 보여지는 데이터를 변경
+                                } else {
+                                    setRows(originalRows); // 필터링된 데이터가 없으면 전체 데이터를 보여줌
+                                }
+                                setOpenFilterDialog(!openFilterDialog); // 필터 다이얼로그 열기/닫기 토글
+                            }}
                             style={{
                                 fontSize: '16px',
                                 width: '211px',
@@ -534,81 +553,87 @@ const DeviceList = () => {
                 </Box>
             </Box>
             <Box sx={{ width: '1524px', height: '756px', mt: 0 }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    apiRef={apiRef}
-                    getRowId={(row) => row.id}
-                    rowsPerPageOptions={[5, 10, 20, 50, 100]}
-                    getRowHeight={getRowHeight}
-                    headerHeight={48}
-                    localeText={getLocaleText()} // Use the localeText based on the current locale
-                    loading={loading} // Add loading prop here
-                    slots={{
-                        footer: CustomFooter,
-                        noRowsOverlay: (loading) ? null : () => ( // Conditionally hide noRowsOverlay during loading
-                            <NoRowsOverlay>
-                                <img src="nodata.png" alt="No data" />
-                                {/* <Typography>No data available</Typography> */}
-                            </NoRowsOverlay>
-                        ),
-                        columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
-                        columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
-                    }}
-                    initialState={{
-                        pagination: { paginationModel: { pageSize: 10 } },
-                    }}
-                    // checkboxSelection
-                    disableSelectionOnClick
-                    selectionModel={selectionModel}
-                    onSelectionModelChange={(newSelection) => {
-                        setSelectionModel(newSelection);
-                    }}
-                    sx={{
-                        // '& .MuiDataGrid-columnHeader--sorted': {
-                        //     backgroundColor: 'transparent', // 정렬된 컬럼의 배경색 제거 (하이라이트 제거)
-                        //   },
-                        //   '& .MuiDataGrid-columnHeader:focus-within': {
-                        //     backgroundColor: 'transparent', // 포커스된 상태의 하이라이트 제거
-                        //   },
-                        '& .MuiDataGrid-columnHeaders div[role="row"]': {
-                            backgroundColor: '#F5F5F7',
-                        },
-                        '& .MuiDataGrid-columnHeaderTitle': {
-                            textAlign: 'center',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            width: '100%',
-                            fontSize: '14px',
-                            fontWeight: '800',
-                            color: '#7d7d7d',
-                        },
-                        '& .MuiDataGrid-cell': {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            fontSize: '16px',
-                            color: '#494949',
-                            height: '58px',
+                {loading ? (
+                    // 로딩 중일 때 프로그레시브 이미지 표시
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={10}
+                        apiRef={apiRef}
+                        getRowId={(row) => row.id}
+                        rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                        getRowHeight={getRowHeight}
+                        headerHeight={48}
+                        localeText={getLocaleText()} // Use the localeText based on the current locale
+                        loading={loading} // Add loading prop here
+                        slots={{
+                            footer: CustomFooter,
+                            noRowsOverlay: (loading) ? null : () => ( // Conditionally hide noRowsOverlay during loading
+                                <NoRowsOverlay>
+                                    <img src="nodata.png" alt="No data" />
+                                    {/* <Typography>No data available</Typography> */}
+                                </NoRowsOverlay>
+                            ),
+                            columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                            columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
+                        }}
+                        initialState={{
+                            pagination: { paginationModel: { pageSize: 10 } },
+                        }}
+                        // checkboxSelection
+                        disableSelectionOnClick
+                        selectionModel={selectionModel}
+                        onSelectionModelChange={(newSelection) => {
+                            setSelectionModel(newSelection);
+                        }}
+                        sx={{
+                            // '& .MuiDataGrid-columnHeader--sorted': {
+                            //     backgroundColor: 'transparent', // 정렬된 컬럼의 배경색 제거 (하이라이트 제거)
+                            //   },
+                            //   '& .MuiDataGrid-columnHeader:focus-within': {
+                            //     backgroundColor: 'transparent', // 포커스된 상태의 하이라이트 제거
+                            //   },
+                            '& .MuiDataGrid-columnHeaders div[role="row"]': {
+                                backgroundColor: '#F5F5F7',
+                            },
+                            '& .MuiDataGrid-columnHeaderTitle': {
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                width: '100%',
+                                fontSize: '14px',
+                                fontWeight: '800',
+                                color: '#7d7d7d',
+                            },
+                            '& .MuiDataGrid-cell': {
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                fontSize: '16px',
+                                color: '#494949',
+                                height: '58px',
+                                backgroundColor: '#ffffff',
+                            },
+                            '& .MuiDataGrid-cellContent': {
+                                width: '100%',
+                            },
+                            '& .MuiDataGrid-footerContainer': {
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '50px',
+                                backgroundColor: '#ffffff',
+                            },
+                            borderBottomLeftRadius: '14px',  // 왼쪽 아래 모서리 라운드 적용
+                            borderBottomRightRadius: '14px', // 오른쪽 아래 모서리 라운드 적용
+                            overflow: 'hidden',
                             backgroundColor: '#ffffff',
-                        },
-                        '& .MuiDataGrid-cellContent': {
-                            width: '100%',
-                        },
-                        '& .MuiDataGrid-footerContainer': {
-                            display: 'flex',
-                            justifyContent: 'center',
-                            marginTop: '50px',
-                            backgroundColor: '#ffffff',
-                        },
-                        borderBottomLeftRadius: '14px',  // 왼쪽 아래 모서리 라운드 적용
-                        borderBottomRightRadius: '14px', // 오른쪽 아래 모서리 라운드 적용
-                        overflow: 'hidden',
-                        backgroundColor: '#ffffff',
-                    }}
-                />
+                        }}
+                    />)}
                 {/* DeviceManagementDialog Component */}
                 <DeviceManagementDialog
                     open={open}
@@ -620,7 +645,10 @@ const DeviceList = () => {
             <Popover
                 open={openFilterDialog}
                 anchorEl={anchorEl}
-                onClose={handleCloseFilterDialog}
+                onClose={() => {
+                    setOpenFilterDialog(false); // 팝업 닫기
+                    setAnchorEl(null); // anchorEl을 초기화하여 위치 문제 해결
+                }}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',

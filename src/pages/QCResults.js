@@ -164,8 +164,6 @@ const QCResults = () => {
                 Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
             },
             params: {
-                page: 1,
-                size: 100,
                 sort: [
                     "date,desc",
                     "prodName,asc",
@@ -179,7 +177,7 @@ const QCResults = () => {
         }).then(response => {
             const fetchedRows = response.data.content.map(item => ({
                 id: item.id,
-                // id: item.order,
+                order: item.order,
                 model: item.prodName,
                 serial: item.serial,
                 analysis_time: item.date,
@@ -242,7 +240,7 @@ const QCResults = () => {
     };
 
     const columns = [
-        { field: 'id', headerName: `${t('qc_result.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'order', headerName: `${t('qc_result.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'model', headerName: `${t('qc_result.column.model')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('qc_result.column.serial')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'analysis_time', headerName: `${t('qc_result.column.analysis_time')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },

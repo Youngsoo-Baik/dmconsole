@@ -179,8 +179,6 @@ const CustomerDeviceList = () => {
                             Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
                         },
                         params: {
-                            page: 1,
-                            size: 200,
                             sort: [
                                 "createdAt,desc",
                                 "serial,asc",

@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Box } from '@mui/material';
-import Sidebar from './components/Sidebar01';
-import DeviceTable from './components/DeviceTable02';
-import Header from './components/Header';
 import Login from './pages/Login';
 import MainLayout from './components/MainLayout';
 import i18n from './i18n';
 import CustomerDeviceList from './pages/CustomerDeviceList';
-// import DeviceList from './pages/DeviceList';
-// import DeviceList from './components/DeviceTable02';
 import DeviceList from './pages/DeviceList';
 import AnalysisResults from './pages/AnalysisResults';
 import QCResults from './pages/QCResults';

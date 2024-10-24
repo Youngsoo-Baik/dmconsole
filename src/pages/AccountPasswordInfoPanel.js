@@ -37,6 +37,7 @@ const AccountPasswordInfoPanel = ({ open, handleClose, selectedRow }) => {
             }
         } catch (error) {
             console.error('Error resetting password:', error);
+            alert(`Error: ${error.response?.data?.message || 'Password reset failed. Please try again later.'}`);
         }
     };
 
@@ -199,6 +200,12 @@ const AccountPasswordInfoPanel = ({ open, handleClose, selectedRow }) => {
                             variant="contained"
                             sx={{ backgroundColor: "#007dfa", fontSize: '18px', fontWeight: '600px', width: '230px', height: '48px', borderRadius: '10px' }}
                             onClick={() => setChangeDialogOpen(true)}  // 변경 버튼 클릭 시 다이얼로그 열기
+                            disabled={
+                                !formik.values.new_pass || // 신규 비밀번호가 없거나
+                                !formik.values.confirm_pass || // 비밀번호 확인이 없거나
+                                formik.values.new_pass !== formik.values.confirm_pass || // 비밀번호가 서로 다르거나
+                                !isPasswordValid(formik.values.new_pass) // 비밀번호가 유효하지 않으면 비활성화
+                            }
                         >
                             {t('button.change')}
                         </Button>
@@ -231,7 +238,11 @@ const AccountPasswordInfoPanel = ({ open, handleClose, selectedRow }) => {
                         {/* CustomDialog 컴포넌트 : 변경완료 */}
                         <CustomDialog
                             open={changeDoneDialogOpen}
-                            handleClose={() => setChangeDoneDialogOpen(false)}
+                            handleClose={() => {
+                                setChangeDoneDialogOpen(false); // 변경완료 다이얼로그 닫기
+                                setChangeDialogOpen(false); // 비밀번호 변경을 묻는 다이얼로그 닫기
+                                handleClose(); // 상위 다이얼로그 닫기
+                            }}
                             icon={
                                 <Box
                                     sx={{

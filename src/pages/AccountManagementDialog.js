@@ -5,14 +5,19 @@ import AccountMemberInfoPanel from './AccountMemberInfoPanel';
 import AccountPasswordInfoPanel from './AccountPasswordInfoPanel';
 
 
-export default function AccountManagementDialog({ open, handleClose, selectedRow }) {
+export default function AccountManagementDialog({ open, handleClose, selectedRow, onListRefresh }) {
     const [value, setValue] = useState(0);
+    const { t } = useTranslation('console');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const { t } = useTranslation('console');
 
+    const handleDeleteSuccess = () => {
+        onListRefresh();  // 리스트를 갱신하는 콜백 호출
+        handleClose();  // 다이얼로그 닫기
+    };
+    
     return (
         <Dialog
             open={open}
@@ -52,7 +57,7 @@ export default function AccountManagementDialog({ open, handleClose, selectedRow
                 </IconButton>
             </DialogTitle>
             <DialogContent>
-                <Tabs value={value} onChange={handleChange} variant="scrollable" centered
+                <Tabs value={value} onChange={handleChange} centered
                     sx={{
                         position: 'absolute', // Ensure it's positioned relative to the dialog
                         top: '56px',
@@ -98,9 +103,14 @@ export default function AccountManagementDialog({ open, handleClose, selectedRow
                 </Tabs>
                 {/* Conditionally render each TabPanel */}
                 <Box sx={{ paddingTop: '136px', paddingLeft: '5px', paddingRight: '5px' }}>
-                    {/* {value === 0 && <AccountMemberInfoPanel />}
-                    {value === 1 && <AccountPasswordInfoPanel />} */}
-                    {value === 0 && <AccountMemberInfoPanel open={open} handleClose={handleClose} selectedRow={selectedRow} />}
+                    {value === 0 && (
+                        <AccountMemberInfoPanel
+                            open={open}
+                            handleClose={handleClose}
+                            selectedRow={selectedRow}
+                            onDeleteSuccess={handleDeleteSuccess} // onDeleteSuccess 추가
+                        />
+                    )}
                     {value === 1 && <AccountPasswordInfoPanel open={open} handleClose={handleClose} selectedRow={selectedRow} />}
                 </Box>
             </DialogContent>

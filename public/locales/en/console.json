@@ -380,9 +380,9 @@
 	    "pass_confirm_placeholder": "Please re-enter your password.",
 	    "create_done": "Registration Complete",
 	    "create_done_description": "The member registration has been successfully completed.",
-        "invalid_email": "The email format is invalid.",
-        "invalid_pass": "Invalid password format. It must be 8 - 20 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
-        "invalid_pass_confirm": "The passwords do not match."
+            "invalid_email": "The email format is invalid.",
+            "invalid_pass": "Invalid password format. It must be 8 - 20 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+            "invalid_pass_confirm": "The passwords do not match."
 	},
         "account_mod_dialog": {
             "title": "Modify Account Information",

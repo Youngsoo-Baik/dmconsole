@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Grid, Typography, Divider, Box, Button, MenuItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import CustomTextField from '../components/CustomTextField';
+import CustomEditTextField from '../components/CustomEditTextField';
 import { useFormik } from 'formik';
 import CustomDialog from '../components/CustomDialog'; // CustomDialog 경로
 import CustomLongDescriptionDialog from '../components/CustomLongDescriptionDialog'; // CustomLongDescriptionDialog 경로
@@ -12,7 +12,7 @@ import { getAccessToken } from '../utils/token';
 
 const apiUrl = Config.apiUrl;
 
-function DeleteButton({ userId, onDeleteSuccess }) {
+function DeleteButton({ userId, onDeleteSuccess, handleClose }) {
     const { t } = useTranslation('console');
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -26,6 +26,7 @@ function DeleteButton({ userId, onDeleteSuccess }) {
                 });
                 onDeleteSuccess(); // 성공 시 콜백 호출
                 setDeleteDialogOpen(false); // 다이얼로그 닫기
+                handleClose(); // 회원정보수정 다이얼로그 닫기
             } catch (error) {
                 console.error('Error deleting user:', error);
             }
@@ -121,7 +122,7 @@ function DeleteButton({ userId, onDeleteSuccess }) {
     );
 }
 
-const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
+const AccountMemberInfoPanel = ({ open, handleClose, selectedRow, onDeleteSuccess }) => {
     const { t } = useTranslation('console');
     const [successDialogOpen, setSuccessDialogOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -159,6 +160,8 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
     // 계정 삭제 성공 시 처리 함수
     const handleDeleteSuccess = () => {
         setDeleteDoneDialogOpen(true); // 삭제 후 성공 메시지 다이얼로그를 열거나 다른 처리 가능
+        handleClose(); // 회원정보수정 다이얼로그 닫기
+        onDeleteSuccess(); // 회원목록 갱신
     };
 
     // selectedRow가 변경되거나 컴포넌트가 마운트될 때 API 호출
@@ -184,8 +187,8 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
 
     //menuItems for grade
     const gradeMenuItems = [
-        { value: 'A',  icon: './icon-user.svg' },
-        { value: 'M',  icon: './icon-admin.svg' }
+        { value: 'A', icon: './icon-user.svg' },
+        { value: 'M', icon: './icon-admin.svg' }
     ];
     return (
         <Paper
@@ -208,7 +211,11 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
                             </Typography>
                         </Box>
                         {/* DeleteButton 호출 부분 */}
-                        <DeleteButton userId={selectedRow.id} onDeleteSuccess={handleDeleteSuccess} />
+                        <DeleteButton
+                            userId={selectedRow.id}
+                            onDeleteSuccess={handleDeleteSuccess}
+                            handleClose={handleClose}
+                        />
                     </Box>
                 </Grid>
 
@@ -235,7 +242,7 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
                                     color: 'var(--primary-blue-700)',
                                     mb: '8px'
                                 }}>{t('account_list.account_mod_dialog.name')}</Typography>
-                                <CustomTextField
+                                <CustomEditTextField
                                     id="name"
                                     name="name"
                                     placeholder={t('account_list.account_mod_dialog.name')}
@@ -266,7 +273,7 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
                                     color: 'var(--primary-blue-700)',
                                     mb: '8px'
                                 }}>{t('account_list.account_mod_dialog.department')}</Typography>
-                                <CustomTextField
+                                <CustomEditTextField
                                     id="department"
                                     name="department"
                                     placeholder={t('account_list.account_mod_dialog.department')}
@@ -303,7 +310,7 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
                                     color: 'var(--primary-blue-700)',
                                     mb: '8px'
                                 }}>{t('account_list.account_mod_dialog.email')}</Typography>
-                                <CustomTextField
+                                <CustomEditTextField
                                     id="email"
                                     name="email"
                                     placeholder={t('account_list.account_mod_dialog.email')}
@@ -335,7 +342,7 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow }) => {
                                     color: 'var(--primary-blue-700)',
                                     mb: '8px'
                                 }}>{t('account_list.account_mod_dialog.grade')}</Typography>
-                                {/* <CustomTextField
+                                {/* <CustomEditTextField
                                     id="grade"
                                     name="grade"
                                     placeholder={t('account_list.account_mod_dialog.grade')}

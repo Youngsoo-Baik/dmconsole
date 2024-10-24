@@ -20,66 +20,70 @@ const NoRowsOverlay = styled('div')({
 });
 
 const initialRows = [
-    { id: 1, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 2, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 3, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 4, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 5, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 6, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 7, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 8, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 9, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 10, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 11, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 12, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 13, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 14, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 15, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+    { id: 1, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+    { id: 2, analyte_name: 'CREA', result: '0', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
+    { id: 3, analyte_name: 'CREA', result: '10', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
+    { id: 4, analyte_name: 'CREA', result: '-11', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'L' },
+    { id: 5, analyte_name: 'CREA', result: '32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+    { id: 6, analyte_name: 'CREA', result: '222', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'LT' },
+    { id: 7, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'GT' },
+    { id: 8, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
+    { id: 9, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
+    { id: 10, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
+    { id: 11, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+    { id: 12, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
+    { id: 13, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'L' },
+    { id: 14, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+    { id: 15, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'GT' },
+    { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'LT' },
 ];
 
 
-const AnalysisResultsDetailInfoPanel = ({selectedRow}) => {
+const AnalysisResultsDetailInfoPanel = ({ selectedRow }) => {
     const [rows, setRows] = useState([]);
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
 
-        // API 호출 및 데이터 매핑
-        useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const response = await apiClient.get(`${apiUrl}/console/analysis-results/${selectedRow}`, {
-                        headers: {
-                            Authorization: `Bearer ${getAccessToken()}`,
-                        }
-                    });
-    
-                    const data = response.data;
-    
-                    // API 응답 데이터를 rows 형식으로 변환
-                    const mappedRows = [{
-                        id: data.id,
-                        analyte_name: data.prodName,        // 제품 이름
-                        result: data.serial,                // 시리얼 번호
-                        finalod: data.date,                 // 분석 시간
-                        ref_bound: data.patientId,          // 환자 ID
-                        unit: data.sex,                     // 성별
-                        error_type: data.errorCode          // 에러 코드
-                    }];
-    
-                    setRows(mappedRows);
-    
-                } catch (error) {
-                    console.error("Error fetching data:", error);
-                }
-            };
-    
-            fetchData();
-        }, [selectedRow]);  // id 값이 변경될 때마다 호출
+    console.log(selectedRow);
+
+    //API 호출 및 데이터 매핑
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/analysis-results/${selectedRow}/result-data`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    }
+                });
+
+                const data = response.data.content; // 응답에서 content 부분을 가져옴
+
+                // API 응답 데이터를 rows 형식으로 변환
+                const mappedRows = data.map(item => ({
+                    id: item.id,                     // 고유 ID
+                    order: item.order,               // 순서
+                    analyte_name: item.analyteName,  // 분석물 이름
+                    result: item.result,             // 결과 값
+                    finalod: item.finalOd,           // 최종 OD 값
+                    ref_bound: item.refRange,        // 참조 범위
+                    unit: item.unit,                 // 단위
+                    error_type: item.bubbleOccur,     // 에러 타입
+                    abFlag: item.abFlag             // AB Flag
+                }));
+
+                setRows(mappedRows);
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [selectedRow]);  // id 값이 변경될 때마다 호출
 
     const columns = [
-        { field: 'id', headerName: `${t('analysis_result.detail_dialog.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'order', headerName: `${t('analysis_result.detail_dialog.column.no')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'analyte_name', headerName: `${t('analysis_result.detail_dialog.column.analyte_name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         {
             field: 'result', headerName: `${t('analysis_result.detail_dialog.column.result')}`, flex: 2, minWidth: 150, headerAlign: 'center', align: 'center',
@@ -89,46 +93,47 @@ const AnalysisResultsDetailInfoPanel = ({selectedRow}) => {
                 // ID 값에 따라 다른 아이콘을 반환
                 const getIconById = (id) => {
                     switch (id) {
-                        case 1:
+                        case 'H':
                             return (
-                                <div style={{color: '#e02b1d', display: 'flex', alignItems: 'center'}}>
+                                <div style={{ color: 'var(--negative-red-500)', display: 'flex', alignItems: 'center' }}>
                                     <img src={'/up-tag.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
+                                    <span>{params.row.result}</span>
                                 </div>
                             );
-                        case 2:
+                        case 'L':
                             return (
-                                <div style={{color: '#007dfa', display: 'flex', alignItems: 'center'}}>
+                                <div style={{ color: 'var(--primary-blue-500)', display: 'flex', alignItems: 'center' }}>
                                     <img src={'/down-tag.png'} alt={'down tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
+                                    <span>{params.row.result}</span>
                                 </div>
                             );
-                        case 3:
+                        case 'LT':
                             return (
-                                <div style={{color: '#494949', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/check-tag.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
-                                </div>
-                            );
-                        case 4:
-                            return (
-                                <div style={{color: '#f96c1c', display: 'flex', alignItems: 'center'}}>
+                                <div style={{ color: 'var(--cautuionary-orange-500)', display: 'flex', alignItems: 'center' }}>
                                     <img src={'/inequality_low.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
+                                    <span>{params.row.result}</span>
                                 </div>
                             );
-                        case 5:
+                        case 'GT':
                             return (
-                                <div style={{color: '#f96c1c', display: 'flex', alignItems: 'center'}}>
+                                <div style={{ color: 'var(--cautuionary-orange-500)', display: 'flex', alignItems: 'center' }}>
                                     <img src={'/inequality_high.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
+                                    <span>{params.row.result}</span>
+                                </div>
+                            );
+                        case 'F':
+                            return (
+                                <div style={{ color: 'var(--nagative-red-600)', display: 'flex', alignItems: 'center' }}>
+                                    <img src={'/alert.png'} alt={'up tag'} style={{ marginRight: 10 }} />
+                                    <span>{params.row.result}</span>
                                 </div>
                             );
                         default:
+                        case 'N':
                             return (
-                                <div style={{color: '#a41207', display: 'flex', alignItems: 'center'}}>
-                                    <img src={'/alert.png'} alt={'up tag'} style={{ marginRight: 10 }} />
-                                    <span>{params.row.id}</span>
+                                <div style={{ color: 'var(--gray-gray-500)', display: 'flex', alignItems: 'center' }}>
+                                    <img src={'/check-tag.png'} alt={'up tag'} style={{ marginRight: 10 }} />
+                                    <span>{params.row.result}</span>
                                 </div>
                             );
                     }
@@ -136,8 +141,8 @@ const AnalysisResultsDetailInfoPanel = ({selectedRow}) => {
 
                 return (
                     <div>
-                        {getIconById(params.row.id)}
-                        {/* <span>{params.row.id}</span> */}
+                        {getIconById(params.row.abFlag)}
+                        {/* {getIconById(params.row.abFlag)}*/}
                     </div>
                 );
             },
@@ -173,7 +178,7 @@ const AnalysisResultsDetailInfoPanel = ({selectedRow}) => {
                     columns={columns}
                     pageSize={13}
                     apiRef={apiRef}
-                    getRowId={(row) => row.id}
+                    getRowId={(row) => row.id}  // id가 없을 경우 고유한 값을 설정
                     // rowsPerPageOptions={[5, 10, 20, 50, 100]}
                     // hideFooterPagination
                     // hideFooterSelectedRowCount

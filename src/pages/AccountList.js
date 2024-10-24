@@ -142,8 +142,6 @@ const AccountList = () => {
                 Authorization: `Bearer ${getAccessToken}`, // 토큰 추가
             },
             params: {
-                page: 1,
-                size: 10,
                 sorting: ['createdAt,desc'],
             },
         })
@@ -180,7 +178,7 @@ const AccountList = () => {
     };
 
     const columns = [
-        { field: 'id', headerName: `${t('account_list.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'id', headerName: `${t('account_list.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center'},
         { field: 'name', headerName: `${t('account_list.column.name')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'email', headerName: `${t('account_list.column.email')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'department', headerName: `${t('account_list.column.department')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
@@ -345,6 +343,7 @@ const AccountList = () => {
                     open={open}
                     handleClose={handleClose}
                     selectedRow={selectedRow} // Pass the selected row to the dialog for context
+                    onListRefresh={fetchUsers} // 리스트 갱신을 위한 콜백 전달
                 />
             </Box>
         </Box>

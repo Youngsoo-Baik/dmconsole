@@ -157,14 +157,13 @@ const ErrorReport = () => {
                 prodName: '',
                 serial: '',
                 errorTitle: '',
-                page: 1,
-                size: 9000,
                 sort: ['date,desc'],
             },
         })
             .then((response) => {
                 const fetchedRows = response.data.content.map((item, index) => ({
                     id: item.id,
+                    order: item.order,
                     model: item.prodName,
                     serial: item.serial,
                     date: item.date,
@@ -236,7 +235,7 @@ const ErrorReport = () => {
     }
 
     const columns = [
-        { field: 'id', headerName: `${t('errors_report.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'order', headerName: `${t('errors_report.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'model', headerName: `${t('errors_report.column.model')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('errors_report.column.serial')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'date', headerName: `${t('errors_report.column.date')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },

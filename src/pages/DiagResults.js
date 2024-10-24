@@ -159,6 +159,7 @@ const DiagResults = () => {
             .then((response) => {
                 const fetchedRows = response.data.content.map((item) => ({
                     id: item.id,
+                    order: item.order,
                     serial: item.serial,
                     diag_time: item.date,
                     plunger_motor: item.plungerMotor,
@@ -205,7 +206,7 @@ const DiagResults = () => {
     }
 
     const columns = [
-        { field: 'id', headerName: `${t('self_diag.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'order', headerName: `${t('self_diag.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('self_diag.column.serial')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'diag_time', headerName: `${t('self_diag.column.diag_time')}`, flex: 1.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'plunger_motor', headerName: `${t('self_diag.column.plunger_motor')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center', renderCell: (params) => renderStatus(params) },

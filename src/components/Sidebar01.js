@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
-import { Home, DeviceHub, Storage, AccountBox, ExitToApp } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import './Sidebar.css';
 import { useTranslation } from 'react-i18next';
 import LogoutDialog from './LogoutDialog';  // LogoutDialog 컴포넌트 임포트
 import { logout } from '../api/auth'; // auth.js에서 login, logout 함수 가져오기
+import apiClient from '../api/apiClient'; // API client import
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+
+const apiUrl = Config.apiUrl;
 
 const SidebarContainer = styled(Box)({
     width: '326px',
@@ -80,10 +84,29 @@ const SubListItem = styled(ListItem)({
 
 function Sidebar({ onLogout }) {
     const [selectedPath, setSelectedPath] = useState(''); // 현재 선택된 경로를 상태로 관리
-    const [user, setUser] = useState('admin'); // 현재 로그인된 사용자를 'admin'으로 설정
+    const [userRole, setUserRole] = useState(''); // userRole 추가
     const { t } = useTranslation('console');
     const navigate = useNavigate(); // Initialize navigate from useNavigate hook
     const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/users/me`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    },
+                });
+                const { role } = response.data;
+                setUserRole(role);  // role을 상태로 저장
+                console.log('User role:', role);
+            } catch (error) {
+                console.error('Failed to fetch user role:', error);
+            }
+        };
+
+        fetchUserRole();
+    }, []);
 
     const handleLogoutClick = () => {
         setLogoutDialogOpen(true);  // 다이얼로그 열림
@@ -230,7 +253,7 @@ function Sidebar({ onLogout }) {
                 <Divider sx={{ width: '300px', marginLeft: '13px', marginTop: '20px' }} />
 
                 {/* 로그인 계정이 admin인 경우에 계정 관리 메뉴 추가 */}
-                {user === 'admin' && (
+                {userRole === 'ADMIN' && (
                     <>
                         <ListItem sx={{ mt: '10px', paddingLeft: '46px' }}>
                             <ListItemIcon>

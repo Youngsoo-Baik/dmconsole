@@ -158,16 +158,13 @@ const AnalysisResults = () => {
     // API 데이터 호출
     useEffect(() => {
         apiClient.get(`${apiUrl}/console/analysis-results`, {
-            params: {
-                page: 1,
-                size: 100,
-            },
             headers: {
                 Authorization: `Bearer ${getAccessToken()}`,
             }
         }).then(response => {
             const fetchedRows = response.data.content.map(item => ({
-                id: item.order,
+                id: item.id,
+                order: item.order,
                 model: item.prodName,
                 serial: item.serial,
                 analysis_time: item.date,
@@ -226,7 +223,7 @@ const AnalysisResults = () => {
     };
 
     const columns = [
-        { field: 'id', headerName: `${t('analysis_result.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'order', headerName: `${t('analysis_result.column.id')}`, flex: 1, minWidth: 70, headerAlign: 'center', align: 'center' },
         { field: 'model', headerName: `${t('analysis_result.column.model')}`, flex: 2.5, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'serial', headerName: `${t('analysis_result.column.serial')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'analysis_time', headerName: `${t('analysis_result.column.analysis_time')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
