@@ -11,9 +11,12 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import koKR from '../components/koKR.json'; // Import the translation file
 import DiagResultsInfoDialog from './DiagResultsInfoDialog';
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const apiUrl = Config.apiUrl;
 
@@ -420,74 +423,82 @@ const DiagResults = () => {
                 </Box>
             </Box>
             <Box sx={{ width: '1524px', height: '756px', mt: 0 }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    apiRef={apiRef}
-                    getRowId={(row) => row.id}
-                    rowsPerPageOptions={[5, 10, 20, 50, 100]}
-                    getRowHeight={getRowHeight}
-                    onRowClick={handleRowClick}  // 행 클릭 시 이벤트 핸들러 호출
-                    headerHeight={48}
-                    localeText={getLocaleText()} // Use the localeText based on the current locale
-                    loading={loading} // Add loading prop here
-                    slots={{
-                        footer: CustomFooter,
-                        noRowsOverlay: () => (
-                            <NoRowsOverlay>
-                                <img src="nodata.png" alt="No data" />
-                                {/* <Typography>No data available</Typography> */}
-                            </NoRowsOverlay>
-                        ),
-                    }}
-                    initialState={{
-                        pagination: { paginationModel: { pageSize: 10 } },
-                    }}
-                    // checkboxSelection
-                    disableSelectionOnClick
-                    selectionModel={selectionModel}
-                    onSelectionModelChange={(newSelection) => {
-                        setSelectionModel(newSelection);
-                    }}
-                    sx={{
-                        '& .MuiDataGrid-columnHeaders div[role="row"]': {
-                            backgroundColor: '#F5F5F7',
-                        },
-                        '& .MuiDataGrid-columnHeaderTitle': {
-                            textAlign: 'center',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            width: '100%',
-                            fontSize: '14px',
-                            fontWeight: '800',
-                            color: '#7d7d7d',
-                        },
-                        '& .MuiDataGrid-cell': {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            fontSize: '16px',
-                            color: '#494949',
-                            height: '58px',
+                {loading ? (
+                    // 로딩 중일 때 프로그레시브 이미지 표시
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={10}
+                        apiRef={apiRef}
+                        getRowId={(row) => row.id}
+                        rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                        getRowHeight={getRowHeight}
+                        onRowClick={handleRowClick}  // 행 클릭 시 이벤트 핸들러 호출
+                        headerHeight={48}
+                        localeText={getLocaleText()} // Use the localeText based on the current locale
+                        loading={loading} // Add loading prop here
+                        slots={{
+                            footer: CustomFooter,
+                            noRowsOverlay: (loading) ? null : () => ( // Conditionally hide noRowsOverlay during loading
+                                <NoRowsOverlay>
+                                    <img src="nodata.png" alt="No data" />
+                                    {/* <Typography>No data available</Typography> */}
+                                </NoRowsOverlay>
+                            ),
+                            columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                            columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
+                        }}
+                        initialState={{
+                            pagination: { paginationModel: { pageSize: 10 } },
+                        }}
+                        // checkboxSelection
+                        disableSelectionOnClick
+                        selectionModel={selectionModel}
+                        onSelectionModelChange={(newSelection) => {
+                            setSelectionModel(newSelection);
+                        }}
+                        sx={{
+                            '& .MuiDataGrid-columnHeaders div[role="row"]': {
+                                backgroundColor: '#F5F5F7',
+                            },
+                            '& .MuiDataGrid-columnHeaderTitle': {
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                width: '100%',
+                                fontSize: '14px',
+                                fontWeight: '800',
+                                color: '#7d7d7d',
+                            },
+                            '& .MuiDataGrid-cell': {
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                fontSize: '16px',
+                                color: '#494949',
+                                height: '58px',
+                                backgroundColor: '#ffffff',
+                            },
+                            '& .MuiDataGrid-cellContent': {
+                                width: '100%',
+                            },
+                            '& .MuiDataGrid-footerContainer': {
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '50px',
+                                backgroundColor: '#ffffff',
+                            },
+                            borderBottomLeftRadius: '14px',  // 왼쪽 아래 모서리 라운드 적용
+                            borderBottomRightRadius: '14px', // 오른쪽 아래 모서리 라운드 적용
+                            overflow: 'hidden',
                             backgroundColor: '#ffffff',
-                        },
-                        '& .MuiDataGrid-cellContent': {
-                            width: '100%',
-                        },
-                        '& .MuiDataGrid-footerContainer': {
-                            display: 'flex',
-                            justifyContent: 'center',
-                            marginTop: '50px',
-                            backgroundColor: '#ffffff',
-                        },
-                        borderBottomLeftRadius: '14px',  // 왼쪽 아래 모서리 라운드 적용
-                        borderBottomRightRadius: '14px', // 오른쪽 아래 모서리 라운드 적용
-                        overflow: 'hidden',
-                        backgroundColor: '#ffffff',
-                    }}
-                />
+                        }}
+                    />)}
                 {/* DiagResultsInfoDialog Component */}
                 <DiagResultsInfoDialog
                     open={dialogOpen}

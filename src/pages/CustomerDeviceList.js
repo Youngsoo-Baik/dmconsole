@@ -7,9 +7,12 @@ import { useTranslation } from 'react-i18next';
 import CustomerDeviceInfoDialog from './CustomerDeviceInfoDialog';
 import { styled } from '@mui/system';
 import koKR from '../components/koKR.json'; // Import the translation file
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const apiUrl = Config.apiUrl;
 
@@ -172,49 +175,41 @@ const CustomerDeviceList = () => {
     useEffect(() => {
         // Simulate an API call
         // setTimeout(() => {
-            const fetchDevices = async () => {
-                try {
-                    const response = await apiClient.get(`${apiUrl}/console/customer-devices`, {
-                        headers: {
-                            Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
-                        },
-                        params: {
-                            sort: [
-                                "createdAt,desc",
-                                "serial,asc",
-                                "country,asc",
-                                "area,asc",
-                                "reseller,asc",
-                                "manager,asc",
-                                "prodName,asc",
-                                "customer,asc",
-                                "productAt,asc"
-                            ]
-                        }
-                    });
+        const fetchDevices = async () => {
+            try {
+                const response = await apiClient.get(`${apiUrl}/console/customer-devices`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+                    },
+                    params: {
+                        sort: 
+                            "id,asc"
+                    }
+                });
 
-                    const updatedRows = response.data.content.map((device, index) => ({
-                        id: device.id, // 'id' 필드 매핑
-                        country: device.country, // 'country' 필드 매핑
-                        region: device.area, // 'region'은 'area' 필드로 매핑
-                        reseller: device.reseller, // 'reseller' 필드 매핑
-                        manager: device.manager, // 'manager' 필드 매핑
-                        model: device.prodName, // 'model'은 'prodName' 필드로 매핑
-                        customer: device.email, // 'customer'은 'email' 필드로 매핑
-                        serial: device.serial, // 'serial' 필드 매핑
-                        production_date: device.productAt, // 'production_date'는 'productAt' 필드로 매핑
-                        connection_state: device.isConnect // 'connection_state'는 'isConnect' 필드로 매핑
-                    }));
+                const updatedRows = response.data.content.map((device, index) => ({
+                    id: device.id, // 'id' 필드 매핑
+                    country: device.country, // 'country' 필드 매핑
+                    region: device.area, // 'region'은 'area' 필드로 매핑
+                    reseller: device.reseller, // 'reseller' 필드 매핑
+                    manager: device.manager, // 'manager' 필드 매핑
+                    model: device.prodName, // 'model'은 'prodName' 필드로 매핑
+                    customer: device.email, // 'customer'은 'email' 필드로 매핑
+                    serial: device.serial, // 'serial' 필드 매핑
+                    production_date: device.productAt, // 'production_date'는 'productAt' 필드로 매핑
+                    connection_state: device.isConnect // 'connection_state'는 'isConnect' 필드로 매핑
+                }));
 
-                    setRows(updatedRows); // rows 상태 업데이트
+                setRows(updatedRows); // rows 상태 업데이트
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching device data:', error);
+                setLoading(false);
+            }
+        };
 
-                } catch (error) {
-                    console.error('Error fetching device data:', error);
-                }
-            };
-
-            fetchDevices(); // 컴포넌트가 마운트되었을 때 데이터 호출
-            setLoading(false);
+        fetchDevices(); // 컴포넌트가 마운트되었을 때 데이터 호출
+        // setLoading(false);
         // }, 2000); // simulate loading for 2 seconds
     }, []);
 
@@ -240,68 +235,76 @@ const CustomerDeviceList = () => {
                 </Typography>
             </Box>
             <Box sx={{ width: '1524px', height: '802px', mt: '41px' }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    apiRef={apiRef}
-                    getRowId={(row) => row.id}
-                    rowsPerPageOptions={[5, 10, 20, 50, 100]}
-                    getRowHeight={getRowHeight}
-                    onRowClick={handleRowClick}  // 행 클릭 시 이벤트 핸들러 호출
-                    headerHeight={48}
-                    localeText={getLocaleText()} // Use the localeText based on the current locale
-                    loading={loading} // Add loading prop here
-                    slots={{
-                        footer: CustomFooter,
-                        noRowsOverlay: () => (
-                            <NoRowsOverlay>
-                                <img src="nodata.png" alt="No data" />
-                                {/* <Typography>No data available</Typography> */}
-                            </NoRowsOverlay>
-                        ),
-                    }}
-                    initialState={{
-                        pagination: { paginationModel: { pageSize: 10 } },
-                    }}
-                    sx={{
-                        '& .MuiDataGrid-columnHeaders div[role="row"]': {
-                            backgroundColor: '#F5F5F7',
-                        },
-                        '& .MuiDataGrid-columnHeaderTitle': {
-                            textAlign: 'center',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            width: '100%',
-                            fontSize: '14px',
-                            fontWeight: '800',
-                            color: '#7d7d7d',
-                        },
-                        '& .MuiDataGrid-cell': {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            fontSize: '16px',
-                            color: '#494949',
-                            height: '58px',
-                            backgroundColor: '#ffffff',
-                        },
-                        '& .MuiDataGrid-cellContent': {
-                            width: '100%',
+                {loading ? (
+                    // 로딩 중일 때 프로그레시브 이미지 표시
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={10}
+                        apiRef={apiRef}
+                        getRowId={(row) => row.id}
+                        rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                        getRowHeight={getRowHeight}
+                        onRowClick={handleRowClick}  // 행 클릭 시 이벤트 핸들러 호출
+                        headerHeight={48}
+                        localeText={getLocaleText()} // Use the localeText based on the current locale
+                        loading={loading} // Add loading prop here
+                        slots={{
+                            footer: CustomFooter,
+                            noRowsOverlay: (loading) ? null : () => ( // Conditionally hide noRowsOverlay during loading
+                                <NoRowsOverlay>
+                                    <img src="nodata.png" alt="No data" />
+                                    {/* <Typography>No data available</Typography> */}
+                                </NoRowsOverlay>
+                            ),
+                            columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                            columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
+                        }}
+                        initialState={{
+                            pagination: { paginationModel: { pageSize: 10 } },
+                        }}
+                        sx={{
+                            '& .MuiDataGrid-columnHeaders div[role="row"]': {
+                                backgroundColor: '#F5F5F7',
+                            },
+                            '& .MuiDataGrid-columnHeaderTitle': {
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                width: '100%',
+                                fontSize: '14px',
+                                fontWeight: '800',
+                                color: '#7d7d7d',
+                            },
+                            '& .MuiDataGrid-cell': {
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                fontSize: '16px',
+                                color: '#494949',
+                                height: '58px',
+                                backgroundColor: '#ffffff',
+                            },
+                            '& .MuiDataGrid-cellContent': {
+                                width: '100%',
 
-                        },
-                        '& .MuiDataGrid-footerContainer': {
-                            display: 'flex',
-                            justifyContent: 'center',
-                            marginTop: '95px',
+                            },
+                            '& .MuiDataGrid-footerContainer': {
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '95px',
+                                backgroundColor: '#ffffff',
+                            },
+                            borderRadius: '14px',
+                            overflow: 'hidden',
                             backgroundColor: '#ffffff',
-                        },
-                        borderRadius: '14px',
-                        overflow: 'hidden',
-                        backgroundColor: '#ffffff',
-                    }}
-                />
+                        }}
+                    />)}
                 {/* 다이얼로그 컴포넌트 */}
                 <CustomerDeviceInfoDialog
                     open={dialogOpen}

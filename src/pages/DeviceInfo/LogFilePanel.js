@@ -8,6 +8,8 @@ import { styled } from '@mui/system';
 import apiClient from '../../api/apiClient'; // API client import
 import Config from '../../Config'; // apiUrl 추가
 import { getAccessToken } from '../../utils/token';
+import CustomColumnSortedAscendingIcon from '../../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../../components/CustomColumnSortedDescendingIcon ';
 
 const apiUrl = Config.apiUrl;
 
@@ -260,6 +262,8 @@ const LogFilePanel = (rowId) => {
                                 {/* <Typography>No data available</Typography> */}
                             </NoRowsOverlay>
                         ),
+                        columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                        columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
                     }}
                     initialState={{
                         pagination: { paginationModel: { pageSize: 10 } },

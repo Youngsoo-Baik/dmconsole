@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { Select, MenuItem, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
@@ -8,6 +8,8 @@ import { styled } from '@mui/system';
 import apiClient from '../../api/apiClient'; // API client import
 import Config from '../../Config'; // apiUrl 추가
 import { getAccessToken } from '../../utils/token';
+import CustomColumnSortedAscendingIcon from '../../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../../components/CustomColumnSortedDescendingIcon ';
 
 const apiUrl = Config.apiUrl;
 
@@ -104,30 +106,30 @@ function CustomFooter() {
 }
 
 const initialRows = [
-    { id: 1, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 2, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09'},
-    { id: 3, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 4, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 5, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 6, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09'},
-    { id: 7, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 8, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 9, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 10, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09'},
-    { id: 11, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 12, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 13, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 14, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09'},
-    { id: 15, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 16, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 17, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 18, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09'},
-    { id: 19, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 20, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 21, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 22, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09'},
-    { id: 23, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
-    { id: 24, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09'},
+    { id: 1, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 2, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+    { id: 3, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 4, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 5, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 6, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+    { id: 7, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 8, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 9, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 10, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+    { id: 11, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 12, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 13, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 14, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+    { id: 15, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 16, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 17, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 18, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+    { id: 19, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 20, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 21, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 22, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+    { id: 23, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+    { id: 24, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
 ];
 
 const PanelInfoPanel = (rowId) => {
@@ -146,7 +148,7 @@ const PanelInfoPanel = (rowId) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-    
+
                 // API로 받은 serial 값을 상태에 저장
                 const { serial: deviceSerial } = response.data;
                 setSerial(deviceSerial);  // serial 상태 업데이트
@@ -154,12 +156,12 @@ const PanelInfoPanel = (rowId) => {
                 console.error('Error fetching device info:', error);
             }
         };
-    
+
         if (rowId) {
             fetchDeviceInfo();
         }
     }, [rowId]); // rowId가 변경될 때마다 실행
-    
+
     // 로그 파일 정보 가져오는 API 호출
     useEffect(() => {
         const fetchPanelInfo = async () => {
@@ -170,7 +172,7 @@ const PanelInfoPanel = (rowId) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                
+
                 // Map the API response to match DataGrid row structure
                 const mappedRows = response.data.content.map((item, index) => ({
                     id: index + 1,  // Using the index as a unique id
@@ -218,7 +220,7 @@ const PanelInfoPanel = (rowId) => {
                     {t('device_list.panel_info_tab.title')}
                 </Typography>
             </Box>
-            <Box sx={{ height:'620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
+            <Box sx={{ height: '620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
@@ -236,6 +238,8 @@ const PanelInfoPanel = (rowId) => {
                                 {/* <Typography>No data available</Typography> */}
                             </NoRowsOverlay>
                         ),
+                        columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                        columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
                     }}
                     initialState={{
                         pagination: { paginationModel: { pageSize: 10 } },

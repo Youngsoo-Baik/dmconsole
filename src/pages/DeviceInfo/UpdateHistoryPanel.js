@@ -8,6 +8,8 @@ import { styled } from '@mui/system';
 import apiClient from '../../api/apiClient'; // API client import
 import Config from '../../Config'; // apiUrl 추가
 import { getAccessToken } from '../../utils/token';
+import CustomColumnSortedAscendingIcon from '../../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../../components/CustomColumnSortedDescendingIcon ';
 
 const apiUrl = Config.apiUrl;
 
@@ -138,7 +140,7 @@ const initialRows = [
 ];
 
 
-const UpdateHistoryPanel = ({rowId}) => {
+const UpdateHistoryPanel = ({ rowId }) => {
     const [rows, setRows] = useState([]);
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
@@ -154,7 +156,7 @@ const UpdateHistoryPanel = ({rowId}) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                
+
                 // Map the API response to match DataGrid row structure
                 const mappedRows = response.data.content.map((item, index) => ({
                     id: index + 1,  // Using the index as a unique id
@@ -184,7 +186,7 @@ const UpdateHistoryPanel = ({rowId}) => {
         { field: 'elapsed', headerName: `${t('device_list.update_history_tab.column.elapsed')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'old_version', headerName: `${t('device_list.update_history_tab.column.old_version')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'new_version', headerName: `${t('device_list.update_history_tab.column.new_version')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
-        { field: 'method', headerName: `${t('device_list.update_history_tab.column.method')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center'},
+        { field: 'method', headerName: `${t('device_list.update_history_tab.column.method')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
     ];
 
     return (
@@ -206,7 +208,7 @@ const UpdateHistoryPanel = ({rowId}) => {
                     {t('device_list.update_history_tab.title')}
                 </Typography>
             </Box>
-            <Box sx={{ height:'620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
+            <Box sx={{ height: '620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
@@ -224,6 +226,8 @@ const UpdateHistoryPanel = ({rowId}) => {
                                 {/* <Typography>No data available</Typography> */}
                             </NoRowsOverlay>
                         ),
+                        columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                        columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
                     }}
                     initialState={{
                         pagination: { paginationModel: { pageSize: 10 } },

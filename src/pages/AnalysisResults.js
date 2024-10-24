@@ -11,9 +11,12 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import koKR from '../components/koKR.json'; // Import the translation file
 import AnalysisResultsDetailInfoDialog from './AnalysisResultsDetailInfoDialog'; // Import your custom dialog component
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const apiUrl = Config.apiUrl;
 
@@ -270,38 +273,38 @@ const AnalysisResults = () => {
         fileInputRef.current.click();
     };
 
-        // 'View All' 버튼 클릭 시 전체 데이터 복원
-        const handleViewAll = () => {
-            setRows(originalRows); // 원본 데이터를 rows에 설정하여 전체 데이터 표시
-            setFilteredRows([]); // 필터링된 데이터 초기화
-        };
-    
-        // 'Filter Search' 버튼 클릭 시 필터링된 데이터 적용
-        const handleFilterSearch = (event, values = {}) => {
-            setAnchorEl(event.currentTarget);
-            setOpenFilterDialog(!openFilterDialog);
-    
-            // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용, 없으면 원본 데이터 사용
-            const baseRows = filteredRows.length > 0 ? filteredRows : originalRows;
-    
-            console.log(values);
-            // const filteredRows = originalRows.filter((row) => {
-            const newFilteredRows = baseRows.filter((row) => {
-                console.log("filtering debugging")
-                return (
-                    (!values.model || row.model === productsMenuItems.find((item) => item.value === values.model)?.label) &&
-                    (!values.serial || row.serial.includes(values.serial)) &&
-                    (!values.cat_lot || row.cat_lot.includes(values.cat_lot)) &&
-                    (!values.error_code || row.error_code.includes(values.error_code)) 
-                );
-            });
-    
-            // setRows(filteredRows); // 필터링된 데이터를 rows에 설정
-            // handleCloseFilterDialog(); // 필터 다이얼로그 닫기
-            setRows(newFilteredRows); // 필터링된 데이터를 rows에 설정
-            setFilteredRows(newFilteredRows); // 필터링된 데이터를 filteredRows에도 저장
-        };
-    
+    // 'View All' 버튼 클릭 시 전체 데이터 복원
+    const handleViewAll = () => {
+        setRows(originalRows); // 원본 데이터를 rows에 설정하여 전체 데이터 표시
+        setFilteredRows([]); // 필터링된 데이터 초기화
+    };
+
+    // 'Filter Search' 버튼 클릭 시 필터링된 데이터 적용
+    const handleFilterSearch = (event, values = {}) => {
+        setAnchorEl(event.currentTarget);
+        setOpenFilterDialog(!openFilterDialog);
+
+        // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용, 없으면 원본 데이터 사용
+        const baseRows = filteredRows.length > 0 ? filteredRows : originalRows;
+
+        console.log(values);
+        // const filteredRows = originalRows.filter((row) => {
+        const newFilteredRows = baseRows.filter((row) => {
+            console.log("filtering debugging")
+            return (
+                (!values.model || row.model === productsMenuItems.find((item) => item.value === values.model)?.label) &&
+                (!values.serial || row.serial.includes(values.serial)) &&
+                (!values.cat_lot || row.cat_lot.includes(values.cat_lot)) &&
+                (!values.error_code || row.error_code.includes(values.error_code))
+            );
+        });
+
+        // setRows(filteredRows); // 필터링된 데이터를 rows에 설정
+        // handleCloseFilterDialog(); // 필터 다이얼로그 닫기
+        setRows(newFilteredRows); // 필터링된 데이터를 rows에 설정
+        setFilteredRows(newFilteredRows); // 필터링된 데이터를 filteredRows에도 저장
+    };
+
     const handleClickFilterButton = (event) => {
         setAnchorEl(event.currentTarget);
         setOpenFilterDialog(!openFilterDialog);
@@ -398,74 +401,82 @@ const AnalysisResults = () => {
                 </Box>
             </Box>
             <Box sx={{ width: '1524px', height: '756px', mt: 0 }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    apiRef={apiRef}
-                    getRowId={(row) => row.id}
-                    rowsPerPageOptions={[5, 10, 20, 50, 100]}
-                    getRowHeight={getRowHeight}
-                    headerHeight={48}
-                    localeText={getLocaleText()} // Use the localeText based on the current locale
-                    onRowClick={handleRowClick} // 행 클릭 시 이벤트
-                    loading={loading} // Add loading prop here
-                    slots={{
-                        footer: CustomFooter,
-                        noRowsOverlay: () => (
-                            <NoRowsOverlay>
-                                <img src="nodata.png" alt="No data" />
-                                {/* <Typography>No data available</Typography> */}
-                            </NoRowsOverlay>
-                        ),
-                    }}
-                    initialState={{
-                        pagination: { paginationModel: { pageSize: 10 } },
-                    }}
-                    // checkboxSelection
-                    disableSelectionOnClick
-                    selectionModel={selectionModel}
-                    onSelectionModelChange={(newSelection) => {
-                        setSelectionModel(newSelection);
-                    }}
-                    sx={{
-                        '& .MuiDataGrid-columnHeaders div[role="row"]': {
-                            backgroundColor: '#F5F5F7',
-                        },
-                        '& .MuiDataGrid-columnHeaderTitle': {
-                            textAlign: 'center',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            width: '100%',
-                            fontSize: '14px',
-                            fontWeight: '800',
-                            color: '#7d7d7d',
-                        },
-                        '& .MuiDataGrid-cell': {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            fontSize: '16px',
-                            color: '#494949',
-                            height: '58px',
+                {loading ? (
+                    // 로딩 중일 때 프로그레시브 이미지 표시
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={10}
+                        apiRef={apiRef}
+                        getRowId={(row) => row.id}
+                        rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                        getRowHeight={getRowHeight}
+                        headerHeight={48}
+                        localeText={getLocaleText()} // Use the localeText based on the current locale
+                        onRowClick={handleRowClick} // 행 클릭 시 이벤트
+                        loading={loading} // Add loading prop here
+                        slots={{
+                            footer: CustomFooter,
+                            noRowsOverlay: (loading) ? null : () => ( // Conditionally hide noRowsOverlay during loading
+                                <NoRowsOverlay>
+                                    <img src="nodata.png" alt="No data" />
+                                    {/* <Typography>No data available</Typography> */}
+                                </NoRowsOverlay>
+                            ),
+                            columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                            columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
+                        }}
+                        initialState={{
+                            pagination: { paginationModel: { pageSize: 10 } },
+                        }}
+                        // checkboxSelection
+                        disableSelectionOnClick
+                        selectionModel={selectionModel}
+                        onSelectionModelChange={(newSelection) => {
+                            setSelectionModel(newSelection);
+                        }}
+                        sx={{
+                            '& .MuiDataGrid-columnHeaders div[role="row"]': {
+                                backgroundColor: '#F5F5F7',
+                            },
+                            '& .MuiDataGrid-columnHeaderTitle': {
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                width: '100%',
+                                fontSize: '14px',
+                                fontWeight: '800',
+                                color: '#7d7d7d',
+                            },
+                            '& .MuiDataGrid-cell': {
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                fontSize: '16px',
+                                color: '#494949',
+                                height: '58px',
+                                backgroundColor: '#ffffff',
+                            },
+                            '& .MuiDataGrid-cellContent': {
+                                width: '100%',
+                            },
+                            '& .MuiDataGrid-footerContainer': {
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '50px',
+                                backgroundColor: '#ffffff',
+                            },
+                            borderBottomLeftRadius: '14px',  // 왼쪽 아래 모서리 라운드 적용
+                            borderBottomRightRadius: '14px', // 오른쪽 아래 모서리 라운드 적용
+                            overflow: 'hidden',
                             backgroundColor: '#ffffff',
-                        },
-                        '& .MuiDataGrid-cellContent': {
-                            width: '100%',
-                        },
-                        '& .MuiDataGrid-footerContainer': {
-                            display: 'flex',
-                            justifyContent: 'center',
-                            marginTop: '50px',
-                            backgroundColor: '#ffffff',
-                        },
-                        borderBottomLeftRadius: '14px',  // 왼쪽 아래 모서리 라운드 적용
-                        borderBottomRightRadius: '14px', // 오른쪽 아래 모서리 라운드 적용
-                        overflow: 'hidden',
-                        backgroundColor: '#ffffff',
-                    }}
-                />
+                        }}
+                    />)}
                 {/* DeviceManagementDialog Component */}
                 <AnalysisResultsDetailInfoDialog
                     open={open}

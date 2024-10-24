@@ -8,6 +8,8 @@ import { styled } from '@mui/system';
 import apiClient from '../../api/apiClient'; // API client import
 import Config from '../../Config'; // apiUrl 추가
 import { getAccessToken } from '../../utils/token';
+import CustomColumnSortedAscendingIcon from '../../components/CustomColumnSortedAscendingIcon ';
+import CustomColumnSortedDescendingIcon from '../../components/CustomColumnSortedDescendingIcon ';
 
 const apiUrl = Config.apiUrl;
 
@@ -104,28 +106,28 @@ function CustomFooter() {
 }
 
 const initialRows = [
-    { id: 1, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 2, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 3, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 4, analyte_name: 'K1', analyte_id: 'c407', fullname: 'Potassium', ref_bound: '3.5 - 5.8', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 5, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 6, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 7, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 8, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 9, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 10, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 11, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 12, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 13, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 14, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 15, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 16, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 17, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 18, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 19, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 20, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 21, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
-    { id: 22, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0' , inst_factor_b: '0.0'},
+    { id: 1, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 2, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 3, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 4, analyte_name: 'K1', analyte_id: 'c407', fullname: 'Potassium', ref_bound: '3.5 - 5.8', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 5, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 6, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 7, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 8, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 9, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 10, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 11, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 12, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 13, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 14, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 15, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 16, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 17, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 18, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 19, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 20, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 21, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+    { id: 22, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
 ];
 
 
@@ -144,7 +146,7 @@ const InstrumentCoefPanel = (rowId) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                
+
                 // Map the API response to match DataGrid row structure
                 const mappedRows = response.data.content.map((item, index) => ({
                     id: index + 1,  // Using the index as a unique id
@@ -175,8 +177,8 @@ const InstrumentCoefPanel = (rowId) => {
         { field: 'fullname', headerName: `${t('device_list.instrument_coef_tab.column.analyte_fullname')}`, flex: 2, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'ref_bound', headerName: `${t('device_list.instrument_coef_tab.column.ref_bound')}`, flex: 1, minWidth: 100, headerAlign: 'center', align: 'center' },
         { field: 'unit', headerName: `${t('device_list.instrument_coef_tab.column.unit')}`, flex: 0.5, minWidth: 50, headerAlign: 'center', align: 'center' },
-        { field: 'inst_factor_a', headerName: `${t('device_list.instrument_coef_tab.column.inst_factor_a')}`, flex: 0.5, minWidth: 70, headerAlign: 'center', align: 'center'},
-        { field: 'inst_factor_b', headerName: `${t('device_list.instrument_coef_tab.column.inst_factor_b')}`, flex: 0.5, minWidth: 70, headerAlign: 'center', align: 'center'},
+        { field: 'inst_factor_a', headerName: `${t('device_list.instrument_coef_tab.column.inst_factor_a')}`, flex: 0.5, minWidth: 70, headerAlign: 'center', align: 'center' },
+        { field: 'inst_factor_b', headerName: `${t('device_list.instrument_coef_tab.column.inst_factor_b')}`, flex: 0.5, minWidth: 70, headerAlign: 'center', align: 'center' },
     ];
 
     return (
@@ -198,7 +200,7 @@ const InstrumentCoefPanel = (rowId) => {
                     {t('device_list.instrument_coef_tab.title')}
                 </Typography>
             </Box>
-            <Box sx={{height:'620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
+            <Box sx={{ height: '620px', paddingTop: '20px', paddingLeft: '18px', paddingRight: '18px' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
@@ -216,6 +218,8 @@ const InstrumentCoefPanel = (rowId) => {
                                 {/* <Typography>No data available</Typography> */}
                             </NoRowsOverlay>
                         ),
+                        columnSortedAscendingIcon: CustomColumnSortedAscendingIcon,
+                        columnSortedDescendingIcon: CustomColumnSortedDescendingIcon,
                     }}
                     initialState={{
                         pagination: { paginationModel: { pageSize: 10 } },
