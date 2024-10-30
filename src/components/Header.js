@@ -109,6 +109,9 @@ const LanguageDropdown = () => {
 
     // Change the language in i18n
     i18n.changeLanguage(selectedLanguage);
+
+    // Set Accept-Language Header
+    apiClient.defaults.headers.common['Accept-Language'] = selectedLanguage;
   };
   return (
     <form onSubmit={formik.handleSubmit}>
