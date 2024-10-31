@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import CustomerDeviceInfoDialog from './CustomerDeviceInfoDialog';
 import { styled } from '@mui/system';
 import koKR from '../components/koKR.json'; // Import the translation file
-import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
-import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
@@ -201,9 +201,12 @@ const CustomerDeviceList = () => {
                 }));
 
                 setRows(updatedRows); // rows 상태 업데이트
-                setLoading(false);
+                // setLoading(false);
             } catch (error) {
                 console.error('Error fetching device data:', error);
+                // setLoading(false);
+            } finally {
+                // Ensure loading is set to false after API response (success or error)
                 setLoading(false);
             }
         };

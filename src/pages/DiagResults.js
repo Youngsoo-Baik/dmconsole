@@ -11,8 +11,8 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import koKR from '../components/koKR.json'; // Import the translation file
 import DiagResultsInfoDialog from './DiagResultsInfoDialog';
-import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
-import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
@@ -151,7 +151,7 @@ const DiagResults = () => {
     useEffect(() => {
         apiClient.get(`${apiUrl}/console/self-tests`, {
             headers: {
-                Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+                Authorization: `Bearer ${getAccessToken()}`, // Bearer 토큰 추가
             },
             params: {
                 // serial: 'PVKA0-A44737', // 필요한 serial 번호

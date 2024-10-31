@@ -7,6 +7,9 @@ const Config = {
     },
     production: {
       apiUrl: '/api'
+    },
+    test: { // 테스트 환경에 대한 설정 추가
+      apiUrl: ''  // 예를 들어 테스트 환경에 대한 URL 설정
     }
   };
   

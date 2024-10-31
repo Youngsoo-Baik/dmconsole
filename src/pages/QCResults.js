@@ -13,8 +13,8 @@ import CustomSelect from '../components/CustomSelect';
 import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 import QCResultsDetailInfoDialog from './QCResultsDetailInfoDialog';
-import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
-import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';

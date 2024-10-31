@@ -8,8 +8,8 @@ import { styled } from '@mui/system';
 import apiClient from '../../api/apiClient'; // API client import
 import Config from '../../Config'; // apiUrl 추가
 import { getAccessToken } from '../../utils/token';
-import CustomColumnSortedAscendingIcon from '../../components/CustomColumnSortedAscendingIcon ';
-import CustomColumnSortedDescendingIcon from '../../components/CustomColumnSortedDescendingIcon ';
+import CustomColumnSortedAscendingIcon from '../../components/CustomColumnSortedAscendingIcon';
+import CustomColumnSortedDescendingIcon from '../../components/CustomColumnSortedDescendingIcon';
 
 const apiUrl = Config.apiUrl;
 
@@ -42,6 +42,7 @@ function CustomPagination() {
                 <FormControl variant="outlined" sx={{ mx: 1, minWidth: 78, width: 78, height: 38 }}>
                     <Select value={rowsPerPage} onChange={handlePageSizeChange}
                         disableUnderline
+                        data-testid="pagination-select"  // Add this line
                         sx={{ fontSize: '0.875rem', height: '100%', paddingTop: '8px', paddingBottom: '8px' }}>
                         {[10, 20, 30, 50].map((size) => (
                             <MenuItem key={size} value={size}>

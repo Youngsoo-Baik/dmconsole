@@ -11,8 +11,8 @@ import CustomTextField from '../components/CustomTextField';
 import CustomSelect from '../components/CustomSelect';
 import DeviceManagementDialog from './DeviceManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
-import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
-import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
@@ -358,22 +358,65 @@ const DeviceList = () => {
         apiRef.current.exportDataAsCsv();
     };
 
-    const handleImport = (event) => {
+    // const handleImport = (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         Papa.parse(file, {
+    //             header: true,
+    //             dynamicTyping: true,
+    //             complete: (results) => {
+    //                 const parsedRows = results.data.map((row, index) => ({
+    //                     id: row.ID || index,
+    //                     name: row.Name || row.name,
+    //                     status: row.Status || row.status,
+    //                 }));
+    //                 setRows(parsedRows);
+    //             },
+    //         });
+    //     }
+    // };
+
+    const handleFileChange = async (event) => {
         const file = event.target.files[0];
-        if (file) {
-            Papa.parse(file, {
-                header: true,
-                dynamicTyping: true,
-                complete: (results) => {
-                    const parsedRows = results.data.map((row, index) => ({
-                        id: row.ID || index,
-                        name: row.Name || row.name,
-                        status: row.Status || row.status,
-                    }));
-                    setRows(parsedRows);
-                },
-            });
-        }
+        if (!file) return;
+
+        // Parse CSV file and transform data into the required format
+        Papa.parse(file, {
+            header: true,
+            dynamicTyping: true,
+            complete: async (results) => {
+                // Transform parsed data into the required JSON format
+                const transformedData = results.data.map((row) => ({
+                    serial: row.serial || 'default_serial',
+                    mac: row.mac || 'default_mac',
+                    deviceState: row.deviceState || 'default_state',
+                    reseller: row.reseller || 'default_reseller'
+                }));
+
+                const formData = new FormData();
+                formData.append('data', JSON.stringify(transformedData)); // Append JSON data as a string
+
+                try {
+                    const token = getAccessToken(); // Retrieve access token
+
+                    // Send the POST request
+                    const response = await apiClient.post(
+                        `${apiUrl}/console/devices/import`,
+                        formData,
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }
+                    );
+
+                    console.log('Data imported successfully:', response.data);
+                } catch (error) {
+                    console.error('Error importing data:', error);
+                }
+            },
+        });
     };
 
     // 'View All' 버튼 클릭 시 전체 데이터 복원
@@ -532,6 +575,13 @@ const DeviceList = () => {
                         >
                             {t('button.upload')}
                         </Button>
+                        {/* Hidden file input element */}
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleFileChange} // Handle file selection
+                        />
                         <Button
                             variant="contained"
                             onClick={handleExport}

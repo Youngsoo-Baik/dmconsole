@@ -8,8 +8,8 @@ import { styled } from '@mui/system';
 import AccountManagementDialog from './AccountManagementDialog'; // Import your custom dialog component
 import koKR from '../components/koKR.json'; // Import the translation file
 import AccountCreateDialog from './AccountCreateDialog';
-import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon ';
-import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon ';
+import CustomColumnSortedAscendingIcon from '../components/CustomColumnSortedAscendingIcon';
+import CustomColumnSortedDescendingIcon from '../components/CustomColumnSortedDescendingIcon';
 import apiClient from '../api/apiClient'; // API client import
 import Config from '../Config'; // apiUrl 추가
 import { getAccessToken } from '../utils/token';
