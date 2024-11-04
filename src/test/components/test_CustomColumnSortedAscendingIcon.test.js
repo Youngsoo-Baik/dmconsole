@@ -1,6 +1,6 @@
 
-import { render } from '@testing-library/react';
-import CustomColumnSortedAscendingIcon  from '../../components/CustomColumnSortedAscendingIcon.js';
+// import { render } from '@testing-library/react';
+// import CustomColumnSortedAscendingIcon  from '../../components/CustomColumnSortedAscendingIcon.js';
 
 test('CustomColumnSortedAscendingIcon .js should render without errors', () => {
   expect(true).toBe(true);

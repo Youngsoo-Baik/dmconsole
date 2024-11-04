@@ -13,7 +13,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AccountPasswordInfoPanel from '../../pages/AccountPasswordInfoPanel';
 import apiClient from '../../api/apiClient';
-import Config from '../../Config'; // Import Config to mock it
+// import Config from '../../Config'; // Import Config to mock it
 
 jest.mock('../../api/apiClient');
 jest.mock('../../Config', () => ({

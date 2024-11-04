@@ -6,7 +6,7 @@
 //   expect(true).toBe(true);
 // });
 
-import Config from '../Config';
+// import Config from '../Config';
 
 describe('Config module', () => {
   const originalEnv = process.env.NODE_ENV;

@@ -9,7 +9,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CustomDialog from '../../components/CustomDialog';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import '@testing-library/jest-dom/extend-expect';
 
 // useTranslation을 모킹하여 i18n 텍스트를 대체

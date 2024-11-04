@@ -12,7 +12,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import QCResultsDetailInfoPanel from '../../pages/QCResultsDetailInfoPanel';
 import apiClient from '../../api/apiClient';
 import '@testing-library/jest-dom';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 // Mock API and translation hook
 jest.mock('../../api/apiClient');

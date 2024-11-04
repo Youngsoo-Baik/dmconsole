@@ -7,12 +7,12 @@
 
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import CustomerDeviceList from '../../pages/CustomerDeviceList';
-import CustomerDeviceInfoDialog from '../../pages/CustomerDeviceInfoDialog';
+// import CustomerDeviceInfoDialog from '../../pages/CustomerDeviceInfoDialog';
 import apiClient from '../../api/apiClient';
 import '@testing-library/jest-dom';
-import Config from '../../Config';
+// import Config from '../../Config';
 
 jest.mock('../../api/apiClient');
 jest.mock('../../pages/CustomerDeviceInfoDialog', () => jest.fn(() => <div>Mocked Device Info Dialog</div>));

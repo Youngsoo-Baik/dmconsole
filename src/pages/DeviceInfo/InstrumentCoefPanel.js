@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
-import { Select, MenuItem, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Select, MenuItem, FormControl, Pagination, PaginationItem } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
@@ -106,30 +106,30 @@ function CustomFooter() {
     );
 }
 
-const initialRows = [
-    { id: 1, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 2, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 3, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 4, analyte_name: 'K1', analyte_id: 'c407', fullname: 'Potassium', ref_bound: '3.5 - 5.8', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 5, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 6, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 7, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 8, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 9, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 10, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 11, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 12, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 13, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 14, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 15, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 16, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 17, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 18, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 19, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 20, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 21, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-    { id: 22, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
-];
+// const initialRows = [
+//     { id: 1, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 2, analyte_name: 'CRP4', analyte_id: 'c442', fullname: 'C-reative protein', ref_bound: '-32,768 - -32,768', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 3, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 4, analyte_name: 'K1', analyte_id: 'c407', fullname: 'Potassium', ref_bound: '3.5 - 5.8', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 5, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 6, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 7, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 8, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 9, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 10, analyte_name: 'HDL1', analyte_id: 'c401', fullname: 'High Density Lipoprotein - cholesterol', ref_bound: '40 - 75', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 11, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 12, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 13, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 14, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 15, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 16, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 17, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 18, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 19, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 20, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 21, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+//     { id: 22, analyte_name: 'CI2', analyte_id: 'c411', fullname: 'Chloride', ref_bound: '112 - 126', unit: '', inst_factor_a: '1.0', inst_factor_b: '0.0' },
+// ];
 
 
 const InstrumentCoefPanel = (rowId) => {

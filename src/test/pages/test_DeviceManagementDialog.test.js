@@ -11,11 +11,11 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import DeviceManagementDialog from '../../pages/DeviceManagementDialog';
 import '@testing-library/jest-dom';
-import SystemInfoPanel from '../../pages/DeviceInfo/SystemInfoPanel';
-import LogFilePanel from '../../pages/DeviceInfo/LogFilePanel';
-import PanelInfoPanel from '../../pages/DeviceInfo/PanelInfoPanel';
-import UpdateHistoryPanel from '../../pages/DeviceInfo/UpdateHistoryPanel';
-import InstrumentCoefPanel from '../../pages/DeviceInfo/InstrumentCoefPanel';
+// import SystemInfoPanel from '../../pages/DeviceInfo/SystemInfoPanel';
+// import LogFilePanel from '../../pages/DeviceInfo/LogFilePanel';
+// import PanelInfoPanel from '../../pages/DeviceInfo/PanelInfoPanel';
+// import UpdateHistoryPanel from '../../pages/DeviceInfo/UpdateHistoryPanel';
+// import InstrumentCoefPanel from '../../pages/DeviceInfo/InstrumentCoefPanel';
 
 jest.mock('../../pages/DeviceInfo/SystemInfoPanel', () => jest.fn(() => <div>System Info Content</div>));
 jest.mock('../../pages/DeviceInfo/LogFilePanel', () => jest.fn(() => <div>Log File Content</div>));

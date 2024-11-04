@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-import apiClient from '../../api/apiClient';
+// import { render } from '@testing-library/react';
+// import apiClient from '../../api/apiClient';
 
 test('apiClient.js should render without errors', () => {
   expect(true).toBe(true);

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { Box, Button, Select, MenuItem, Typography, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
@@ -109,22 +109,22 @@ function CustomFooter() {
     );
 }
 
-const initialRows = [
-    { id: 1, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 2, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 3, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 4, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 5, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 6, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 7, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 8, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 9, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 10, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 11, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 12, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 13, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-    { id: 14, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
-];
+// const initialRows = [
+//     { id: 1, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 2, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 3, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 4, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 5, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 6, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 7, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 8, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 9, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 10, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 11, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'A', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 12, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 13, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+//     { id: 14, name: 'Hong Gil Dong', email: 'platformsw@precision-bio.com', department: '디지털헬스케어개발팀', grade: 'M', created_at: '2023-10-30 17:39:24', updated_at: '2023-10-30 17:39:24', management: 'manage' },
+// ];
 
 const AccountList = () => {
     const [rows, setRows] = useState([]);

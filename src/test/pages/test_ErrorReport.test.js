@@ -8,11 +8,11 @@
 // });
 
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import ErrorReport from '../../pages/ErrorReport';
 import apiClient from '../../api/apiClient';
-import { act } from 'react-dom/test-utils';
-import userEvent from '@testing-library/user-event';
+// import { act } from 'react-dom/test-utils';
+// import userEvent from '@testing-library/user-event';
 
 jest.mock('../../api/apiClient', () => ({
   get: jest.fn(),

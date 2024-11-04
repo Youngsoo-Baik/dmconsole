@@ -10,7 +10,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AnalysisResults from '../../pages/AnalysisResults';
 import apiClient from '../../api/apiClient';
-import { getAccessToken } from '../../utils/token';
+// import { getAccessToken } from '../../utils/token';
 
 // Mock getAccessToken to return a dummy token
 jest.mock('../../utils/token', () => ({

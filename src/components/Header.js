@@ -142,14 +142,14 @@ const LanguageDropdown = () => {
           onClose={() => setOpen(false)}
           IconComponent={'& .MuiSelect-icon' ? CustomArrowDownIcon : CustomArrowUpIcon}
         >
-          <CustomMenuItem value="en">
+          {/* <CustomMenuItem value="en">
             <ListItemText primary="English" />
             {open && formik.values.language === 'en' && (
               <ListItemIcon>
                 <CustomCheckedIcon />
               </ListItemIcon>
             )}
-          </CustomMenuItem>
+          </CustomMenuItem> */}
           <CustomMenuItem value="ko">
             <ListItemText primary="한국어" />
             {open && formik.values.language === 'ko' && (
@@ -157,7 +157,7 @@ const LanguageDropdown = () => {
                 <CustomCheckedIcon />
               </ListItemIcon>
             )}
-          </CustomMenuItem>ß
+          </CustomMenuItem>
         </Select>
         {formik.errors.language && (
           <FormHelperText error>{formik.errors.language}</FormHelperText>

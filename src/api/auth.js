@@ -1,5 +1,5 @@
 import apiClient from './apiClient';
-import { getAccessToken, setAccessToken, getRefreshToken, setRefreshToken } from '../utils/token'; // getRefreshToken 추가
+import { setAccessToken, getRefreshToken, setRefreshToken } from '../utils/token'; // getRefreshToken 추가
 import Config from '../Config'; // apiUrl 추가
 
 const apiUrl = Config.apiUrl;

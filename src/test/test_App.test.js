@@ -7,7 +7,7 @@
 // });
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from '../App';
 
 // 각 페이지 컴포넌트를 모킹
@@ -84,6 +84,7 @@ describe('App component', () => {
       { path: '/accounts-list', text: 'Account List' },
     ];
 
+    // eslint-disable-next-line no-unused-vars
     for (const { path, text } of routes) {
       window.history.pushState({}, 'Test page', path);
       render(<App />);

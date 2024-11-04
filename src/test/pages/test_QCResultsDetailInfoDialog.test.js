@@ -11,7 +11,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import QCResultsDetailInfoDialog from '../../pages/QCResultsDetailInfoDialog';
 import '@testing-library/jest-dom';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 // Mock child component and translation hook
 jest.mock('../../pages/QCResultsDetailInfoPanel', () => () => <div>QCResultsDetailInfoPanel Content</div>);

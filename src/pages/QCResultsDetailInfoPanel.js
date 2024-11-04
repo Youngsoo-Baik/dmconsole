@@ -21,24 +21,24 @@ const NoRowsOverlay = styled('div')({
     flexDirection: 'column',
 });
 
-const initialRows = [
-    { id: 1, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 2, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 3, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 4, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 5, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 6, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 7, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 8, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 9, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 10, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 11, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 12, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 13, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 14, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 15, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-    { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
-];
+// const initialRows = [
+//     { id: 1, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 2, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 3, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 4, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 5, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 6, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 7, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 8, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 9, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 10, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 11, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 12, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 13, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 14, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 15, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+//     { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-' },
+// ];
 
 const QCResultsDetailInfoPanel = ({ selectedRow }) => {
     const [rows, setRows] = useState([]);

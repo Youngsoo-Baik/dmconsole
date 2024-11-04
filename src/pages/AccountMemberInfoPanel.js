@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Paper, Grid, Typography, Divider, Box, Button, MenuItem } from '@mui/material';
+import { Paper, Grid, Typography, Divider, Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import CustomEditTextField from '../components/CustomEditTextField';
 import { useFormik } from 'formik';
@@ -125,7 +125,7 @@ function DeleteButton({ userId, onDeleteSuccess, handleClose }) {
 const AccountMemberInfoPanel = ({ open, handleClose, selectedRow, onDeleteSuccess }) => {
     const { t } = useTranslation('console');
     const [successDialogOpen, setSuccessDialogOpen] = useState(false);
-    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    // const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [deleteDoneDialogOpen, setDeleteDoneDialogOpen] = useState(false);
 
     const formik = useFormik({
@@ -183,7 +183,7 @@ const AccountMemberInfoPanel = ({ open, handleClose, selectedRow, onDeleteSucces
                 console.error('Error fetching user data:', error);
             });
         }
-    }, [selectedRow]);
+    }, [formik, selectedRow]);
 
     //menuItems for grade
     const gradeMenuItems = [

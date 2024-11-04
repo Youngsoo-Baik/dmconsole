@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { Box, Button, DialogContent, Select, MenuItem, Popover, Divider, Typography, FormControl, Pagination, PaginationItem } from '@mui/material';
-import Papa from 'papaparse';
+// import Papa from 'papaparse';
 import { useFormik } from 'formik';
 import '../components/DeviceTable.css';
 import { useTranslation } from 'react-i18next';
@@ -112,38 +112,39 @@ function CustomFooter() {
     );
 }
 
-const initialRows = [
-    { id: 1, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 2, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 3, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 4, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 5, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 6, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: true, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 7, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 8, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: true, cat_sensor: true, eqc: true },
-    { id: 9, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 10, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 11, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 12, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 13, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-    { id: 14, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
-];
+// const initialRows = [
+//     { id: 1, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 2, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 3, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 4, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 5, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 6, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: true, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 7, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 8, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: true, cat_sensor: true, eqc: true },
+//     { id: 9, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: false, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 10, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 11, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 12, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 13, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+//     { id: 14, serial: 'PCKA0-A00137', diag_time: '2023-10-30 17:39:24', plunger_motor: true, camera_blu: false, temp_ic: false, cat_sensor: true, eqc: true },
+// ];
 
 const DiagResults = () => {
     const [rows, setRows] = useState([]);
     const [openFilterDialog, setOpenFilterDialog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
-    const fileInputRef = useRef(null);
+    // const fileInputRef = useRef(null);
     const { i18n } = useTranslation();
     const { t } = useTranslation('console');
     const getRowHeight = (params) => 58;
     const [selectionModel, setSelectionModel] = React.useState([]);
-    const [open, setOpen] = useState(false);
-    const [currentRow, setCurrentRow] = useState(null);
+    // const [open, setOpen] = useState(false);
+    // const [currentRow, setCurrentRow] = useState(null);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [originalRows, setOriginalRows] = useState([]); // 초기 데이터 저장용 상태 추가
+    // eslint-disable-next-line no-unused-vars
     const [filteredRows, setFilteredRows] = useState([]); // 필터링된 데이터를 저장할 상태
     const [loading, setLoading] = useState(true);
 
@@ -190,14 +191,14 @@ const DiagResults = () => {
         setDialogOpen(false);
     };
 
-    const handleHeaderCheckboxChange = (event) => {
-        if (event.target.checked) {
-            const allIds = rows.map((row) => row.id); // 대체 코드
-            setSelectionModel(allIds);
-        } else {
-            setSelectionModel([]);
-        }
-    };
+    // const handleHeaderCheckboxChange = (event) => {
+    //     if (event.target.checked) {
+    //         const allIds = rows.map((row) => row.id); // 대체 코드
+    //         setSelectionModel(allIds);
+    //     } else {
+    //         setSelectionModel([]);
+    //     }
+    // };
 
     function renderStatus(params) {
         console.log(params.value);
@@ -238,32 +239,12 @@ const DiagResults = () => {
         apiRef.current.exportDataAsCsv();
     };
 
-    const handleImport = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            Papa.parse(file, {
-                header: true,
-                dynamicTyping: true,
-                complete: (results) => {
-                    const parsedRows = results.data.map((row, index) => ({
-                        id: row.ID || index,
-                        name: row.Name || row.name,
-                        status: row.Status || row.status,
-                    }));
-                    setRows(parsedRows);
-                },
-            });
-        }
-    };
-
-    const handleImportClick = () => {
-        fileInputRef.current.click();
-    };
 
     // 'View All' 버튼 클릭 시 전체 데이터 복원
     const handleViewAll = () => {
         setRows(originalRows); // 원본 데이터를 rows에 설정하여 전체 데이터 표시
         setFilteredRows([]); // 필터링된 데이터 초기화
+        formik.resetForm(); // 필터 검색 폼의 입력값과 선택값 초기화
     };
 
     // 'Filter Search' 버튼 클릭 시 필터링된 데이터 적용
@@ -271,8 +252,16 @@ const DiagResults = () => {
         setAnchorEl(event.currentTarget);
         setOpenFilterDialog(!openFilterDialog);
 
-        // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용, 없으면 원본 데이터 사용
-        const baseRows = filteredRows.length > 0 ? filteredRows : originalRows;
+        // 기존 필터링된 데이터가 있으면 그것을 기준으로 필터 적용하지 않고 항상 originalRows 사용
+        const baseRows = originalRows;
+
+        // 모든 필드가 비어있으면 전체 데이터를 보여줌
+        const hasFilter = values.serial || values.plunger_motor || values.camera_blu || values.temp_ic || values.cat_sensor || values.eqc;
+        if (!hasFilter) {
+            setRows(originalRows); // 필터 값이 없으면 전체 데이터를 rows에 설정
+            setFilteredRows([]); // 필터링된 데이터 초기화
+            return;
+        }
 
         console.log(values);
         // const filteredRows = originalRows.filter((row) => {
@@ -283,7 +272,7 @@ const DiagResults = () => {
 
             return (
                 (!values.serial || row.serial.includes(values.serial)) &&
-                (values.plunger_motor === undefined || row.plunger_motor === (values.plunger_motor === "0")) &&  // true/false 필터링 적용
+                (!values.plunger_motor || row.plunger_motor === (values.plunger_motor === "0")) &&  // true/false 필터링 적용
                 (!values.camera_blu || row.camera_blu === (values.camera_blu === "0")) &&
                 (!values.temp_ic || row.temp_ic === (values.temp_ic === "0")) &&
                 (!values.cat_sensor || row.cat_sensor === (values.cat_sensor === "0")) &&
@@ -297,24 +286,24 @@ const DiagResults = () => {
         setFilteredRows(newFilteredRows); // 필터링된 데이터를 filteredRows에도 저장
     };
 
-    const handleClickFilterButton = (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpenFilterDialog(!openFilterDialog);
-    };
+    // const handleClickFilterButton = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    //     setOpenFilterDialog(!openFilterDialog);
+    // };
 
     const handleCloseFilterDialog = () => {
         setOpenFilterDialog(false);
         setAnchorEl(null);
     };
 
-    function renderConnection(params) {
-        console.log(params);
-        return (
-            <Box sx={{ textAlign: 'center', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {params.value ? <img src="online.png" alt="online" /> : <img src="offline.png" alt="offline" />}
-            </Box>
-        );
-    }
+    // function renderConnection(params) {
+    //     console.log(params);
+    //     return (
+    //         <Box sx={{ textAlign: 'center', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    //             {params.value ? <img src="online.png" alt="online" /> : <img src="offline.png" alt="offline" />}
+    //         </Box>
+    //     );
+    // }
 
     //menuItems for plunger motor
     const plungerMenuItems = [

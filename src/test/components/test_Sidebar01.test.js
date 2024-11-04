@@ -7,12 +7,12 @@
 // });
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Sidebar from '../../components/Sidebar01';
 import { MemoryRouter } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import apiClient from '../../api/apiClient';
-import Config from '../../Config';
+// import Config from '../../Config';
 
 // Mocks
 jest.mock('../../api/apiClient');

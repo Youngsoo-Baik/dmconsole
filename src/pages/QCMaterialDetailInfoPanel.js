@@ -21,23 +21,23 @@ const NoRowsOverlay = styled('div')({
     flexDirection: 'column',
 });
 
-const initialRows = [
-    { id: 1, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 2, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 3, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 4, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 5, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 6, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 7, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 8, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 9, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 10, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 11, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 12, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 13, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 14, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-    { id: 15, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
-];
+// const initialRows = [
+//     { id: 1, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 2, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 3, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 4, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 5, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 6, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 7, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 8, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 9, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 10, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 11, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 12, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 13, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 14, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+//     { id: 15, analyte_name: 'PHOS', analyte_id: 'a435', analyte_fullname: 'Alkaline Phosphatase', target_mean: '39.1', sd: '0.46', target_range: '55-121', unit_si: 'mEq/L', unit_non_si: 'mmol/L', rule: '2' },
+// ];
 
 const QCMaterialDetailInfoPanel = ({ selectedRow }) => {
     const [rows, setRows] = useState([]);

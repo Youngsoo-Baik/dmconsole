@@ -97,7 +97,7 @@ export default function ErrorReportInfoDialog({ open, onClose, rowId }) {
                             {/* <Typography variant="body2" sx={{ fontSize: '16px', color: '#7d7d7d' }}>
                                 {data.isSent ? 'DONE' : 'NOT DONE'}
                             </Typography> */}
-                            {data.isSent ? <img src="/sent_complete.png" width="25px" height="25px"></img> : <img src="/sent_notdone.png" width="25px" height="25px"></img>}
+                            {data.isSent ? <img src="/sent_complete.png" width="25px" height="25px" alt="Sent Complete"></img> : <img src="/sent_notdone.png" width="25px" height="25px" alt="Sent Not Done"></img>}
                         </Grid>
                         <Grid item xs={12}>
                             <Divider /> {/* Divider 컴포넌트 사용 */}

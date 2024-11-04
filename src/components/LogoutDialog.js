@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Box } from '@mui/material';
-import WarningIcon from '@mui/icons-material/Warning';
+import React from 'react';
+import { Dialog, DialogContent, DialogActions, Button, Typography, Box } from '@mui/material';
+// import WarningIcon from '@mui/icons-material/Warning';
 import { useTranslation } from 'react-i18next';
 
 

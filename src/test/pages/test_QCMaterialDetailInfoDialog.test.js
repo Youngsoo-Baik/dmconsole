@@ -11,7 +11,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import QCMaterialDetailInfoDialog from '../../pages/QCMaterialDetailInfoDialog';
 import '@testing-library/jest-dom';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({

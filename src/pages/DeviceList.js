@@ -112,28 +112,28 @@ function CustomFooter() {
     );
 }
 
-const initialRows = [
-    { id: 1, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 2, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 3, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 4, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 5, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 6, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 7, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 8, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 9, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 10, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 11, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 12, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 13, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 14, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 15, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 16, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 17, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 18, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-    { id: 19, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
-    { id: 20, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
-];
+// const initialRows = [
+//     { id: 1, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 2, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 3, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 4, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 5, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 6, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 7, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 8, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 9, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 10, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 11, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 12, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 13, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 14, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 15, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 16, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 17, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 18, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+//     { id: 19, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: true, management: '관리' },
+//     { id: 20, country: '파퓨아뉴기니', region: 'N.America', reseller: 'Vitaliv health and Wellenss Clinic', manager: '담당자', serial: 'YVKAO-A00001', reg_date: '2023-09-15 09:55:32', connection_state: false, management: '관리' },
+// ];
 
 const DeviceList = () => {
     const [rows, setRows] = useState([]);
@@ -358,23 +358,6 @@ const DeviceList = () => {
         apiRef.current.exportDataAsCsv();
     };
 
-    // const handleImport = (event) => {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         Papa.parse(file, {
-    //             header: true,
-    //             dynamicTyping: true,
-    //             complete: (results) => {
-    //                 const parsedRows = results.data.map((row, index) => ({
-    //                     id: row.ID || index,
-    //                     name: row.Name || row.name,
-    //                     status: row.Status || row.status,
-    //                 }));
-    //                 setRows(parsedRows);
-    //             },
-    //         });
-    //     }
-    // };
 
     const handleFileChange = async (event) => {
         const file = event.target.files[0];

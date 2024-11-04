@@ -9,7 +9,7 @@ const apiUrl = Config.apiUrl;
 const token = getAccessToken();
 
 // Simple function to return the API path
-const getApiLoadPath = (lng, ns) => `${apiUrl}console/i18n/${lng}/${ns}.json`;
+const getApiLoadPath = (lng, ns) => `${apiUrl}/console/i18n/${lng}/${ns}.json`;
 
 // Fallback function for local loading
 const getLocalLoadPath = (lng, ns) => `/locales/${lng}/${ns}.json`;

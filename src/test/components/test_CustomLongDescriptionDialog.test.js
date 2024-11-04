@@ -10,7 +10,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CustomLongDescriptionDialog from '../../components/CustomLongDescriptionDialog';
 import '@testing-library/jest-dom/extend-expect';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 // i18n 모킹
 jest.mock('react-i18next', () => ({

@@ -1,4 +1,3 @@
-import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 

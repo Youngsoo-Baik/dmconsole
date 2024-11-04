@@ -7,7 +7,7 @@
 // });
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AccountList from '../../pages/AccountList';
 import { BrowserRouter } from 'react-router-dom';

@@ -8,12 +8,12 @@
 // src/test/pages/test_QCResults.test.js
 
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import QCResults from '../../pages/QCResults';
 import '@testing-library/jest-dom';
 import apiClient from '../../api/apiClient';
-import { useTranslation } from 'react-i18next';
-import userEvent from '@testing-library/user-event';
+// import { useTranslation } from 'react-i18next';
+// import userEvent from '@testing-library/user-event';
 
 jest.mock('../../api/apiClient', () => ({
   get: jest.fn(),
@@ -31,18 +31,18 @@ jest.mock('../../utils/token', () => ({
 }));
 
 describe('QCResults Component', () => {
-  const mockRows = [
-    {
-      id: 1,
-      model: 'Fluoro Check Heating Block',
-      serial: 'PCKA0-A00137',
-      analysis_time: '2023-10-30 17:39:24',
-      cat_lot: 'V30AAW7V',
-      qc_material: 'Liq Multqual',
-      qc_level: '3',
-      error_code: '0',
-    },
-  ];
+  // const mockRows = [
+  //   {
+  //     id: 1,
+  //     model: 'Fluoro Check Heating Block',
+  //     serial: 'PCKA0-A00137',
+  //     analysis_time: '2023-10-30 17:39:24',
+  //     cat_lot: 'V30AAW7V',
+  //     qc_material: 'Liq Multqual',
+  //     qc_level: '3',
+  //     error_code: '0',
+  //   },
+  // ];
 
   beforeEach(() => {
     jest.clearAllMocks();

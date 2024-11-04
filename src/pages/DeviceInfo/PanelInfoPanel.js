@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
-import { Select, MenuItem, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Select, MenuItem, FormControl, Pagination, PaginationItem } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
@@ -105,32 +105,32 @@ function CustomFooter() {
     );
 }
 
-const initialRows = [
-    { id: 1, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 2, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
-    { id: 3, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 4, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 5, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 6, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
-    { id: 7, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 8, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 9, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 10, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
-    { id: 11, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 12, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 13, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 14, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
-    { id: 15, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 16, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 17, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 18, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
-    { id: 19, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 20, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 21, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 22, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
-    { id: 23, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-    { id: 24, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
-];
+// const initialRows = [
+//     { id: 1, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 2, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+//     { id: 3, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 4, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 5, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 6, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+//     { id: 7, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 8, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 9, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 10, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+//     { id: 11, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 12, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 13, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 14, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+//     { id: 15, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 16, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 17, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 18, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+//     { id: 19, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 20, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 21, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 22, serial: 'PCKA0-A00137', info: 'CRP', version: '1.5', date: '2023-10-23 14:27:09' },
+//     { id: 23, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+//     { id: 24, serial: 'PCKA0-A00137', info: 'Aging', version: '3.6', date: '2023-10-23 14:27:09' },
+// ];
 
 const PanelInfoPanel = (rowId) => {
     const [rows, setRows] = useState([]);

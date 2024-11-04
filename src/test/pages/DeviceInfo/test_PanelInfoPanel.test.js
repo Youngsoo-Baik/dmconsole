@@ -11,7 +11,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PanelInfoPanel from '../../../pages/DeviceInfo/PanelInfoPanel';
 import { BrowserRouter } from 'react-router-dom';
-import { DataGrid } from '@mui/x-data-grid';
+// import { DataGrid } from '@mui/x-data-grid';
 import apiClient from '../../../api/apiClient';
 import { getAccessToken } from '../../../utils/token';
 

@@ -9,7 +9,7 @@
 // src/test/pages/DeviceInfo/test_LogFilePanel.test.js
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import LogFilePanel from '../../../pages/DeviceInfo/LogFilePanel';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Box, Grid, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { styled } from '@mui/system';
+// import { styled } from '@mui/system';
 import '../styles/colors.css';
 import apiClient from '../api/apiClient'; // API client import
-import Config from '../Config'; // apiUrl 추가
-import { getAccessToken } from '../utils/token';
-const apiUrl = Config.apiUrl;
+// import Config from '../Config'; // apiUrl 추가
+// import { getAccessToken } from '../utils/token';
+// const apiUrl = Config.apiUrl;
 
-const CustomDivider = styled(Divider)(({ theme }) => ({
-    width: '0.5px',
-    height: '54px',
-    margin: '12.6px 35px 12.6px 22.5px',
-    // transform: 'rotate(-270deg)',
-    backgroundColor: 'var(--gray-400)', // Corresponds to var(--gray-400)
-}));
+// const CustomDivider = styled(Divider)(({ theme }) => ({
+//     width: '0.5px',
+//     height: '54px',
+//     margin: '12.6px 35px 12.6px 22.5px',
+//     // transform: 'rotate(-270deg)',
+//     backgroundColor: 'var(--gray-400)', // Corresponds to var(--gray-400)
+// }));
 
 export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
     const { t } = useTranslation('console');

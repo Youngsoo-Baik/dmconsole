@@ -8,14 +8,14 @@
 
 import i18n from '../i18n'; // src/i18.js
 import apiClient from '../api/apiClient';
-import Config from '../Config';
-import { getAccessToken } from '../utils/token';
+// import Config from '../Config';
+// import { getAccessToken } from '../utils/token';
 
 jest.mock('../api/apiClient', () => ({
   get: jest.fn(() => Promise.resolve({ data: {} })), // get 메서드가 Promise를 반환하도록 모의 설정
 }));
 jest.mock('../Config', () => ({
-  apiUrl: '/mockApi/',
+  apiUrl: '/mockApi',
 }));
 jest.mock('../utils/token', () => ({
   getAccessToken: jest.fn(() => 'mockAccessToken'),

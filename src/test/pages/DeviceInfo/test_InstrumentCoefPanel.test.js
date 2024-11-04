@@ -15,7 +15,7 @@
 // src/test/pages/DeviceInfo/test_InstrumentCoefPanel.test.js
 
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import InstrumentCoefPanel from '../../../pages/DeviceInfo/InstrumentCoefPanel';
 import '@testing-library/jest-dom';
 import { act } from 'react-dom/test-utils';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Paper, Box } from '@mui/material';
 import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
-import { Select, MenuItem, FormControl, Pagination, PaginationItem, IconButton } from '@mui/material';
+import { Select, MenuItem, FormControl, Pagination, PaginationItem } from '@mui/material';
 import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector, GridFooterContainer } from '@mui/x-data-grid';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/system';
@@ -105,39 +105,39 @@ function CustomFooter() {
     );
 }
 
-const initialRows = [
-    { id: 1, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 2, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 3, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 4, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 5, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 6, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 7, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 8, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 9, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 10, module: 'Kernel', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 11, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 12, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 13, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 14, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 15, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 16, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 17, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 18, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 19, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 20, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 21, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 22, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 23, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 24, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 25, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 26, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 27, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 28, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
-    { id: 29, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 30, module: 'Kernel', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-    { id: 31, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
-];
+// const initialRows = [
+//     { id: 1, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 2, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 3, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 4, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 5, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 6, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 7, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 8, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 9, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 10, module: 'Kernel', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 11, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 12, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 13, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 14, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 15, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 16, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 17, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 18, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 19, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 20, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 21, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 22, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 23, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 24, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 25, module: 'system', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 26, module: 'XML Archive', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 27, module: 'QTE', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 28, module: 'Application', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'INTERNET' },
+//     { id: 29, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 30, module: 'Kernel', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+//     { id: 31, module: 'RootF/S', complete: '2021-11-24 18:45:10', elapsed: '2m 53s.367', old_version: '1.00.15.0011', new_version: '1.00.15.0011', method: 'USB' },
+// ];
 
 
 const UpdateHistoryPanel = ({ rowId }) => {

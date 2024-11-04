@@ -10,7 +10,7 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import DeviceList from '../../pages/DeviceList';
-import { act } from 'react-dom/test-utils';
+// import { act } from 'react-dom/test-utils';
 import '@testing-library/jest-dom';
 import apiClient from '../../api/apiClient';
 

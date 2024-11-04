@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import MainLayout from './components/MainLayout';
+// eslint-disable-next-line no-unused-vars
 import i18n from './i18n';
 import CustomerDeviceList from './pages/CustomerDeviceList';
 import DeviceList from './pages/DeviceList';

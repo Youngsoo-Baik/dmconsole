@@ -110,13 +110,13 @@ function CustomFooter() {
 
 const CustomerDeviceList = () => {
     const [rows, setRows] = useState([]);
-    const [openFilterDialog, setOpenFilterDialog] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
+    // const [openFilterDialog, setOpenFilterDialog] = useState(false);
+    // const [anchorEl, setAnchorEl] = useState(null);
     const apiRef = useGridApiRef();
     const { i18n } = useTranslation();
     const { t } = useTranslation('console');
     const getRowHeight = (params) => 58;
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [loading, setLoading] = useState(true);

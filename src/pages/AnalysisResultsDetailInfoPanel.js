@@ -21,24 +21,24 @@ const NoRowsOverlay = styled('div')({
     flexDirection: 'column',
 });
 
-const initialRows = [
-    { id: 1, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
-    { id: 2, analyte_name: 'CREA', result: '0', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
-    { id: 3, analyte_name: 'CREA', result: '10', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
-    { id: 4, analyte_name: 'CREA', result: '-11', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'L' },
-    { id: 5, analyte_name: 'CREA', result: '32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
-    { id: 6, analyte_name: 'CREA', result: '222', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'LT' },
-    { id: 7, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'GT' },
-    { id: 8, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
-    { id: 9, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
-    { id: 10, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
-    { id: 11, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
-    { id: 12, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
-    { id: 13, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'L' },
-    { id: 14, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
-    { id: 15, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'GT' },
-    { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'LT' },
-];
+// const initialRows = [
+//     { id: 1, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+//     { id: 2, analyte_name: 'CREA', result: '0', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
+//     { id: 3, analyte_name: 'CREA', result: '10', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
+//     { id: 4, analyte_name: 'CREA', result: '-11', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'L' },
+//     { id: 5, analyte_name: 'CREA', result: '32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+//     { id: 6, analyte_name: 'CREA', result: '222', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'LT' },
+//     { id: 7, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'GT' },
+//     { id: 8, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
+//     { id: 9, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'N' },
+//     { id: 10, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
+//     { id: 11, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+//     { id: 12, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'H' },
+//     { id: 13, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'L' },
+//     { id: 14, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'F' },
+//     { id: 15, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'GT' },
+//     { id: 16, analyte_name: 'CREA', result: '-32768', finalod: '-0.999', ref_bound: '-32768 - -32768', unit: 'mg/dl', error_type: '-', abFlag: 'LT' },
+// ];
 
 
 const AnalysisResultsDetailInfoPanel = ({ selectedRow }) => {

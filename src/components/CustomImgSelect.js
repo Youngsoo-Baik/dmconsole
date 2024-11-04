@@ -5,6 +5,7 @@ import {
     Select,
     MenuItem,
     InputBase,
+    // eslint-disable-next-line no-unused-vars
     ListItemText,
     ListItemIcon,
     FormHelperText,
@@ -103,6 +104,7 @@ const CustomImgSelect = ({
     itemHeight,
     placeholder, // 새로운 placeholder prop 추가
 }) => {
+    // eslint-disable-next-line no-unused-vars
     const [open, setOpen] = useState(false);
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Paper, Grid, Typography, Divider, Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import CustomTextField from '../components/CustomTextField';

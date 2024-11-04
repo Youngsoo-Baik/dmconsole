@@ -105,21 +105,21 @@ function CustomFooter() {
     );
 }
 
-const initialRows = [
-    { id: 1, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 2, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 3, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 4, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 5, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 6, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 7, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 8, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 9, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 10, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 11, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 12, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-    { id: 13, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
-];
+// const initialRows = [
+//     { id: 1, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 2, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 3, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 4, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 5, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 6, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 7, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 8, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 9, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 10, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 11, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 12, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+//     { id: 13, serial: 'PCKA0-A00137', log: 'ErrorLog', logfile: 'sbalog_PCKA0-A00137-20230101.zip', date: '2023-10-23 14:27:09', unit: 'YVKAO-A00001', management: '관리' },
+// ];
 
 const LogFilePanel = (rowId) => {
     const [rows, setRows] = useState([]);
@@ -127,6 +127,7 @@ const LogFilePanel = (rowId) => {
     const { t } = useTranslation('console');
     const apiRef = useGridApiRef();
     const getRowHeight = (params) => 47;
+    // eslint-disable-next-line no-unused-vars
     const [selectedRow, setSelectedRow] = useState(null);
     const [hoveredRow, setHoveredRow] = useState(null); // Track hovered row
 

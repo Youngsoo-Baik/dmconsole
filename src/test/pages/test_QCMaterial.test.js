@@ -14,7 +14,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import QCMaterial from '../../pages/QCMaterial';
 import apiClient from '../../api/apiClient';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 
 // Mock API and utility imports
 jest.mock('../../api/apiClient', () => ({
@@ -33,19 +33,19 @@ jest.mock('react-i18next', () => ({
 }));
 
 describe('QCMaterial Component', () => {
-  const mockRows = [
-    {
-      id: 1,
-      model: 'Test Model',
-      serial: 'SN12345',
-      qc_material: 'Test QC Material',
-      qc_level: '3',
-      lot: 'LOT123',
-      expiration_date: '2023-10-30',
-      modifier: 'Test Modifier',
-      qc_val_version: '01',
-    },
-  ];
+  // const mockRows = [
+  //   {
+  //     id: 1,
+  //     model: 'Test Model',
+  //     serial: 'SN12345',
+  //     qc_material: 'Test QC Material',
+  //     qc_level: '3',
+  //     lot: 'LOT123',
+  //     expiration_date: '2023-10-30',
+  //     modifier: 'Test Modifier',
+  //     qc_val_version: '01',
+  //   },
+  // ];
 
   beforeAll(() => {
     // Mock URL.createObjectURL to avoid errors in the test environment

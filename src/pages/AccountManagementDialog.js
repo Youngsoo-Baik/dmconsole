@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, Tabs, Tab, Box, Typography, IconButton } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Tabs, Tab, Box, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AccountMemberInfoPanel from './AccountMemberInfoPanel';
 import AccountPasswordInfoPanel from './AccountPasswordInfoPanel';

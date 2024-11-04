@@ -11,7 +11,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import ErrorReportInfoDialog from '../../pages/ErrorReportInfoDialog';
 import apiClient from '../../api/apiClient';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 jest.mock('../../api/apiClient', () => ({
@@ -23,16 +23,16 @@ jest.mock('../../utils/token', () => ({
 }));
 
 describe('ErrorReportInfoDialog Component', () => {
-  const mockData = {
-    prodName: 'Test Model',
-    serial: 'SN12345',
-    date: '2023-10-30',
-    isSent: true,
-    viewLog: 'Sample Log',
-    errorTitle: 'Sample Error Title',
-    panelType: 'Panel A',
-    controlType: 'Control B',
-  };
+  // const mockData = {
+  //   prodName: 'Test Model',
+  //   serial: 'SN12345',
+  //   date: '2023-10-30',
+  //   isSent: true,
+  //   viewLog: 'Sample Log',
+  //   errorTitle: 'Sample Error Title',
+  //   panelType: 'Panel A',
+  //   controlType: 'Control B',
+  // };
 
   const defaultProps = {
     open: true,

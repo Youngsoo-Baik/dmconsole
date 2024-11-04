@@ -12,7 +12,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import QCMaterialDetailInfoPanel from '../../pages/QCMaterialDetailInfoPanel';
 import '@testing-library/jest-dom';
 import apiClient from '../../api/apiClient';
-import { getAccessToken } from '../../utils/token';
+// import { getAccessToken } from '../../utils/token';
 
 jest.mock('../../api/apiClient', () => ({
   get: jest.fn(),

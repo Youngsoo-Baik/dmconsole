@@ -11,7 +11,7 @@ import apiClient from '../../api/apiClient';
 import { setAccessToken, setRefreshToken, getRefreshToken } from '../../utils/token';
 import Config from '../../Config'; // apiUrl 추가
 
-const apiUrl = Config.apiUrl;
+// const apiUrl = Config.apiUrl;
 
 // Mocks
 jest.mock('../../api/apiClient');
