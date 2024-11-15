@@ -38,7 +38,9 @@ describe('CustomerDeviceInfoDialog Component', () => {
         render(<CustomerDeviceInfoDialog open={true} onClose={jest.fn()} rowId={mockRowId} />);
 
         await waitFor(() => {
-            expect(apiClient.get).toHaveBeenCalledWith(`/console/customer-devices/${mockRowId}`);
+            expect(apiClient.get).toHaveBeenCalledWith(`/console/customer-devices/${mockRowId}`,
+                expect.any(Object) // 추가 옵션 무시
+            );
         });
 
         // Check if dialog renders data after API call
@@ -67,7 +69,7 @@ describe('CustomerDeviceInfoDialog Component', () => {
         // Check if the "confirm" button is present and clickable
         const confirmButton = screen.getByRole('button', { name: /confirm/i });
         expect(confirmButton).toBeInTheDocument();
-        
+
         userEvent.click(confirmButton);
         expect(onCloseMock).toHaveBeenCalled();
     });
@@ -87,7 +89,9 @@ describe('CustomerDeviceInfoDialog Component', () => {
         render(<CustomerDeviceInfoDialog open={true} onClose={jest.fn()} rowId={mockRowId} />);
 
         await waitFor(() => {
-            expect(apiClient.get).toHaveBeenCalledWith(`/console/customer-devices/${mockRowId}`);
+            expect(apiClient.get).toHaveBeenCalledWith(`/console/customer-devices/${mockRowId}`,
+                expect.any(Object) // 추가 옵션 무시
+            );
         });
 
         // Check that the dialog does not display data on error

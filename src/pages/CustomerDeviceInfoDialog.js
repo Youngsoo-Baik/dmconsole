@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import apiClient from '../api/apiClient'; // apiClient import
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Box, Grid, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import Config from '../Config'; // apiUrl 추가
+import { getAccessToken } from '../utils/token';
+const apiUrl = Config.apiUrl;
 
 // 샘플 데이터 (이 데이터를 rowId로 가져왔다고 가정)
 // const rowData = {
@@ -21,7 +24,11 @@ export default function CustomerDeviceInfoDialog({ open, onClose, rowId }) {
     useEffect(() => {
         const fetchDeviceData = async () => {
             try {
-                const response = await apiClient.get(`/console/customer-devices/${rowId}`);
+                const response = await apiClient.get(`${apiUrl}/console/customer-devices/${rowId}`, {
+                    headers: {
+                        Authorization: `Bearer ${getAccessToken}`, // Bearer 토큰 추가
+                    }
+                });
                 setRowData(response.data); // 응답 데이터를 rowData에 저장
             } catch (error) {
                 console.error('Error fetching device data:', error);

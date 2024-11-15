@@ -40,7 +40,7 @@ export default function DiagResultsInfoDialog({ open, onClose, rowId }) {
     }, [rowId, open]);
 
     if (loading) {
-        return <Typography>{t('loading')}</Typography>; // 로딩 중 메시지
+        // return <Typography>{t('loading')}</Typography>; // 로딩 중 메시지
     }
 
     if (!diagData) {

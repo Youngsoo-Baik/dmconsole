@@ -42,12 +42,12 @@ describe('DiagResultsInfoDialog Component', () => {
     apiClient.get.mockClear();
   });
 
-  it('displays loading message initially', async () => {
-    apiClient.get.mockImplementationOnce(() => new Promise(() => {})); // mock pending state
+  // it('displays loading message initially', async () => {
+  //   apiClient.get.mockImplementationOnce(() => new Promise(() => {})); // mock pending state
 
-    renderComponent();
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
-  });
+  //   renderComponent();
+  //   expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  // });
 
   it('renders dialog with data after fetching', async () => {
     apiClient.get.mockResolvedValueOnce({ data: mockData });
